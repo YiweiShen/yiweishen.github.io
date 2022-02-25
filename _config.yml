@@ -105,3 +105,9 @@ deploy:
   type: git
   repo: https://github.com/YiWeiShen/yiweishen.github.io
   branch: main
+
+feed:
+  enable: true
+  type: atom
+  path: atom.xml
+  limit: 20
