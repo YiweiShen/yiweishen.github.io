@@ -100,9 +100,10 @@ hexo d
 ```
 It will automatically generate GitHub Page for you which you can see by visiting YOUR_NAME.github.io
 
-When you try to deploy the blog, if you see this message ERROR Deployer not found: git, or other error messages, double check if you have all node_modules installed.
+When you try to deploy the blog, if you see this message ERROR Deployer not found: git, or other error messages, for example, you need rss feed ready for your blog, please double check if you have all node_modules installed.
 ```bash
 npm install hexo-deployer-git --save
+npm install hexo-generator-feed --save
 ```
 
 Ref:
@@ -112,3 +113,6 @@ https://hexo.io
 
 Theme NexT
 https://theme-next.js.org
+
+hexo-generator-feed
+https://github.com/hexojs/hexo-generator-feed
