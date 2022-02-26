@@ -77,6 +77,12 @@ http_proxy = {
 
 r = requests.get(url, proxies=http_proxy)
 ```
+# Use HTTP Proxy in Terminal on MacOS (Bash)
+Enter the below command into the terminal for a session use.
+```bash
+export http_proxy=http://vps_IP:PORT_NUMBER
+```
+If you want to make the proxy permanent in the Terminal, you can add it into bash_profile.
 
 # Use HTTP Proxy on iOS
 Go to the settings page of the WiFi you are currently using. Configure HTTP Proxy to Manual and enter the details. 
