@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yiweishen.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.10.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+  <meta name="description" content="For some reason, you need to use a HTTP Proxy. Let me assume you have an account of Microsoft Azure.  Create VM on AzureFirst, go to Azure Portal and create a linux virtual machine, say, Ubuntu 20.04">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP Proxy via Squid in Ubuntu on Microsoft Azure">
+<meta property="og:url" content="http://yiweishen.github.io/2022/02/24/HTTP-Proxy-via-Squid-in-Ubuntu-on-Microsoft-Azure/index.html">
+<meta property="og:site_name" content="SecondHand C0D1NG">
+<meta property="og:description" content="For some reason, you need to use a HTTP Proxy. Let me assume you have an account of Microsoft Azure.  Create VM on AzureFirst, go to Azure Portal and create a linux virtual machine, say, Ubuntu 20.04">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-24T17:34:21.000Z">
+<meta property="article:modified_time" content="2022-03-24T03:43:46.411Z">
+<meta property="article:author" content="David Shen">
+<meta property="article:tag" content="Personal Blog">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://yiweishen.github.io/2022/02/24/HTTP-Proxy-via-Squid-in-Ubuntu-on-Microsoft-Azure/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://yiweishen.github.io/2022/02/24/HTTP-Proxy-via-Squid-in-Ubuntu-on-Microsoft-Azure/","path":"2022/02/24/HTTP-Proxy-via-Squid-in-Ubuntu-on-Microsoft-Azure/","title":"HTTP Proxy via Squid in Ubuntu on Microsoft Azure"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>HTTP Proxy via Squid in Ubuntu on Microsoft Azure | SecondHand C0D1NG</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="SecondHand C0D1NG" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">SecondHand C0D1NG</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Create-VM-on-Azure"><span class="nav-number">1.</span> <span class="nav-text">Create VM on Azure</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Connect-to-VM"><span class="nav-number">2.</span> <span class="nav-text">Connect to VM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Install-Squid"><span class="nav-number">3.</span> <span class="nav-text">Install Squid</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Update-Squid-Config-file"><span class="nav-number">4.</span> <span class="nav-text">Update Squid Config file</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Open-Port-for-Squid"><span class="nav-number">5.</span> <span class="nav-text">Open Port for Squid</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Use-HTTP-Proxy-in-Python"><span class="nav-number">6.</span> <span class="nav-text">Use HTTP Proxy in Python</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Use-HTTP-Proxy-in-Terminal-on-MacOS-Bash"><span class="nav-number">7.</span> <span class="nav-text">Use HTTP Proxy in Terminal on MacOS (Bash)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Use-HTTP-Proxy-on-iOS"><span class="nav-number">8.</span> <span class="nav-text">Use HTTP Proxy on iOS</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">David Shen</p>
+  <div class="site-description" itemprop="description">A quiet place for blogging</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/YiweiShen" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;YiweiShen" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2022/02/24/HTTP-Proxy-via-Squid-in-Ubuntu-on-Microsoft-Azure/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="David Shen">
+      <meta itemprop="description" content="A quiet place for blogging">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SecondHand C0D1NG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HTTP Proxy via Squid in Ubuntu on Microsoft Azure
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-02-24 12:34:21" itemprop="dateCreated datePublished" datetime="2022-02-24T12:34:21-05:00">2022-02-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-03-23 23:43:46" itemprop="dateModified" datetime="2022-03-23T23:43:46-04:00">2022-03-23</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>For some reason, you need to use a HTTP Proxy.</p>
+<p>Let me assume you have an account of Microsoft Azure. </p>
+<h1 id="Create-VM-on-Azure"><a href="#Create-VM-on-Azure" class="headerlink" title="Create VM on Azure"></a>Create VM on Azure</h1><p>First, go to Azure Portal and create a linux virtual machine, say, Ubuntu 20.04 LTS. Default config will be fine during your VM setup.</p>
+<h1 id="Connect-to-VM"><a href="#Connect-to-VM" class="headerlink" title="Connect to VM"></a>Connect to VM</h1><p>Connect to the virtual machine via SSH with client, in my case, I use Terminal on MacOS. Let’s rename the private key file to azureuser.pem which you download from the previous VM creation step. Use chmod 400 to ensure you have read-only access to the private key. </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> 400 azureuser.pem</span><br><span class="line">ssh -i /Path/To/Some/Folder/azureuser.pem azureuser@vps_IP</span><br></pre></td></tr></table></figure>
+
+<h1 id="Install-Squid"><a href="#Install-Squid" class="headerlink" title="Install Squid"></a>Install Squid</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update -y</span><br><span class="line">sudo apt-get upgrade -y</span><br><span class="line">sudo apt-get install squid -y</span><br></pre></td></tr></table></figure>
+
+<h1 id="Update-Squid-Config-file"><a href="#Update-Squid-Config-file" class="headerlink" title="Update Squid Config file"></a>Update Squid Config file</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/squid/squid.conf</span><br></pre></td></tr></table></figure>
+
+<p>Find and insert the below two lines BEFORE the line of http_access deny all, to allow your IP to use the proxy.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">acl client src your_IP</span><br><span class="line">http_access allow client</span><br></pre></td></tr></table></figure>
+<p>By default, Squid uses port 3128. If you are going to change it, just remember to double check if any other application is using the port by default.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http_port PORT_NUMBER</span><br></pre></td></tr></table></figure>
+<p>By default, Squid will append your original IP address in the HTTP requests it forwards, something like X-Forwarded-For: 192.1.2.3. So, if you don’t want the destination server to know you are using a proxy, and you want to remove some of the request_headers that Squid passes on to the destination server, you can Ctrl + W to find and uncomment these:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># forwarded_for off</span></span><br><span class="line"><span class="comment"># request_header_access Authorization allow all</span></span><br><span class="line"><span class="comment"># request_header_access Proxy-Authorization allow all</span></span><br><span class="line"><span class="comment"># request_header_access Cache-Control allow all           </span></span><br><span class="line"><span class="comment"># request_header_access Content-Length allow all</span></span><br><span class="line"><span class="comment"># request_header_access Content-Type allow all</span></span><br><span class="line"><span class="comment"># request_header_access Date allow all</span></span><br><span class="line"><span class="comment"># request_header_access Host allow all</span></span><br><span class="line"><span class="comment"># request_header_access If-Modified-Since allow all</span></span><br><span class="line"><span class="comment"># request_header_access Pragma allow all</span></span><br><span class="line"><span class="comment"># request_header_access Accept allow all</span></span><br><span class="line"><span class="comment"># request_header_access Accept-Charset allow all</span></span><br><span class="line"><span class="comment"># request_header_access Accept-Encoding allow all</span></span><br><span class="line"><span class="comment"># request_header_access Accept-Language allow all</span></span><br><span class="line"><span class="comment"># request_header_access Connection allow all</span></span><br><span class="line"><span class="comment"># request_header_access All deny all</span></span><br></pre></td></tr></table></figure>
+
+<p>All, done. Ctrl + O to save the file, and Ctrl + X to exit the file. Restart Squid or maybe you can just restart VM.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service squid restart</span><br></pre></td></tr></table></figure>
+
+<h1 id="Open-Port-for-Squid"><a href="#Open-Port-for-Squid" class="headerlink" title="Open Port for Squid"></a>Open Port for Squid</h1><p>Lastly, go to your VM on the azure portal, open the Networking Tab in the settings. You need to add one inbound port rules to make the Squid http_port number (by default, 3128) accessible from your IP.</p>
+<h1 id="Use-HTTP-Proxy-in-Python"><a href="#Use-HTTP-Proxy-in-Python" class="headerlink" title="Use HTTP Proxy in Python"></a>Use HTTP Proxy in Python</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">http_proxy = &#123;</span><br><span class="line">	<span class="string">&#x27;http&#x27;</span>: <span class="string">&#x27;http://vps_IP:PORT_NUMBER&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">r = requests.get(url, proxies=http_proxy)</span><br></pre></td></tr></table></figure>
+<h1 id="Use-HTTP-Proxy-in-Terminal-on-MacOS-Bash"><a href="#Use-HTTP-Proxy-in-Terminal-on-MacOS-Bash" class="headerlink" title="Use HTTP Proxy in Terminal on MacOS (Bash)"></a>Use HTTP Proxy in Terminal on MacOS (Bash)</h1><p>Enter the below command into the terminal for a session use.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> http_proxy=http://vps_IP:PORT_NUMBER</span><br></pre></td></tr></table></figure>
+<p>If you want to make the proxy permanent in the Terminal, you can add it into bash_profile.</p>
+<h1 id="Use-HTTP-Proxy-on-iOS"><a href="#Use-HTTP-Proxy-on-iOS" class="headerlink" title="Use HTTP Proxy on iOS"></a>Use HTTP Proxy on iOS</h1><p>Go to the settings page of the WiFi you are currently using. Configure HTTP Proxy to Manual and enter the details. </p>
+<p>By the way, save your time and do not use Squid to bypass GFW. It will fail, technically speaking. I’m sorry. </p>
+<p>Squid is not designed to encrypt internet traffic by any means. On the contrary, Squid server can and will intercept SSL interception because Squid is literally the man-in-the-middle (MiTM). Keep that in mind if you consider making use of the other’s HTTP Proxy.</p>
+<p>Ref:</p>
+<p>Ubuntu documentation for Squid:<br><a target="_blank" rel="noopener" href="https://help.ubuntu.com/community/Squid">https://help.ubuntu.com/community/Squid</a></p>
+<p>Squid man page:<br><a target="_blank" rel="noopener" href="http://manpages.ubuntu.com/manpages/focal/en/man8/squid.8.html">http://manpages.ubuntu.com/manpages/focal/en/man8/squid.8.html</a></p>
+<p>Official Squid site:<br><a target="_blank" rel="noopener" href="http://www.squid-cache.org/">http://www.squid-cache.org</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>David Shen
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="http://yiweishen.github.io/2022/02/24/HTTP-Proxy-via-Squid-in-Ubuntu-on-Microsoft-Azure/" title="HTTP Proxy via Squid in Ubuntu on Microsoft Azure">http://yiweishen.github.io/2022/02/24/HTTP-Proxy-via-Squid-in-Ubuntu-on-Microsoft-Azure/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/07/15/Store-Password-in-Database/" rel="prev" title="Store Password in Database">
+                  <i class="fa fa-chevron-left"></i> Store Password in Database
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/02/24/Rebuild-this-blog-using-Hexo-and-Theme-NexT/" rel="next" title="Rebuild this blog using Hexo and Theme NexT">
+                  Rebuild this blog using Hexo and Theme NexT <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">David Shen</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
