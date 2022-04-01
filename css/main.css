@@ -898,6 +898,7 @@ pre code {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
+  z-index: 5;
 }
 @media (max-width: 413px) {
   .post-body .tabs ul.nav-tabs,
@@ -2505,6 +2506,11 @@ ul.breadcrumb li:last-child {
 }
 @media (max-width: 767px) {
   .site-nav {
+    padding-top: 30px;
+  }
+}
+@media (max-width: 767px) {
+  .main-menu {
     border-bottom: 1px solid #ddd;
     border-top: 1px solid #ddd;
   }
@@ -2600,7 +2606,7 @@ ul.breadcrumb li:last-child {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #0d4b38;
+  background: #ff052b;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
