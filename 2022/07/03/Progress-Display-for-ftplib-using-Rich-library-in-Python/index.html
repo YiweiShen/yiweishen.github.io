@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yiweishen.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="The ftplib is included in Python batteries, which can be used to implement the client side of the FTP protocol. It’s compact and easy to use, but missing a user-friendly progress display. For example,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Progress Display for ftplib using Rich Library in Python">
+<meta property="og:url" content="http://yiweishen.github.io/2022/07/03/Progress-Display-for-ftplib-using-Rich-library-in-Python/index.html">
+<meta property="og:site_name" content="SecondHand C0D1NG">
+<meta property="og:description" content="The ftplib is included in Python batteries, which can be used to implement the client side of the FTP protocol. It’s compact and easy to use, but missing a user-friendly progress display. For example,">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-07-03T14:44:57.000Z">
+<meta property="article:modified_time" content="2022-07-03T16:20:03.434Z">
+<meta property="article:author" content="David Shen">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://yiweishen.github.io/2022/07/03/Progress-Display-for-ftplib-using-Rich-library-in-Python/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://yiweishen.github.io/2022/07/03/Progress-Display-for-ftplib-using-Rich-library-in-Python/","path":"2022/07/03/Progress-Display-for-ftplib-using-Rich-library-in-Python/","title":"Progress Display for ftplib using Rich Library in Python"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Progress Display for ftplib using Rich Library in Python | SecondHand C0D1NG</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="SecondHand C0D1NG" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">SecondHand C0D1NG</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">David Shen</p>
+  <div class="site-description" itemprop="description">A quiet place for blogging</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/YiweiShen" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;YiweiShen" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2022/07/03/Progress-Display-for-ftplib-using-Rich-library-in-Python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="David Shen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SecondHand C0D1NG">
+      <meta itemprop="description" content="A quiet place for blogging">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Progress Display for ftplib using Rich Library in Python | SecondHand C0D1NG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Progress Display for ftplib using Rich Library in Python
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-03 10:44:57 / Modified: 12:20:03" itemprop="dateCreated datePublished" datetime="2022-07-03T10:44:57-04:00">2022-07-03</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>The ftplib is included in Python batteries, which can be used to implement the client side of the FTP protocol. It’s compact and easy to use, but missing a user-friendly progress display. For example, if you have a long-time connection to upload &#x2F; download a large file to &#x2F; from the FTP server, the terminal tells you nothing about the progress of the file transfer.</p>
+<p>Don’t panic.</p>
+<p>Luckily, we have Rich, a Python library, showing rich text (with color and style) to the terminal. Especially, it can display continuously updated information regarding the progress of long running tasks &#x2F; file copies etc. That is perfect for the scenario of file transfer with FTP server.</p>
+<p>The main challenge is that the Progress in rich.progress has to be called every time you need to update the UI and we have to, at the same time, synchronize the actual progress of FTP file transfer.</p>
+<p>OK, show me the code.</p>
+<p>First, make sure you have rich library installed. </p>
+<p>Then, double check if you get these dependencies imported.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> ftplib <span class="keyword">import</span> FTP_TLS</span><br><span class="line"><span class="keyword">from</span> rich <span class="keyword">import</span> <span class="built_in">print</span></span><br><span class="line"><span class="keyword">from</span> rich.progress <span class="keyword">import</span> Progress, SpinnerColumn, TotalFileSizeColumn, TransferSpeedColumn, TimeElapsedColumn</span><br></pre></td></tr></table></figure>
+
+<p>The implementation is straightforward with the help from the callback in FTP.retrbinary(). The callback function is called for each block of data received. And that is when we take the chance to update and render the progress display.</p>
+<p>Here is an example of downloading from FTP server.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">download_from_ftp</span>(<span class="params">file_path</span>):</span><br><span class="line">    <span class="comment"># ftplib.FTP_TLS() connects to FTP server with username and password</span></span><br><span class="line">    ftp = FTP_TLS(host=FTP_HOST, user=FTP_USER, passwd=FTP_PASSWD)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Securing the data connection requires the user to explicitly ask for it by calling the prot_p()</span></span><br><span class="line">    ftp.prot_p()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># prepare a file object on local machine to write data into</span></span><br><span class="line">    f = <span class="built_in">open</span>(file_path, <span class="string">&#x27;wb&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># initialize the ftp_progress with file_size, ftp connection and the file object</span></span><br><span class="line">    <span class="comment"># you may need to work out how to get the actual file size</span></span><br><span class="line">    <span class="comment"># Hint: FTP.dir() produces a directory listing as returned by the LIST command</span></span><br><span class="line">    tracker = ftp_progress(file_size, ftp, f)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># the trick to update rich progress display is using the callback function in retrbinary()</span></span><br><span class="line">    ftp.retrbinary(<span class="string">&#x27;RETR example_file.zip&#x27;</span>, callback=tracker.handle)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># stop progress display and also terminate the file object</span></span><br><span class="line">    tracker.stop()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># send a QUIT command to the server and close the connection</span></span><br><span class="line">    ftp.quit()</span><br></pre></td></tr></table></figure>
+
+<p>If you go through the comments I wrote for the above function, then the below class should be fairly self-explanatory to you. The handle() is where we reflect the changes in each iteration, yes in callbacks.</p>
+<p>One thing you should be aware of is that FTP uses two separate TCP connections: one to carry commands and the other to transfer data. So in the case of a long-time file transfer, you need to talk to the command channel once a while, to keep it connected. ‘NOOP’ command is designed for this, to prevent the client from being automatically disconnected (by server) for being idle.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ftp_progress</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, file_size, ftp, f</span>):</span><br><span class="line">        self.file_size = file_size</span><br><span class="line">        self.ftp = ftp</span><br><span class="line">        self.f = f</span><br><span class="line">        self.size_written = <span class="number">0</span></span><br><span class="line">        self.time = time.time()</span><br><span class="line">        self.progress = Progress(</span><br><span class="line">            SpinnerColumn(),</span><br><span class="line">            *Progress.get_default_columns(),</span><br><span class="line">            TotalFileSizeColumn(),</span><br><span class="line">            TransferSpeedColumn(),</span><br><span class="line">            TimeElapsedColumn(),</span><br><span class="line">        )</span><br><span class="line">        self.task_download = self.progress.add_task(<span class="string">&quot;[red]Download...&quot;</span>, total=self.file_size)</span><br><span class="line">        self.progress.start()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">stop</span>(<span class="params">self</span>):</span><br><span class="line">        self.progress.stop()</span><br><span class="line">        self.f.close()</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">handle</span>(<span class="params">self, data</span>):</span><br><span class="line">        self.f.write(data)</span><br><span class="line">        self.size_written += <span class="number">8192</span></span><br><span class="line">        self.progress.update(self.task_download, advance=<span class="number">8192</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># keep FTP control connection alive</span></span><br><span class="line">        <span class="keyword">if</span> time.time() - self.time &gt; <span class="number">60</span>:</span><br><span class="line">            self.time = time.time()</span><br><span class="line">            self.ftp.putcmd(<span class="string">&#x27;NOOP&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>As a final note, it should be mentioned that be careful of passing by reference in Python. If you don’t close &#x2F; keep FTP connections correctly with the server, strange things (not the TV show) cound happen.</p>
+<p>And, stay away from the nested callbacks, always.</p>
+<p>Ref:</p>
+<p>ftplib — FTP protocol client<br><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/ftplib.html">https://docs.python.org/3/library/ftplib.html</a></p>
+<p>Rich’s documentation<br><a target="_blank" rel="noopener" href="https://rich.readthedocs.io/en/stable/index.html">https://rich.readthedocs.io/en/stable/index.html</a></p>
+<p>Progress Display (Rich)<br><a target="_blank" rel="noopener" href="https://rich.readthedocs.io/en/stable/progress.html">https://rich.readthedocs.io/en/stable/progress.html</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>David Shen
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="http://yiweishen.github.io/2022/07/03/Progress-Display-for-ftplib-using-Rich-library-in-Python/" title="Progress Display for ftplib using Rich Library in Python">http://yiweishen.github.io/2022/07/03/Progress-Display-for-ftplib-using-Rich-library-in-Python/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/02/24/Rebuild-this-blog-using-Hexo-and-Theme-NexT/" rel="prev" title="Rebuild this blog using Hexo and Theme NexT">
+                  <i class="fa fa-chevron-left"></i> Rebuild this blog using Hexo and Theme NexT
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">David Shen</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

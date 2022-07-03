@@ -127,7 +127,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-count">70</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -179,6 +179,98 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2022/07/03/Progress-Display-for-ftplib-using-Rich-library-in-Python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="David Shen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SecondHand C0D1NG">
+      <meta itemprop="description" content="A quiet place for blogging">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | SecondHand C0D1NG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/03/Progress-Display-for-ftplib-using-Rich-library-in-Python/" class="post-title-link" itemprop="url">Progress Display for ftplib using Rich Library in Python</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-03 10:44:57 / Modified: 12:20:03" itemprop="dateCreated datePublished" datetime="2022-07-03T10:44:57-04:00">2022-07-03</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>The ftplib is included in Python batteries, which can be used to implement the client side of the FTP protocol. It’s compact and easy to use, but missing a user-friendly progress display. For example, if you have a long-time connection to upload &#x2F; download a large file to &#x2F; from the FTP server, the terminal tells you nothing about the progress of the file transfer.</p>
+<p>Don’t panic.</p>
+<p>Luckily, we have Rich, a Python library, showing rich text (with color and style) to the terminal. Especially, it can display continuously updated information regarding the progress of long running tasks &#x2F; file copies etc. That is perfect for the scenario of file transfer with FTP server.</p>
+<p>The main challenge is that the Progress in rich.progress has to be called every time you need to update the UI and we have to, at the same time, synchronize the actual progress of FTP file transfer.</p>
+<p>OK, show me the code.</p>
+<p>First, make sure you have rich library installed. </p>
+<p>Then, double check if you get these dependencies imported.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> ftplib <span class="keyword">import</span> FTP_TLS</span><br><span class="line"><span class="keyword">from</span> rich <span class="keyword">import</span> <span class="built_in">print</span></span><br><span class="line"><span class="keyword">from</span> rich.progress <span class="keyword">import</span> Progress, SpinnerColumn, TotalFileSizeColumn, TransferSpeedColumn, TimeElapsedColumn</span><br></pre></td></tr></table></figure>
+
+<p>The implementation is straightforward with the help from the callback in FTP.retrbinary(). The callback function is called for each block of data received. And that is when we take the chance to update and render the progress display.</p>
+<p>Here is an example of downloading from FTP server.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">download_from_ftp</span>(<span class="params">file_path</span>):</span><br><span class="line">    <span class="comment"># ftplib.FTP_TLS() connects to FTP server with username and password</span></span><br><span class="line">    ftp = FTP_TLS(host=FTP_HOST, user=FTP_USER, passwd=FTP_PASSWD)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Securing the data connection requires the user to explicitly ask for it by calling the prot_p()</span></span><br><span class="line">    ftp.prot_p()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># prepare a file object on local machine to write data into</span></span><br><span class="line">    f = <span class="built_in">open</span>(file_path, <span class="string">&#x27;wb&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># initialize the ftp_progress with file_size, ftp connection and the file object</span></span><br><span class="line">    <span class="comment"># you may need to work out how to get the actual file size</span></span><br><span class="line">    <span class="comment"># Hint: FTP.dir() produces a directory listing as returned by the LIST command</span></span><br><span class="line">    tracker = ftp_progress(file_size, ftp, f)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># the trick to update rich progress display is using the callback function in retrbinary()</span></span><br><span class="line">    ftp.retrbinary(<span class="string">&#x27;RETR example_file.zip&#x27;</span>, callback=tracker.handle)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># stop progress display and also terminate the file object</span></span><br><span class="line">    tracker.stop()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># send a QUIT command to the server and close the connection</span></span><br><span class="line">    ftp.quit()</span><br></pre></td></tr></table></figure>
+
+<p>If you go through the comments I wrote for the above function, then the below class should be fairly self-explanatory to you. The handle() is where we reflect the changes in each iteration, yes in callbacks.</p>
+<p>One thing you should be aware of is that FTP uses two separate TCP connections: one to carry commands and the other to transfer data. So in the case of a long-time file transfer, you need to talk to the command channel once a while, to keep it connected. ‘NOOP’ command is designed for this, to prevent the client from being automatically disconnected (by server) for being idle.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ftp_progress</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, file_size, ftp, f</span>):</span><br><span class="line">        self.file_size = file_size</span><br><span class="line">        self.ftp = ftp</span><br><span class="line">        self.f = f</span><br><span class="line">        self.size_written = <span class="number">0</span></span><br><span class="line">        self.time = time.time()</span><br><span class="line">        self.progress = Progress(</span><br><span class="line">            SpinnerColumn(),</span><br><span class="line">            *Progress.get_default_columns(),</span><br><span class="line">            TotalFileSizeColumn(),</span><br><span class="line">            TransferSpeedColumn(),</span><br><span class="line">            TimeElapsedColumn(),</span><br><span class="line">        )</span><br><span class="line">        self.task_download = self.progress.add_task(<span class="string">&quot;[red]Download...&quot;</span>, total=self.file_size)</span><br><span class="line">        self.progress.start()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">stop</span>(<span class="params">self</span>):</span><br><span class="line">        self.progress.stop()</span><br><span class="line">        self.f.close()</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">handle</span>(<span class="params">self, data</span>):</span><br><span class="line">        self.f.write(data)</span><br><span class="line">        self.size_written += <span class="number">8192</span></span><br><span class="line">        self.progress.update(self.task_download, advance=<span class="number">8192</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># keep FTP control connection alive</span></span><br><span class="line">        <span class="keyword">if</span> time.time() - self.time &gt; <span class="number">60</span>:</span><br><span class="line">            self.time = time.time()</span><br><span class="line">            self.ftp.putcmd(<span class="string">&#x27;NOOP&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>As a final note, it should be mentioned that be careful of passing by reference in Python. If you don’t close &#x2F; keep FTP connections correctly with the server, strange things (not the TV show) cound happen.</p>
+<p>And, stay away from the nested callbacks, always.</p>
+<p>Ref:</p>
+<p>ftplib — FTP protocol client<br><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/ftplib.html">https://docs.python.org/3/library/ftplib.html</a></p>
+<p>Rich’s documentation<br><a target="_blank" rel="noopener" href="https://rich.readthedocs.io/en/stable/index.html">https://rich.readthedocs.io/en/stable/index.html</a></p>
+<p>Progress Display (Rich)<br><a target="_blank" rel="noopener" href="https://rich.readthedocs.io/en/stable/progress.html">https://rich.readthedocs.io/en/stable/progress.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2022/02/24/Rebuild-this-blog-using-Hexo-and-Theme-NexT/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -215,7 +307,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-03 00:41:05" itemprop="dateModified" datetime="2022-06-03T00:41:05-04:00">2022-06-03</time>
+      <time title="Modified: 2022-07-03 12:20:03" itemprop="dateModified" datetime="2022-07-03T12:20:03-04:00">2022-07-03</time>
     </span>
 
   
@@ -326,7 +418,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-03 00:41:05" itemprop="dateModified" datetime="2022-06-03T00:41:05-04:00">2022-06-03</time>
+      <time title="Modified: 2022-07-03 12:20:03" itemprop="dateModified" datetime="2022-07-03T12:20:03-04:00">2022-07-03</time>
     </span>
 
   
@@ -433,7 +525,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-03 00:41:05" itemprop="dateModified" datetime="2022-06-03T00:41:05-04:00">2022-06-03</time>
+      <time title="Modified: 2022-07-03 12:20:03" itemprop="dateModified" datetime="2022-07-03T12:20:03-04:00">2022-07-03</time>
     </span>
 
   
@@ -554,7 +646,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-03 00:41:05" itemprop="dateModified" datetime="2022-06-03T00:41:05-04:00">2022-06-03</time>
+      <time title="Modified: 2022-07-03 12:20:03" itemprop="dateModified" datetime="2022-07-03T12:20:03-04:00">2022-07-03</time>
     </span>
 
   
@@ -640,7 +732,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-03 00:41:05" itemprop="dateModified" datetime="2022-06-03T00:41:05-04:00">2022-06-03</time>
+      <time title="Modified: 2022-07-03 12:20:03" itemprop="dateModified" datetime="2022-07-03T12:20:03-04:00">2022-07-03</time>
     </span>
 
   
@@ -723,7 +815,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-03 00:41:05" itemprop="dateModified" datetime="2022-06-03T00:41:05-04:00">2022-06-03</time>
+      <time title="Modified: 2022-07-03 12:20:03" itemprop="dateModified" datetime="2022-07-03T12:20:03-04:00">2022-07-03</time>
     </span>
 
   
@@ -802,7 +894,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-03 00:41:05" itemprop="dateModified" datetime="2022-06-03T00:41:05-04:00">2022-06-03</time>
+      <time title="Modified: 2022-07-03 12:20:03" itemprop="dateModified" datetime="2022-07-03T12:20:03-04:00">2022-07-03</time>
     </span>
 
   
@@ -887,7 +979,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-03 00:41:05" itemprop="dateModified" datetime="2022-06-03T00:41:05-04:00">2022-06-03</time>
+      <time title="Modified: 2022-07-03 12:20:03" itemprop="dateModified" datetime="2022-07-03T12:20:03-04:00">2022-07-03</time>
     </span>
 
   
@@ -965,7 +1057,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-03 00:41:05" itemprop="dateModified" datetime="2022-06-03T00:41:05-04:00">2022-06-03</time>
+      <time title="Modified: 2022-07-03 12:20:03" itemprop="dateModified" datetime="2022-07-03T12:20:03-04:00">2022-07-03</time>
     </span>
 
   
@@ -979,83 +1071,6 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>I have been thinking about to code myself a blog from scratch because the hexo blog seems out of date. The interactions between Github and Hexo are sometimes failing and I got warnings of it might not be working in some future. Maybe it’s good time to practice some front-end coding with html&#x2F;css and javascript.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2021/03/30/Leetcode/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="David Shen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SecondHand C0D1NG">
-      <meta itemprop="description" content="A quiet place for blogging">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | SecondHand C0D1NG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/03/30/Leetcode/" class="post-title-link" itemprop="url">Leetcode</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-03-30 16:45:17" itemprop="dateCreated datePublished" datetime="2021-03-30T16:45:17-04:00">2021-03-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-03 00:41:05" itemprop="dateModified" datetime="2022-06-03T00:41:05-04:00">2022-06-03</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>The coding experience on Leetcode is fantastic because you can always get instant feedback that your code is not working. Then you try again and get the feedback again that your codes fail. Back and forth serveral times until you get it.</p>
-<p>To be honest, I like Project Euler more, because of its simplicity and the sense of art comes from the simplicity. Still, I think you need the Leetcode to practice to get a job. In this sense, it’s a wonderful website that gives you hope of the employment.</p>
 
       
     </div>
