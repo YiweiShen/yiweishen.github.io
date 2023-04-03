@@ -1430,6 +1430,8 @@ pre code {
   color: #999;
   font-size: 0.875em;
   padding: 20px 0;
+  transition: 0.2s ease-in-out;
+  transition-property: left, right;
 }
 .footer.footer-fixed {
   bottom: 0;
@@ -2414,6 +2416,9 @@ ul.breadcrumb li:last-child {
   .sidebar-active {
     padding-right: 320px;
   }
+  .sidebar-active .footer-fixed {
+    right: 320px;
+  }
 }
 .sidebar {
   right: -320px;
@@ -2452,7 +2457,7 @@ ul.breadcrumb li:last-child {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #a2347f;
+  background: #ff5;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
