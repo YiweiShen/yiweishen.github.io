@@ -16,7 +16,7 @@ Check if your Linux kernel version is 4.9 or higher.
 uname -r
 ```
 
-## 1. Congestion_control status
+## Congestion Control Status
 
 ```bash
 sysctl net.ipv4.tcp_available_congestion_control
@@ -24,7 +24,7 @@ sysctl net.ipv4.tcp_available_congestion_control
 
 If you see `net.ipv4.tcp_available_congestion_control = bbr cubic reno`, then BBR is enabled. You can check it again after we enable BBR.
 
-## 2. Enable BBR
+## Enable BBR
 
 ```bash
 echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
