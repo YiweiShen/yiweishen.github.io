@@ -27,7 +27,7 @@
 <meta property="og:description" content="IntroductionBBR (“Bottleneck Bandwidth and Round-trip propagation time”) aims to improve network performance and reduce latency. BBR estimates the available network bandwidth and the round-trip time (">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-05-07T20:03:12.000Z">
-<meta property="article:modified_time" content="2023-05-07T20:19:25.389Z">
+<meta property="article:modified_time" content="2023-05-07T20:30:37.235Z">
 <meta property="article:author" content="David Shen">
 <meta property="article:tag" content="Blog">
 <meta name="twitter:card" content="summary">
@@ -113,7 +113,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisites"><span class="nav-number">2.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Congestion-control-status"><span class="nav-number">3.</span> <span class="nav-text">1. Congestion_control status</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Enable-BBR"><span class="nav-number">4.</span> <span class="nav-text">2. Enable BBR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">5.</span> <span class="nav-text">References</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisites"><span class="nav-number">2.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Congestion-Control-Status"><span class="nav-number">3.</span> <span class="nav-text">Congestion Control Status</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Enable-BBR"><span class="nav-number">4.</span> <span class="nav-text">Enable BBR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">5.</span> <span class="nav-text">References</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -196,7 +196,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2023-05-07 16:03:12 / Modified: 16:19:25" itemprop="dateCreated datePublished" datetime="2023-05-07T16:03:12-04:00">2023-05-07</time>
+      <time title="Created: 2023-05-07 16:03:12 / Modified: 16:30:37" itemprop="dateCreated datePublished" datetime="2023-05-07T16:03:12-04:00">2023-05-07</time>
     </span>
 
   
@@ -213,10 +213,10 @@
 <h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><p>Check if your Linux kernel version is 4.9 or higher.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">uname</span> -r</span><br></pre></td></tr></table></figure>
 
-<h2 id="1-Congestion-control-status"><a href="#1-Congestion-control-status" class="headerlink" title="1. Congestion_control status"></a>1. Congestion_control status</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl net.ipv4.tcp_available_congestion_control</span><br></pre></td></tr></table></figure>
+<h2 id="Congestion-Control-Status"><a href="#Congestion-Control-Status" class="headerlink" title="Congestion Control Status"></a>Congestion Control Status</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl net.ipv4.tcp_available_congestion_control</span><br></pre></td></tr></table></figure>
 
 <p>If you see <code>net.ipv4.tcp_available_congestion_control = bbr cubic reno</code>, then BBR is enabled. You can check it again after we enable BBR.</p>
-<h2 id="2-Enable-BBR"><a href="#2-Enable-BBR" class="headerlink" title="2. Enable BBR"></a>2. Enable BBR</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;net.core.default_qdisc=fq&quot;</span> &gt;&gt; /etc/sysctl.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;net.ipv4.tcp_congestion_control=bbr&quot;</span> &gt;&gt; /etc/sysctl.conf</span><br><span class="line">sudo sysctl -p</span><br></pre></td></tr></table></figure>
+<h2 id="Enable-BBR"><a href="#Enable-BBR" class="headerlink" title="Enable BBR"></a>Enable BBR</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;net.core.default_qdisc=fq&quot;</span> &gt;&gt; /etc/sysctl.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;net.ipv4.tcp_congestion_control=bbr&quot;</span> &gt;&gt; /etc/sysctl.conf</span><br><span class="line">sudo sysctl -p</span><br></pre></td></tr></table></figure>
 
 <p>The first line enables Fair Queueing (FQ), which is a network scheduler that improves network performance by reducing latency and jitter. The second line enables BBR.</p>
 <p>The last line reloads the configuration file for the changes to take effect.</p>
