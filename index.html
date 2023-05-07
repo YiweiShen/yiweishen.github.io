@@ -123,7 +123,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-count">71</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -153,6 +153,88 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2023/05/07/Optimize-TCP-by-enabling-BBR-on-Oracle-Cloud-Linux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="David Shen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SecondHand C0D1NG">
+      <meta itemprop="description" content="A quiet place for blogging">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | SecondHand C0D1NG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/07/Optimize-TCP-by-enabling-BBR-on-Oracle-Cloud-Linux/" class="post-title-link" itemprop="url">Optimize TCP by enabling BBR on Oracle Cloud Linux</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2023-05-07 16:03:12 / Modified: 16:19:25" itemprop="dateCreated datePublished" datetime="2023-05-07T16:03:12-04:00">2023-05-07</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>BBR (“Bottleneck Bandwidth and Round-trip propagation time”) aims to improve network performance and reduce latency. BBR estimates the available network bandwidth and the round-trip time (RTT) to adjust the TCP sending rate dynamically, reducing queuing delays and reducing packet loss.</p>
+<h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><p>Check if your Linux kernel version is 4.9 or higher.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">uname</span> -r</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-Congestion-control-status"><a href="#1-Congestion-control-status" class="headerlink" title="1. Congestion_control status"></a>1. Congestion_control status</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl net.ipv4.tcp_available_congestion_control</span><br></pre></td></tr></table></figure>
+
+<p>If you see <code>net.ipv4.tcp_available_congestion_control = bbr cubic reno</code>, then BBR is enabled. You can check it again after we enable BBR.</p>
+<h2 id="2-Enable-BBR"><a href="#2-Enable-BBR" class="headerlink" title="2. Enable BBR"></a>2. Enable BBR</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;net.core.default_qdisc=fq&quot;</span> &gt;&gt; /etc/sysctl.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;net.ipv4.tcp_congestion_control=bbr&quot;</span> &gt;&gt; /etc/sysctl.conf</span><br><span class="line">sudo sysctl -p</span><br></pre></td></tr></table></figure>
+
+<p>The first line enables Fair Queueing (FQ), which is a network scheduler that improves network performance by reducing latency and jitter. The second line enables BBR.</p>
+<p>The last line reloads the configuration file for the changes to take effect.</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>Optimizing HTTP&#x2F;2 prioritization with BBR and tcp_notsent_lowat:<br><a target="_blank" rel="noopener" href="https://blog.cloudflare.com/http-2-prioritization-with-nginx/">https://blog.cloudflare.com/http-2-prioritization-with-nginx/</a></p>
+<p>TCP BBR congestion control comes to GCP – your Internet just got faster:<br><a target="_blank" rel="noopener" href="https://cloud.google.com/blog/products/networking/tcp-bbr-congestion-control-comes-to-gcp-your-internet-just-got-faster">https://cloud.google.com/blog/products/networking/tcp-bbr-congestion-control-comes-to-gcp-your-internet-just-got-faster</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -198,7 +280,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-22 00:09:26" itemprop="dateModified" datetime="2023-04-22T00:09:26-04:00">2023-04-22</time>
+      <time title="Modified: 2023-05-07 16:19:25" itemprop="dateModified" datetime="2023-05-07T16:19:25-04:00">2023-05-07</time>
     </span>
 
   
@@ -296,7 +378,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-22 00:09:26" itemprop="dateModified" datetime="2023-04-22T00:09:26-04:00">2023-04-22</time>
+      <time title="Modified: 2023-05-07 16:19:25" itemprop="dateModified" datetime="2023-05-07T16:19:25-04:00">2023-05-07</time>
     </span>
 
   
@@ -407,7 +489,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-22 00:09:26" itemprop="dateModified" datetime="2023-04-22T00:09:26-04:00">2023-04-22</time>
+      <time title="Modified: 2023-05-07 16:19:25" itemprop="dateModified" datetime="2023-05-07T16:19:25-04:00">2023-05-07</time>
     </span>
 
   
@@ -514,7 +596,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-22 00:09:26" itemprop="dateModified" datetime="2023-04-22T00:09:26-04:00">2023-04-22</time>
+      <time title="Modified: 2023-05-07 16:19:25" itemprop="dateModified" datetime="2023-05-07T16:19:25-04:00">2023-05-07</time>
     </span>
 
   
@@ -635,7 +717,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-22 00:09:26" itemprop="dateModified" datetime="2023-04-22T00:09:26-04:00">2023-04-22</time>
+      <time title="Modified: 2023-05-07 16:19:25" itemprop="dateModified" datetime="2023-05-07T16:19:25-04:00">2023-05-07</time>
     </span>
 
   
@@ -721,7 +803,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-22 00:09:26" itemprop="dateModified" datetime="2023-04-22T00:09:26-04:00">2023-04-22</time>
+      <time title="Modified: 2023-05-07 16:19:25" itemprop="dateModified" datetime="2023-05-07T16:19:25-04:00">2023-05-07</time>
     </span>
 
   
@@ -804,7 +886,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-22 00:09:26" itemprop="dateModified" datetime="2023-04-22T00:09:26-04:00">2023-04-22</time>
+      <time title="Modified: 2023-05-07 16:19:25" itemprop="dateModified" datetime="2023-05-07T16:19:25-04:00">2023-05-07</time>
     </span>
 
   
@@ -883,7 +965,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-22 00:09:26" itemprop="dateModified" datetime="2023-04-22T00:09:26-04:00">2023-04-22</time>
+      <time title="Modified: 2023-05-07 16:19:25" itemprop="dateModified" datetime="2023-05-07T16:19:25-04:00">2023-05-07</time>
     </span>
 
   
@@ -968,7 +1050,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-22 00:09:26" itemprop="dateModified" datetime="2023-04-22T00:09:26-04:00">2023-04-22</time>
+      <time title="Modified: 2023-05-07 16:19:25" itemprop="dateModified" datetime="2023-05-07T16:19:25-04:00">2023-05-07</time>
     </span>
 
   
@@ -1002,84 +1084,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2021/03/30/Code-myself-a-blog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="David Shen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SecondHand C0D1NG">
-      <meta itemprop="description" content="A quiet place for blogging">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | SecondHand C0D1NG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/03/30/Code-myself-a-blog/" class="post-title-link" itemprop="url">Code myself a blog</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-03-30 16:53:15" itemprop="dateCreated datePublished" datetime="2021-03-30T16:53:15-04:00">2021-03-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-22 00:09:26" itemprop="dateModified" datetime="2023-04-22T00:09:26-04:00">2023-04-22</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>I have been thinking about to code myself a blog from scratch because the hexo blog seems out of date. The interactions between Github and Hexo are sometimes failing and I got warnings of it might not be working in some future. Maybe it’s good time to practice some front-end coding with html&#x2F;css and javascript.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

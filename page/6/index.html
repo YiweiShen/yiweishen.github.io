@@ -123,7 +123,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-count">71</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -153,6 +153,167 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2017/04/04/import-re/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="David Shen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SecondHand C0D1NG">
+      <meta itemprop="description" content="A quiet place for blogging">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | SecondHand C0D1NG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/04/04/import-re/" class="post-title-link" itemprop="url">import re</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-04-03 21:06:20" itemprop="dateCreated datePublished" datetime="2017-04-03T21:06:20-04:00">2017-04-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-05-07 16:19:25" itemprop="dateModified" datetime="2023-05-07T16:19:25-04:00">2023-05-07</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>A regular expression (or RE) specifies a set of strings that matches it; the functions in this module let you check if a particular string matches a given regular expression (or if a given regular expression matches a particular string, which comes down to the same thing).  Blah blah blah.</p>
+<p>Again, documentation first<br><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/re.html">https://docs.python.org/3/library/re.html</a><br>as always</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br></pre></td></tr></table></figure>
+<p>You cannot match a Unicode string with a byte pattern or vice-versa.</p>
+<p>The special characters in RE<br>tl;ra (Too long; Read anyway) or maybe you should read the documentation directly.</p>
+<p>‘.’<br>(Dot.) In the default mode, this matches any character except a newline. If the DOTALL flag has been specified, this matches any character including a newline.</p>
+<p>‘^’<br>(Caret.) Matches the start of the string, and in MULTILINE mode also matches immediately after each newline.</p>
+<p>‘$’<br>Matches the end of the string or just before the newline at the end of the string, and in MULTILINE mode also matches before a newline. </p>
+<p>‘<em>‘<br>Causes the resulting RE to match 0 or more repetitions of the preceding RE, as many repetitions as are possible. ab</em> will match ‘a’, ‘ab’, or ‘a’ followed by any number of ‘b’s.</p>
+<p>‘+’<br>Causes the resulting RE to match 1 or more repetitions of the preceding RE. ab+ will match ‘a’ followed by any non-zero number of ‘b’s; it will not match just ‘a’.</p>
+<p>‘?’<br>Causes the resulting RE to match 0 or 1 repetitions of the preceding RE. ab? will match either ‘a’ or ‘ab’.</p>
+<p><em>?, +?, ??<br>The ‘</em>‘, ‘+’, and ‘?’ qualifiers are all greedy; they match as much text as possible. Sometimes this behaviour isn’t desired; if the RE &lt;.*&gt; is matched against <a> b <c>, it will match the entire string, and not just <a>. Adding ? after the qualifier makes it perform the match in non-greedy or minimal fashion; as few characters as possible will be matched. Using the RE &lt;.*?&gt; will match only <a>.</p>
+<p>{m}<br>Specifies that exactly m copies of the previous RE should be matched; fewer matches cause the entire RE not to match. For example, a{6} will match exactly six ‘a’ characters, but not five.</p>
+<p>{m,n}<br>Causes the resulting RE to match from m to n repetitions of the preceding RE, attempting to match as many repetitions as possible. </p>
+<p>{m,n}?<br>Causes the resulting RE to match from m to n repetitions of the preceding RE, attempting to match as few repetitions as possible.</p>
+<p>‘&#39;<br>Either escapes special characters (permitting you to match characters like ‘*’, ‘?’, and so forth), or signals a special sequence</p>
+<p>[]<br>Used to indicate a set of characters.</p>
+<p>‘|’<br>A|B, where A and B can be arbitrary REs, creates a regular expression that will match either A or B. </p>
+<p>(…)<br>Matches whatever regular expression is inside the parentheses, and indicates the start and end of a group</p>
+<p>(?…)<br>This is an extension notation (a ‘?’ following a ‘(‘ is not meaningful otherwise). The first character after the ‘?’ determines what the meaning and further syntax of the construct is. </p>
+<p>(?aiLmsux)<br>(One or more letters from the set ‘a’, ‘i’, ‘L’, ‘m’, ‘s’, ‘u’, ‘x’.) The group matches the empty string; the letters set the corresponding flags: re.A (ASCII-only matching), re.I (ignore case), re.L (locale dependent), re.M (multi-line), re.S (dot matches all), and re.X (verbose), for the entire regular expression.</p>
+<p>(?:…)<br>A non-capturing version of regular parentheses. Matches whatever regular expression is inside the parentheses, but the substring matched by the group cannot be retrieved after performing a match or referenced later in the pattern.</p>
+<p>(?imsx-imsx:…)<br>(Zero or more letters from the set ‘i’, ‘m’, ‘s’, ‘x’, optionally followed by ‘-‘ followed by one or more letters from the same set.) The letters set or removes the corresponding flags: re.I (ignore case), re.M (multi-line), re.S (dot matches all), and re.X (verbose), for the part of the expression. (The flags are described in Module Contents.)</p>
+<p>(?P<name>…)<br>Similar to regular parentheses, but the substring matched by the group is accessible via the symbolic group name name. If the pattern is (?P<quote>[‘“]).*?(?P&#x3D;quote) (i.e. matching a string quoted with either single or double quotes)</p>
+<p>(?P&#x3D;name)<br>A backreference to a named group; it matches whatever text was matched by the earlier group named name.</p>
+<p>(?#…)<br>A comment; the contents of the parentheses are simply ignored.</p>
+<p>(?&#x3D;…)<br>Matches if … matches next, but doesn’t consume any of the string. This is called a lookahead assertion. For example, Isaac (?&#x3D;Asimov) will match ‘Isaac ‘ only if it’s followed by ‘Asimov’.</p>
+<p>(?!…)<br>Matches if … doesn’t match next. This is a negative lookahead assertion. For example, Isaac (?!Asimov) will match ‘Isaac ‘ only if it’s not followed by ‘Asimov’.</p>
+<p>(?&lt;&#x3D;…)<br>Matches if the current position in the string is preceded by a match for … that ends at the current position. This is called a positive lookbehind assertion. (?&lt;&#x3D;abc)def will find a match in abcdef, since the lookbehind will back up 3 characters and check if the contained pattern matches. The contained pattern must only match strings of some fixed length, meaning that abc or a|b are allowed, but a* and a{3,4} are not. </p>
+<p>(?&lt;!…)<br>Matches if the current position in the string is not preceded by a match for …</p>
+<p>(?(id&#x2F;name)yes-pattern|no-pattern)<br>Will try to match with yes-pattern if the group with given id or name exists, and with no-pattern if it doesn’t. no-pattern is optional and can be omitted. For example, (&lt;)?(\w+@\w+(?:.\w+)+)(?(1)&gt;|$) is a poor email matching pattern, which will match with ‘<a href="mailto:&#x75;&#x73;&#101;&#x72;&#x40;&#x68;&#111;&#115;&#116;&#46;&#99;&#x6f;&#x6d;">&#x75;&#x73;&#101;&#x72;&#x40;&#x68;&#111;&#115;&#116;&#46;&#99;&#x6f;&#x6d;</a>‘ as well as ‘<a href="mailto:&#117;&#x73;&#x65;&#114;&#x40;&#x68;&#111;&#x73;&#116;&#x2e;&#x63;&#111;&#109;">&#117;&#x73;&#x65;&#114;&#x40;&#x68;&#111;&#x73;&#116;&#x2e;&#x63;&#111;&#109;</a>‘, but not with ‘&lt;<a href="mailto:&#x75;&#115;&#x65;&#114;&#64;&#x68;&#x6f;&#115;&#116;&#x2e;&#x63;&#x6f;&#x6d;">&#x75;&#115;&#x65;&#114;&#64;&#x68;&#x6f;&#115;&#116;&#x2e;&#x63;&#x6f;&#x6d;</a>‘ nor ‘<a href="mailto:&#117;&#x73;&#x65;&#x72;&#64;&#x68;&#x6f;&#115;&#x74;&#x2e;&#x63;&#111;&#x6d;">&#117;&#x73;&#x65;&#x72;&#64;&#x68;&#x6f;&#115;&#x74;&#x2e;&#x63;&#111;&#x6d;</a>&gt;’.</p>
+<p>\number<br>Matches the contents of the group of the same number. Groups are numbered starting from 1. For example, (.+) \1 matches ‘the the’ or ‘55 55’, but not ‘thethe’ (note the space after the group).</p>
+<p>\A<br>Matches only at the start of the string.</p>
+<p>\b<br>Matches the empty string, but only at the beginning or end of a word.</p>
+<p>\B<br>Matches the empty string, but only when it is not at the beginning or end of a word. This means that r’py\B’ matches ‘python’, ‘py3’, ‘py2’, but not ‘py’, ‘py.’, or ‘py!’. </p>
+<p>\d<br>For Unicode (str) patterns:<br>Matches any Unicode decimal digit (that is, any character in Unicode character category [Nd]). This includes [0-9], and also many other digit characters. If the ASCII flag is used only [0-9] is matched (but the flag affects the entire regular expression, so in such cases using an explicit [0-9] may be a better choice).<br>For 8-bit (bytes) patterns:<br>Matches any decimal digit; this is equivalent to [0-9].</p>
+<p>\D<br>Matches any character which is not a Unicode decimal digit. This is the opposite of \d. If the ASCII flag is used this becomes the equivalent of [^0-9] (but the flag affects the entire regular expression, so in such cases using an explicit [^0-9] may be a better choice).</p>
+<p>\s<br>Matches Unicode whitespace characters </p>
+<p>\S<br>Matches any character which is not a Unicode whitespace character.</p>
+<p>\w<br>Matches Unicode word characters</p>
+<p>\W<br>Matches any character which is not a Unicode word character.</p>
+<p>\Z<br>Matches only at the end of the string.</p>
+<p>OK, let’s move on to Module Contents</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">re.<span class="built_in">compile</span>(pattern, flags=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p>Compile a regular expression pattern into a regular expression object, which can be used for matching using its match() and search() methods</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">prog = re.<span class="built_in">compile</span>(pattern)</span><br><span class="line">result = prog.match(string)</span><br></pre></td></tr></table></figure>
+<p>is equivalent to</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result = re.match(pattern, string)</span><br></pre></td></tr></table></figure>
+<p>but using re.compile() and saving the resulting regular expression object for reuse is more efficient when the expression will be used several times in a single program.</p>
+<p>re.A<br>re.ASCII</p>
+<p>re.DEBUG</p>
+<p>re.I<br>re.IGNORECASE</p>
+<p>re.L<br>re.LOCALE</p>
+<p>re.M<br>re.MULTILINE</p>
+<p>re.S<br>re.DOTALL</p>
+<p>re.X<br>re.VERBOSE<br>This flag allows you to write regular expressions that look nicer and are more readable by allowing you to visually separate logical sections of the pattern and add comments. Whitespace within the pattern is ignored, except when in a character class or when preceded by an unescaped backslash. When a line contains a # that is not in a character class and is not preceded by an unescaped backslash, all characters from the leftmost such # through the end of the line are ignored.</p>
+<p>This means that the two following regular expression objects that match a decimal number are functionally equal:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = re.<span class="built_in">compile</span>(<span class="string">r&quot;&quot;&quot;\d +  # the integral part</span></span><br><span class="line"><span class="string">                   \.    # the decimal point</span></span><br><span class="line"><span class="string">                   \d *  # some fractional digits&quot;&quot;&quot;</span>, re.X)</span><br><span class="line">b = re.<span class="built_in">compile</span>(<span class="string">r&quot;\d+\.\d*&quot;</span>)</span><br><span class="line"></span><br><span class="line">re.search(pattern, string, flags=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p>Scan through string looking for the first location where the regular expression pattern produces a match, and return a corresponding match object.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">re.match(pattern, string, flags=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p>If zero or more characters at the beginning (be careful) of string match the regular expression pattern, return a corresponding match object. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">re.fullmatch(pattern, string, flags=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p>If the whole string matches the regular expression pattern, return a corresponding match object. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">re.split(pattern, string, maxsplit=<span class="number">0</span>, flags=<span class="number">0</span>)</span><br><span class="line"><span class="comment"># Split string by the occurrences of pattern.</span></span><br><span class="line">re.split(<span class="string">&#x27;\W+&#x27;</span>, <span class="string">&#x27;Words, words, words.&#x27;</span>)</span><br><span class="line"><span class="comment"># [&#x27;Words&#x27;, &#x27;words&#x27;, &#x27;words&#x27;, &#x27;&#x27;]</span></span><br><span class="line">re.split(<span class="string">&#x27;(\W+)&#x27;</span>, <span class="string">&#x27;Words, words, words.&#x27;</span>)</span><br><span class="line"><span class="comment"># [&#x27;Words&#x27;, &#x27;, &#x27;, &#x27;words&#x27;, &#x27;, &#x27;, &#x27;words&#x27;, &#x27;.&#x27;, &#x27;&#x27;]</span></span><br><span class="line">re.split(<span class="string">&#x27;\W+&#x27;</span>, <span class="string">&#x27;Words, words, words.&#x27;</span>, <span class="number">1</span>)</span><br><span class="line"><span class="comment"># [&#x27;Words&#x27;, &#x27;words, words.&#x27;]</span></span><br><span class="line">re.split(<span class="string">&#x27;[a-f]+&#x27;</span>, <span class="string">&#x27;0a3B9&#x27;</span>, flags=re.IGNORECASE)</span><br><span class="line"><span class="comment"># [&#x27;0&#x27;, &#x27;3&#x27;, &#x27;9&#x27;]</span></span><br><span class="line">re.split(<span class="string">&#x27;(\W+)&#x27;</span>, <span class="string">&#x27;...words, words...&#x27;</span>)</span><br><span class="line"><span class="comment"># [&#x27;&#x27;, &#x27;...&#x27;, &#x27;words&#x27;, &#x27;, &#x27;, &#x27;words&#x27;, &#x27;...&#x27;, &#x27;&#x27;]</span></span><br><span class="line"></span><br><span class="line">re.findall(pattern, string, flags=<span class="number">0</span>)</span><br><span class="line"><span class="comment"># Return all non-overlapping matches of pattern in string, as a list of strings.</span></span><br><span class="line"></span><br><span class="line">re.finditer(pattern, string, flags=<span class="number">0</span>)</span><br><span class="line"><span class="comment"># Return an iterator yielding match objects over all non-overlapping matches for the RE pattern in string.</span></span><br><span class="line"></span><br><span class="line">re.sub(pattern, repl, string, count=<span class="number">0</span>, flags=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p>Return the string obtained by replacing the leftmost non-overlapping occurrences of pattern in string by the replacement repl.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">m = re.match(<span class="string">r&quot;(\w+) (\w+)&quot;</span>, <span class="string">&quot;Isaac Newton, physicist&quot;</span>)</span><br><span class="line">m.group(<span class="number">0</span>)       <span class="comment"># The entire match &#x27;Isaac Newton&#x27;</span></span><br><span class="line">m.group(<span class="number">1</span>)       <span class="comment"># The first parenthesized subgroup. &#x27;Isaac&#x27;</span></span><br><span class="line">m.group(<span class="number">2</span>)       <span class="comment"># The second parenthesized subgroup. &#x27;Newton&#x27;</span></span><br><span class="line">m.group(<span class="number">1</span>, <span class="number">2</span>)    <span class="comment"># Multiple arguments give us a tuple. (&#x27;Isaac&#x27;, &#x27;Newton&#x27;)</span></span><br><span class="line"></span><br><span class="line">email = <span class="string">&quot;tony@tiremove_thisger.net&quot;</span></span><br><span class="line">m = re.search(<span class="string">&quot;remove_this&quot;</span>, email)</span><br><span class="line">email[:m.start()] + email[m.end():]</span><br><span class="line"><span class="comment"># &#x27;tony@tiger.net&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>Regular Expression Examples in standard docs</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">displaymatch</span>(<span class="params">match</span>):</span><br><span class="line">    <span class="keyword">if</span> match <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&lt;Match: %r, groups=%r&gt;&#x27;</span> % (match.group(), match.groups())</span><br></pre></td></tr></table></figure>
+<p>Suppose you are writing a poker program where a player’s hand is represented as a 5-character string with each character representing a card, “a” for ace, “k” for king, “q” for queen, “j” for jack, “t” for 10, and “2” through “9” representing the card with that value.</p>
+<p>To see if a given string is a valid hand, one could do the following:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">valid = re.<span class="built_in">compile</span>(<span class="string">r&quot;^[a2-9tjqk]&#123;5&#125;$&quot;</span>)</span><br><span class="line">displaymatch(valid.match(<span class="string">&quot;akt5q&quot;</span>))  <span class="comment"># Valid. &quot;&lt;Match: &#x27;akt5q&#x27;, groups=()&gt;&quot;</span></span><br><span class="line">displaymatch(valid.match(<span class="string">&quot;akt5e&quot;</span>))  <span class="comment"># Invalid.</span></span><br><span class="line">displaymatch(valid.match(<span class="string">&quot;akt&quot;</span>))    <span class="comment"># Invalid.</span></span><br><span class="line">displaymatch(valid.match(<span class="string">&quot;727ak&quot;</span>))  <span class="comment"># Valid. &quot;&lt;Match: &#x27;727ak&#x27;, groups=()&gt;&quot;</span></span><br></pre></td></tr></table></figure>
+<p>That last hand, “727ak”, contained a pair, or two of the same valued cards. To match this with a regular expression, one could use backreferences as such:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pair = re.<span class="built_in">compile</span>(<span class="string">r&quot;.*(.).*\1&quot;</span>)</span><br><span class="line">displaymatch(pair.match(<span class="string">&quot;717ak&quot;</span>))     <span class="comment"># Pair of 7s. &quot;&lt;Match: &#x27;717&#x27;, groups=(&#x27;7&#x27;,)&gt;&quot;</span></span><br><span class="line">displaymatch(pair.match(<span class="string">&quot;718ak&quot;</span>))     <span class="comment"># No pairs.</span></span><br><span class="line">displaymatch(pair.match(<span class="string">&quot;354aa&quot;</span>))     <span class="comment"># Pair of aces. &quot;&lt;Match: &#x27;354aa&#x27;, groups=(&#x27;a&#x27;,)&gt;&quot;</span></span><br></pre></td></tr></table></figure>
+<p>To find out what card the pair consists of, one could use the group() method of the match object in the following manner:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">pair.match(<span class="string">&quot;717ak&quot;</span>).group(<span class="number">1</span>) <span class="comment"># &#x27;7&#x27;</span></span><br><span class="line"><span class="comment"># Error because re.match() returns None, which doesn&#x27;t have a group() method:</span></span><br><span class="line">pair.match(<span class="string">&quot;718ak&quot;</span>).group(<span class="number">1</span>)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;&lt;pyshell#23&gt;&quot;</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    re.match(<span class="string">r&quot;.*(.).*\1&quot;</span>, <span class="string">&quot;718ak&quot;</span>).group(<span class="number">1</span>)</span><br><span class="line">AttributeError: <span class="string">&#x27;NoneType&#x27;</span> <span class="built_in">object</span> has no attribute <span class="string">&#x27;group&#x27;</span></span><br><span class="line"></span><br><span class="line">pair.match(<span class="string">&quot;354aa&quot;</span>).group(<span class="number">1</span>) <span class="comment"># &#x27;a&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>search() vs. match()</p>
+<p>of course you can look up on stackoverflow: re.match() checks for a match only at the beginning of the string, while re.search() checks for a match anywhere in the string (this is what Perl does by default).</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">text = <span class="string">&quot;He was carefully disguised but captured quickly by police.&quot;</span></span><br><span class="line">re.findall(<span class="string">r&quot;\w+ly&quot;</span>, text) <span class="comment"># [&#x27;carefully&#x27;, &#x27;quickly&#x27;]</span></span><br></pre></td></tr></table></figure>
+<p>Writing a Tokenizer</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> collections</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">Token = collections.namedtuple(<span class="string">&#x27;Token&#x27;</span>, [<span class="string">&#x27;typ&#x27;</span>, <span class="string">&#x27;value&#x27;</span>, <span class="string">&#x27;line&#x27;</span>, <span class="string">&#x27;column&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">tokenize</span>(<span class="params">code</span>):</span><br><span class="line">    keywords = &#123;<span class="string">&#x27;IF&#x27;</span>, <span class="string">&#x27;THEN&#x27;</span>, <span class="string">&#x27;ENDIF&#x27;</span>, <span class="string">&#x27;FOR&#x27;</span>, <span class="string">&#x27;NEXT&#x27;</span>, <span class="string">&#x27;GOSUB&#x27;</span>, <span class="string">&#x27;RETURN&#x27;</span>&#125;</span><br><span class="line">    token_specification = [</span><br><span class="line">        (<span class="string">&#x27;NUMBER&#x27;</span>,  <span class="string">r&#x27;\d+(\.\d*)?&#x27;</span>),  <span class="comment"># Integer or decimal number</span></span><br><span class="line">        (<span class="string">&#x27;ASSIGN&#x27;</span>,  <span class="string">r&#x27;:=&#x27;</span>),           <span class="comment"># Assignment operator</span></span><br><span class="line">        (<span class="string">&#x27;END&#x27;</span>,     <span class="string">r&#x27;;&#x27;</span>),            <span class="comment"># Statement terminator</span></span><br><span class="line">        (<span class="string">&#x27;ID&#x27;</span>,      <span class="string">r&#x27;[A-Za-z]+&#x27;</span>),    <span class="comment"># Identifiers</span></span><br><span class="line">        (<span class="string">&#x27;OP&#x27;</span>,      <span class="string">r&#x27;[+\-*/]&#x27;</span>),      <span class="comment"># Arithmetic operators</span></span><br><span class="line">        (<span class="string">&#x27;NEWLINE&#x27;</span>, <span class="string">r&#x27;\n&#x27;</span>),           <span class="comment"># Line endings</span></span><br><span class="line">        (<span class="string">&#x27;SKIP&#x27;</span>,    <span class="string">r&#x27;[ \t]+&#x27;</span>),       <span class="comment"># Skip over spaces and tabs</span></span><br><span class="line">        (<span class="string">&#x27;MISMATCH&#x27;</span>,<span class="string">r&#x27;.&#x27;</span>),            <span class="comment"># Any other character</span></span><br><span class="line">    ]</span><br><span class="line">    tok_regex = <span class="string">&#x27;|&#x27;</span>.join(<span class="string">&#x27;(?P&lt;%s&gt;%s)&#x27;</span> % pair <span class="keyword">for</span> pair <span class="keyword">in</span> token_specification)</span><br><span class="line">    line_num = <span class="number">1</span></span><br><span class="line">    line_start = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> mo <span class="keyword">in</span> re.finditer(tok_regex, code):</span><br><span class="line">        kind = mo.lastgroup</span><br><span class="line">        value = mo.group(kind)</span><br><span class="line">        <span class="keyword">if</span> kind == <span class="string">&#x27;NEWLINE&#x27;</span>:</span><br><span class="line">            line_start = mo.end()</span><br><span class="line">            line_num += <span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> kind == <span class="string">&#x27;SKIP&#x27;</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">elif</span> kind == <span class="string">&#x27;MISMATCH&#x27;</span>:</span><br><span class="line">            <span class="keyword">raise</span> RuntimeError(<span class="string">f&#x27;<span class="subst">&#123;value!r&#125;</span> unexpected on line <span class="subst">&#123;line_num&#125;</span>&#x27;</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">if</span> kind == <span class="string">&#x27;ID&#x27;</span> <span class="keyword">and</span> value <span class="keyword">in</span> keywords:</span><br><span class="line">                kind = value</span><br><span class="line">            column = mo.start() - line_start</span><br><span class="line">            <span class="keyword">yield</span> Token(kind, value, line_num, column)</span><br><span class="line"></span><br><span class="line">statements = <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    IF quantity THEN</span></span><br><span class="line"><span class="string">        total := total + price * quantity;</span></span><br><span class="line"><span class="string">        tax := price * 0.05;</span></span><br><span class="line"><span class="string">    ENDIF;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> token <span class="keyword">in</span> tokenize(statements):</span><br><span class="line">    <span class="built_in">print</span>(token)</span><br></pre></td></tr></table></figure>
+<p>The tokenizer produces the following output:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Token(typ=<span class="string">&#x27;IF&#x27;</span>, value=<span class="string">&#x27;IF&#x27;</span>, line=<span class="number">2</span>, column=<span class="number">4</span>)</span><br><span class="line">Token(typ=<span class="string">&#x27;ID&#x27;</span>, value=<span class="string">&#x27;quantity&#x27;</span>, line=<span class="number">2</span>, column=<span class="number">7</span>)</span><br><span class="line">Token(typ=<span class="string">&#x27;THEN&#x27;</span>, value=<span class="string">&#x27;THEN&#x27;</span>, line=<span class="number">2</span>, column=<span class="number">16</span>)</span><br><span class="line">Token(typ=<span class="string">&#x27;ID&#x27;</span>, value=<span class="string">&#x27;total&#x27;</span>, line=<span class="number">3</span>, column=<span class="number">8</span>)</span><br><span class="line">Token(typ=<span class="string">&#x27;ASSIGN&#x27;</span>, value=<span class="string">&#x27;:=&#x27;</span>, line=<span class="number">3</span>, column=<span class="number">14</span>)</span><br><span class="line">Token(typ=<span class="string">&#x27;ID&#x27;</span>, value=<span class="string">&#x27;total&#x27;</span>, line=<span class="number">3</span>, column=<span class="number">17</span>)</span><br><span class="line">Token(typ=<span class="string">&#x27;OP&#x27;</span>, value=<span class="string">&#x27;+&#x27;</span>, line=<span class="number">3</span>, column=<span class="number">23</span>)</span><br><span class="line">Token(typ=<span class="string">&#x27;ID&#x27;</span>, value=<span class="string">&#x27;price&#x27;</span>, line=<span class="number">3</span>, column=<span class="number">25</span>)</span><br><span class="line">Token(typ=<span class="string">&#x27;OP&#x27;</span>, value=<span class="string">&#x27;*&#x27;</span>, line=<span class="number">3</span>, column=<span class="number">31</span>)</span><br><span class="line">Token(typ=<span class="string">&#x27;ID&#x27;</span>, value=<span class="string">&#x27;quantity&#x27;</span>, line=<span class="number">3</span>, column=<span class="number">33</span>)</span><br><span class="line">Token(typ=<span class="string">&#x27;END&#x27;</span>, value=<span class="string">&#x27;;&#x27;</span>, line=<span class="number">3</span>, column=<span class="number">41</span>)</span><br><span class="line">Token(typ=<span class="string">&#x27;ID&#x27;</span>, value=<span class="string">&#x27;tax&#x27;</span>, line=<span class="number">4</span>, column=<span class="number">8</span>)</span><br><span class="line">Token(typ=<span class="string">&#x27;ASSIGN&#x27;</span>, value=<span class="string">&#x27;:=&#x27;</span>, line=<span class="number">4</span>, column=<span class="number">12</span>)</span><br><span class="line">Token(typ=<span class="string">&#x27;ID&#x27;</span>, value=<span class="string">&#x27;price&#x27;</span>, line=<span class="number">4</span>, column=<span class="number">15</span>)</span><br><span class="line">Token(typ=<span class="string">&#x27;OP&#x27;</span>, value=<span class="string">&#x27;*&#x27;</span>, line=<span class="number">4</span>, column=<span class="number">21</span>)</span><br><span class="line">Token(typ=<span class="string">&#x27;NUMBER&#x27;</span>, value=<span class="string">&#x27;0.05&#x27;</span>, line=<span class="number">4</span>, column=<span class="number">23</span>)</span><br><span class="line">Token(typ=<span class="string">&#x27;END&#x27;</span>, value=<span class="string">&#x27;;&#x27;</span>, line=<span class="number">4</span>, column=<span class="number">27</span>)</span><br><span class="line">Token(typ=<span class="string">&#x27;ENDIF&#x27;</span>, value=<span class="string">&#x27;ENDIF&#x27;</span>, line=<span class="number">5</span>, column=<span class="number">4</span>)</span><br><span class="line">Token(typ=<span class="string">&#x27;END&#x27;</span>, value=<span class="string">&#x27;;&#x27;</span>, line=<span class="number">5</span>, column=<span class="number">9</span>)</span><br></pre></td></tr></table></figure>
+
+<p>I know, I know it’s a headache to read these, try PyMOTW-3 instead if you want<br><a target="_blank" rel="noopener" href="https://pymotw.com/3/re/index.html">https://pymotw.com/3/re/index.html</a></p>
+<p>Out there is an alternative regular expression module, to replace re, called regex.<br><a target="_blank" rel="noopener" href="https://pypi.python.org/pypi/regex/">https://pypi.python.org/pypi/regex/</a></p>
+<p>And read this:<br>10 Tips to Get More out of Your Regexes<br><a target="_blank" rel="noopener" href="http://pybit.es/mastering-regex.html">http://pybit.es/mastering-regex.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -198,7 +359,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-22 00:09:26" itemprop="dateModified" datetime="2023-04-22T00:09:26-04:00">2023-04-22</time>
+      <time title="Modified: 2023-05-07 16:19:25" itemprop="dateModified" datetime="2023-05-07T16:19:25-04:00">2023-05-07</time>
     </span>
 
   
@@ -281,7 +442,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-22 00:09:26" itemprop="dateModified" datetime="2023-04-22T00:09:26-04:00">2023-04-22</time>
+      <time title="Modified: 2023-05-07 16:19:25" itemprop="dateModified" datetime="2023-05-07T16:19:25-04:00">2023-05-07</time>
     </span>
 
   
@@ -373,7 +534,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-22 00:09:26" itemprop="dateModified" datetime="2023-04-22T00:09:26-04:00">2023-04-22</time>
+      <time title="Modified: 2023-05-07 16:19:25" itemprop="dateModified" datetime="2023-05-07T16:19:25-04:00">2023-05-07</time>
     </span>
 
   
@@ -459,7 +620,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-22 00:09:26" itemprop="dateModified" datetime="2023-04-22T00:09:26-04:00">2023-04-22</time>
+      <time title="Modified: 2023-05-07 16:19:25" itemprop="dateModified" datetime="2023-05-07T16:19:25-04:00">2023-05-07</time>
     </span>
 
   
@@ -553,7 +714,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-22 00:09:26" itemprop="dateModified" datetime="2023-04-22T00:09:26-04:00">2023-04-22</time>
+      <time title="Modified: 2023-05-07 16:19:25" itemprop="dateModified" datetime="2023-05-07T16:19:25-04:00">2023-05-07</time>
     </span>
 
   
@@ -630,7 +791,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-22 00:09:26" itemprop="dateModified" datetime="2023-04-22T00:09:26-04:00">2023-04-22</time>
+      <time title="Modified: 2023-05-07 16:19:25" itemprop="dateModified" datetime="2023-05-07T16:19:25-04:00">2023-05-07</time>
     </span>
 
   
@@ -712,7 +873,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-22 00:09:26" itemprop="dateModified" datetime="2023-04-22T00:09:26-04:00">2023-04-22</time>
+      <time title="Modified: 2023-05-07 16:19:25" itemprop="dateModified" datetime="2023-05-07T16:19:25-04:00">2023-05-07</time>
     </span>
 
   
@@ -798,7 +959,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-22 00:09:26" itemprop="dateModified" datetime="2023-04-22T00:09:26-04:00">2023-04-22</time>
+      <time title="Modified: 2023-05-07 16:19:25" itemprop="dateModified" datetime="2023-05-07T16:19:25-04:00">2023-05-07</time>
     </span>
 
   
@@ -877,7 +1038,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-22 00:09:26" itemprop="dateModified" datetime="2023-04-22T00:09:26-04:00">2023-04-22</time>
+      <time title="Modified: 2023-05-07 16:19:25" itemprop="dateModified" datetime="2023-05-07T16:19:25-04:00">2023-05-07</time>
     </span>
 
   
@@ -916,84 +1077,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2015/11/15/Code-Analysis-for-Applying-MVC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="David Shen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SecondHand C0D1NG">
-      <meta itemprop="description" content="A quiet place for blogging">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | SecondHand C0D1NG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2015/11/15/Code-Analysis-for-Applying-MVC/" class="post-title-link" itemprop="url">Code Analysis for Applying MVC</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2015-11-15 13:29:52" itemprop="dateCreated datePublished" datetime="2015-11-15T13:29:52-05:00">2015-11-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-22 00:09:26" itemprop="dateModified" datetime="2023-04-22T00:09:26-04:00">2023-04-22</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>For the code in the Stanford iOS 8 lession 3 Applying MVC, I try to comment on the CalculatorBrain.swift line by line.  Some of my thoughts might be naive.  Please bear with me.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line">import Foundation</span><br><span class="line">//necessary to import this</span><br><span class="line"></span><br><span class="line">class CalculatorBrain &#123;</span><br><span class="line">//define a class without inherit from any objective-c class</span><br><span class="line">    </span><br><span class="line">    private enum Op &#123;</span><br><span class="line">    //define a private enum</span><br><span class="line">        case Operand(Double)  </span><br><span class="line">        //for the numbers may be entered</span><br><span class="line">        case Unaryoperation(String, Double -&gt; Double)  </span><br><span class="line">        //for the operation such as sqrt</span><br><span class="line">        case Binaryoperation(String, (Double,Double) -&gt; Double)  </span><br><span class="line">        //for the operation such as plus or minus</span><br><span class="line"></span><br><span class="line">        var description: String &#123;  </span><br><span class="line">        //define a read-only string for enum values</span><br><span class="line">            get &#123;  </span><br><span class="line">            //without set so this is read-only</span><br><span class="line">                switch self &#123;  </span><br><span class="line">                //from each enum value itself to figure out the description for each one</span><br><span class="line">                case .Operand(let operand):</span><br><span class="line">                    return &quot;\(operand)&quot;  </span><br><span class="line">                    //in case of numbers, use the number as description</span><br><span class="line">                case .Unaryoperation(let symbol, _):</span><br><span class="line">                    return symbol</span><br><span class="line">                case .Binaryoperation(let symbol, _):</span><br><span class="line">                    return symbol  </span><br><span class="line">                    //in case of operations, use the symbol as description string, _ just means that we dont care for that</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">    private var opStack = [Op]()</span><br><span class="line">    //define the opStack for store the numbers or operation symbols as an array</span><br><span class="line">    </span><br><span class="line">    private var knownOps = [String: Op]()</span><br><span class="line">    //define the knownOps for known operations in dictionary for later use</span><br><span class="line">        </span><br><span class="line">    init () &#123;  </span><br><span class="line">    //here initiate for the knownOps dictionary</span><br><span class="line">        knownOps[&quot;✕&quot;] = Op.Binaryoperation(&quot;✕&quot;,*)  </span><br><span class="line">        //* is the build-in operating function that does (Double,Double) -&gt; Double</span><br><span class="line">        knownOps[&quot;÷&quot;] = Op.Binaryoperation(&quot;÷&quot;) &#123; $0 / $1 &#125;  </span><br><span class="line">        //if the func is the last parameter, then it is legit to leave outside like this</span><br><span class="line">        knownOps[&quot;+&quot;] = Op.Binaryoperation(&quot;+&quot;,+)  </span><br><span class="line">        //similar to &quot;x&quot;</span><br><span class="line">        knownOps[&quot;−&quot;] = Op.Binaryoperation(&quot;−&quot;) &#123; $0 - $1 &#125;  </span><br><span class="line">        //also $0 refers to the first operand when passed in, $1 for the second</span><br><span class="line">        knownOps[&quot;√&quot;] = Op.Unaryoperation(&quot;√&quot;, sqrt)</span><br><span class="line">    &#125;  //for example, knownOps[&quot;x&quot;] would be &quot;x&quot; : &quot;x&quot;, *</span><br><span class="line">    </span><br><span class="line">    private func evaluate(ops:[Op]) -&gt; (result:Double?, remainingOps:[Op]) &#123;  </span><br><span class="line">    //define a private func named evaluate and takes ops as input and two output as result and remainingOps for iteration if necessary</span><br><span class="line">        if !ops.isEmpty &#123;  </span><br><span class="line">        //only when ops is not empty</span><br><span class="line">            var remainingOps = ops  </span><br><span class="line">            //for the purpose of manipulating the send-in parameter ops, otherwise it is just constant copy of ops</span><br><span class="line">            let op = remainingOps.removeLast()  </span><br><span class="line">            //then we really removed the last item in ops and return the last item value to op for next swith process</span><br><span class="line">            switch op &#123;  </span><br><span class="line">            //swith has to look after every possibility, or you need a default case</span><br><span class="line">            case .Operand(let operand):</span><br><span class="line">                return (operand, remainingOps)  </span><br><span class="line">                //in case of number, return a tuple (the number, and the remaining opStack), quite descriptive</span><br><span class="line">            case .Unaryoperation(_, let operation):  </span><br><span class="line">            //get the certain operation</span><br><span class="line">                let operandEvaluation = evaluate(remainingOps)  </span><br><span class="line">                //try iteration</span><br><span class="line">                if let operand = operandEvaluation.result &#123;  </span><br><span class="line">                //only if iteration comes back with the result</span><br><span class="line">                return (operation(operand),operandEvaluation.remainingOps)  </span><br><span class="line">                //then the operation of the result is returned as first parameter and remaining Ops of the operandEvaluation as the second</span><br><span class="line">                &#125;</span><br><span class="line">            case .Binaryoperation(_, let operation):  </span><br><span class="line">            //not so triky if take a deep look</span><br><span class="line">                let operandEvaluation = evaluate(remainingOps)</span><br><span class="line">                if let operand1 = operandEvaluation.result &#123;  </span><br><span class="line">                //because it is binary operation which means it need two operands, how to get them, by two .result from twice operandEvaluation</span><br><span class="line">                    let operandEvaluation = evaluate(remainingOps)</span><br><span class="line">                    if let operand2 = operandEvaluation.result &#123;  </span><br><span class="line">                    //get the second operand</span><br><span class="line">                        return (operation(operand1,operand2),operandEvaluation.remainingOps)</span><br><span class="line">                        //perform the binary operation, return the result as the first parameter and the remaining opStack for further handling</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return (nil, ops)  </span><br><span class="line">        //if ops is empty, return nil and ops which is empty</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    func evaluate() -&gt; Double? &#123;  </span><br><span class="line">    //only in the swift, we can overload function with the same name</span><br><span class="line">        let (result, _) = evaluate(opStack)  </span><br><span class="line">        //you see, actually we are doing the evaluate(opStack)</span><br><span class="line">        return result  </span><br><span class="line">        //and only return the result of it</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    func pushOperand(operand:Double) -&gt; Double? &#123;  </span><br><span class="line">    //pass in the number and will pass out the number</span><br><span class="line">        opStack.append(Op.Operand(operand))  </span><br><span class="line">        //append the number to opStack</span><br><span class="line">        return evaluate()  </span><br><span class="line">        //result is the number</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    func performOperation(symbol:String) -&gt; Double? &#123;  </span><br><span class="line">    //pass in the operation symbol and will pass out the operation result if it could</span><br><span class="line">        if let operation = knownOps[symbol] &#123;  </span><br><span class="line">        //check if the operation is known</span><br><span class="line">            opStack.append(operation)  </span><br><span class="line">            //if the symbol is known then add to opStack</span><br><span class="line">        &#125;</span><br><span class="line">        return evaluate()  </span><br><span class="line">        //try to return of the known operation</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/7/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
