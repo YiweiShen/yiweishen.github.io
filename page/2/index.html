@@ -123,7 +123,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-count">73</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -153,6 +153,91 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2021/05/24/Superclass-Typo-in-Servlet-Template-of-Eclipse/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="David Shen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SecondHand C0D1NG">
+      <meta itemprop="description" content="A quiet place for blogging">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | SecondHand C0D1NG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/05/24/Superclass-Typo-in-Servlet-Template-of-Eclipse/" class="post-title-link" itemprop="url">Superclass Typo in Servlet Template of Eclipse</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-05-23 20:52:39" itemprop="dateCreated datePublished" datetime="2021-05-23T20:52:39-04:00">2021-05-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-24 17:06:44" itemprop="dateModified" datetime="2022-02-24T17:06:44-05:00">2022-02-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Update: The typo has been fixed if you are using Dynamic web module version 5.0</p>
+<p>When you are using the Servlet Template in Eclipse, you may encounter the error saying “The import javax.servlet cannot be resolved.”</p>
+<p>For example, I am using Eclipse for Mac (Version 4.19.0). First, create a Dynamic Web Project, target runtime: Apache Tomcat v10.0, Dynamic web module version 4.0. And inside this project, create a new servlet file using the Create Servlet Wizard. Soon you will see the errors pop up in the servlet file you just created.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// BEFORE</span></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.annotation.WebServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br></pre></td></tr></table></figure>
+
+<p>How to fix it? All you have to do is changing the superclass name from javax into jakarta. Why does this happen? I think it is because, as mentioned on Wikipedia page, that from 12 Jun 2020 and on, API moved from package javax.servlet to jakarta.servlet. Let’s hope Eclipse will update the template someday in future. For the exising codes out there, I guess they are doing well.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// AFTER</span></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> jakarta.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> jakarta.servlet.annotation.WebServlet;</span><br><span class="line"><span class="keyword">import</span> jakarta.servlet.http.HttpServlet;</span><br><span class="line"><span class="keyword">import</span> jakarta.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> jakarta.servlet.http.HttpServletResponse;</span><br></pre></td></tr></table></figure>
+
+<p>Of course, you can create an empty class file to build servlet from scratch, to avoid such issues. Just in case you do face the similar errors in Eclipse when coding Java, I hope the simple fix would help you.</p>
+<p>Wikipedia page of Jakarta Servlet:<br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Jakarta_Servlet">https://en.wikipedia.org/wiki/Jakarta_Servlet</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -853,83 +938,6 @@
           <p>You can google it for more details, maybe you can find the wikipedia page if you are curious enough. Anyway, put it in a simple way, the paradox is talking about the contradiction between the reality that we have not met any aliens and the high probability there should be so many aliens in the cosmos because the universe is so big.</p>
 <p>It occurs to me that when a society becomes more civilized, it kind of loses the impulse to invade as one way of exploration. You need to treat all those living things equally because you can see the tendency that we treat with each other more fairly no matter who you are, where you come from, or what are you. In the end, everyone lives happily in their chambers and forgets the big universe exists.</p>
 <p>Or maybe, there could be a pandemic out there in the universe, everyone during this period of time needs to stay low and keep quiet. It is equivalent to the dark forest theory I know. But the twist here is that the pandemic can end, and it will.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2021/03/12/Information-and-Noise/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="David Shen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SecondHand C0D1NG">
-      <meta itemprop="description" content="A quiet place for blogging">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | SecondHand C0D1NG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/03/12/Information-and-Noise/" class="post-title-link" itemprop="url">Information and Noise</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-03-11 23:40:08" itemprop="dateCreated datePublished" datetime="2021-03-11T23:40:08-05:00">2021-03-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-02-24 17:06:44" itemprop="dateModified" datetime="2022-02-24T17:06:44-05:00">2022-02-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>No, I am not talking about Shannon’s Noisy-Channel Coding Theorem.</p>
-<p>By information, I mean news in general. Because we are exposed to too much information on a daily basis, most of them become noise in our life. For example, it won’t hurt if you miss all the news for a week or a month. Your life goes on. And you know what, the most important news to you will find you anyway. </p>
 
       
     </div>
