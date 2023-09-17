@@ -17,11 +17,6 @@ jobs:
       - name: Restore Timestamps
         uses: chetan/git-restore-mtime-action@v1
 
-      - name: Setup Node.js 20.x
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20'
-
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
         with:
