@@ -123,7 +123,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">73</span>
+          <span class="site-state-item-count">74</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -156,6 +156,88 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2017/04/05/datetime-Module/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yiwei Shen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SecondHand C0D1NG">
+      <meta itemprop="description" content="Notes & Thoughts">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | SecondHand C0D1NG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/04/05/datetime-Module/" class="post-title-link" itemprop="url">datetime Module</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-04-04 23:35:16" itemprop="dateCreated datePublished" datetime="2017-04-04T23:35:16-04:00">2017-04-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-24 17:06:44" itemprop="dateModified" datetime="2022-02-24T17:06:44-05:00">2022-02-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="https://music.163.com/outchain/player?type=2&id=2007819&auto=1&height=66"></iframe>
+
+<p>The topic today is datetime which makes me think of life.  Maybe, music is a mataphor of life.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line">t = datetime.date(<span class="number">2017</span>, <span class="number">4</span>, <span class="number">4</span>)</span><br><span class="line">t.isoweekday() <span class="comment"># 2</span></span><br><span class="line">t.isoformat() <span class="comment"># &#x27;2017-04-04&#x27;</span></span><br><span class="line"></span><br><span class="line">one_day = datetime.timedelta(days=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>Other things useless (maybe not) you could find on<br><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/datetime.html">https://docs.python.org/3/library/datetime.html</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> date</span><br><span class="line"></span><br><span class="line">today = date.today()</span><br><span class="line">today == date.fromtimestamp(time.time()) <span class="comment"># True</span></span><br><span class="line">my_birthday = date(today.year, <span class="number">6</span>, <span class="number">24</span>) <span class="comment"># Fake birthday</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> my_birthday &lt; today:</span><br><span class="line">    my_birthday = my_birthday.replace(year=today.year + <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">time_to_birthday = <span class="built_in">abs</span>(my_birthday - today) <span class="comment"># why we need abs that makes previous IF statement meaningless</span></span><br><span class="line">time_to_birthday.days</span><br></pre></td></tr></table></figure>
+<p>You could always find the manual. That’s enough for today.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -411,7 +493,7 @@
 <p>(?!…)<br>Matches if … doesn’t match next. This is a negative lookahead assertion. For example, Isaac (?!Asimov) will match ‘Isaac ‘ only if it’s not followed by ‘Asimov’.</p>
 <p>(?&lt;&#x3D;…)<br>Matches if the current position in the string is preceded by a match for … that ends at the current position. This is called a positive lookbehind assertion. (?&lt;&#x3D;abc)def will find a match in abcdef, since the lookbehind will back up 3 characters and check if the contained pattern matches. The contained pattern must only match strings of some fixed length, meaning that abc or a|b are allowed, but a* and a{3,4} are not. </p>
 <p>(?&lt;!…)<br>Matches if the current position in the string is not preceded by a match for …</p>
-<p>(?(id&#x2F;name)yes-pattern|no-pattern)<br>Will try to match with yes-pattern if the group with given id or name exists, and with no-pattern if it doesn’t. no-pattern is optional and can be omitted. For example, (&lt;)?(\w+@\w+(?:.\w+)+)(?(1)&gt;|$) is a poor email matching pattern, which will match with ‘<a href="mailto:&#117;&#115;&#x65;&#114;&#x40;&#x68;&#111;&#x73;&#116;&#x2e;&#x63;&#x6f;&#109;">&#117;&#115;&#x65;&#114;&#x40;&#x68;&#111;&#x73;&#116;&#x2e;&#x63;&#x6f;&#109;</a>‘ as well as ‘<a href="mailto:&#117;&#x73;&#x65;&#114;&#64;&#104;&#111;&#x73;&#116;&#46;&#x63;&#111;&#109;">&#117;&#x73;&#x65;&#114;&#64;&#104;&#111;&#x73;&#116;&#46;&#x63;&#111;&#109;</a>‘, but not with ‘&lt;<a href="mailto:&#117;&#115;&#101;&#114;&#64;&#104;&#111;&#x73;&#x74;&#46;&#x63;&#111;&#109;">&#117;&#115;&#101;&#114;&#64;&#104;&#111;&#x73;&#x74;&#46;&#x63;&#111;&#109;</a>‘ nor ‘<a href="mailto:&#x75;&#115;&#101;&#114;&#x40;&#104;&#x6f;&#115;&#x74;&#46;&#99;&#111;&#109;">&#x75;&#115;&#101;&#114;&#x40;&#104;&#x6f;&#115;&#x74;&#46;&#99;&#111;&#109;</a>&gt;’.</p>
+<p>(?(id&#x2F;name)yes-pattern|no-pattern)<br>Will try to match with yes-pattern if the group with given id or name exists, and with no-pattern if it doesn’t. no-pattern is optional and can be omitted. For example, (&lt;)?(\w+@\w+(?:.\w+)+)(?(1)&gt;|$) is a poor email matching pattern, which will match with ‘<a href="mailto:&#x75;&#115;&#101;&#114;&#x40;&#104;&#x6f;&#115;&#116;&#x2e;&#99;&#111;&#x6d;">&#x75;&#115;&#101;&#114;&#x40;&#104;&#x6f;&#115;&#116;&#x2e;&#99;&#111;&#x6d;</a>‘ as well as ‘<a href="mailto:&#117;&#x73;&#101;&#114;&#64;&#104;&#x6f;&#115;&#116;&#x2e;&#x63;&#111;&#109;">&#117;&#x73;&#101;&#114;&#64;&#104;&#x6f;&#115;&#116;&#x2e;&#x63;&#111;&#109;</a>‘, but not with ‘&lt;<a href="mailto:&#117;&#115;&#x65;&#x72;&#64;&#x68;&#111;&#x73;&#x74;&#46;&#x63;&#111;&#109;">&#117;&#115;&#x65;&#x72;&#64;&#x68;&#111;&#x73;&#x74;&#46;&#x63;&#111;&#109;</a>‘ nor ‘<a href="mailto:&#x75;&#115;&#101;&#x72;&#x40;&#104;&#x6f;&#115;&#x74;&#46;&#x63;&#111;&#x6d;">&#x75;&#115;&#101;&#x72;&#x40;&#104;&#x6f;&#115;&#x74;&#46;&#x63;&#111;&#x6d;</a>&gt;’.</p>
 <p>\number<br>Matches the contents of the group of the same number. Groups are numbered starting from 1. For example, (.+) \1 matches ‘the the’ or ‘55 55’, but not ‘thethe’ (note the space after the group).</p>
 <p>\A<br>Matches only at the start of the string.</p>
 <p>\b<br>Matches the empty string, but only at the beginning or end of a word.</p>
@@ -996,92 +1078,6 @@ Namespaces are one honking great idea -- let&#39;s do more of those!```
 
 <p>To deal with the motion shake of iPhone:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) &#123;</span><br><span class="line">    if event?.subtype == UIEventSubtype.MotionShake &#123;</span><br><span class="line">        print(&quot;The phone has been shaken.”)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2015/12/04/3-Ways-to-Resign-Keyboard-in-Swift/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yiwei Shen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SecondHand C0D1NG">
-      <meta itemprop="description" content="Notes & Thoughts">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | SecondHand C0D1NG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2015/12/04/3-Ways-to-Resign-Keyboard-in-Swift/" class="post-title-link" itemprop="url">3 Ways to Resign Keyboard in Swift</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2015-12-03 19:07:11" itemprop="dateCreated datePublished" datetime="2015-12-03T19:07:11-05:00">2015-12-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-02-24 17:06:44" itemprop="dateModified" datetime="2022-02-24T17:06:44-05:00">2022-02-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>For the apps that enable users to input something in a textfield, you should always keep an eye on the keyboard resign.  Here are 3 of the most common ways to accomplish this goal.</p>
-<p>No.1 To resign the first responder position of the keyboard in the buttom action so that press this bottom would also cause keyboard dismiss:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.someTextField.resignFirstResponder()</span><br></pre></td></tr></table></figure>
-
-<p>No.2 To override the touchesBegan function so that if users touch outside the keyboard, the keyboard closes down:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">override func touchesBegan(touches: Set&lt;UITouch&gt;, withEvent event: UIEvent?) &#123;</span><br><span class="line">        self.view.endEditing(true)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>No.3 To inherit UITextFieldDelegate for the current ViewController, then use textFieldShouldReturn function so that when users press return key of the keyboard, the keyboard resigns:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">func textFieldShouldReturn(textField: UITextField) -&gt; Bool &#123;</span><br><span class="line">        someTextField.resignFirstResponder()</span><br><span class="line">        return true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Just a simple note for myself.</p>
-
       
     </div>
 

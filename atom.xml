@@ -6,7 +6,7 @@
   <link href="http://yiweishen.github.io/atom.xml" rel="self"/>
   
   <link href="http://yiweishen.github.io/"/>
-  <updated>2023-09-02T19:27:10.000Z</updated>
+  <updated>2024-03-16T16:04:28.000Z</updated>
   <id>http://yiweishen.github.io/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Raycast Alternative on Windows 11: Microsoft PowerToys</title>
+    <link href="http://yiweishen.github.io/2024/03/16/Raycast-Alternative-on-Windows-11-Microsoft-PowerToys/"/>
+    <id>http://yiweishen.github.io/2024/03/16/Raycast-Alternative-on-Windows-11-Microsoft-PowerToys/</id>
+    <published>2024-03-16T15:42:57.000Z</published>
+    <updated>2024-03-16T16:04:28.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Raycast is a productivity tool for macOS. It allows you to quickly access files, folders, and applications. It’s great, but only available on macOS. If you already use Raycast, you know how useful it is. If you don’t, you should give it a try if you have a Mac.</p><p>For daily work, I also use Windows, and I was trying to implement a similar workflow on Windows. The thing I missed the most was the ability to search and open previously used workspaces in VS Code or remote machines with a few keystrokes.</p><p>You can guess my excitement when I found out about Microsoft PowerToys.</p><p>OK.</p><p>Enable VS Code search in the settings for PowerToys Run utility.</p><p>Then, you can use the shortcut <code>Alt + Space</code> to search for your workspaces.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; THE_WORKSPACE_NAME_YOU_WANT_TO_OPEN</span><br></pre></td></tr></table></figure><p>Now I have to find the equivalent of <code>zsh-autosuggestions</code> on Windows. Wish me luck.</p><p>Links to the tools mentioned in this post:</p><ul><li><a href="https://raycast.com/">Raycast</a></li><li><a href="https://github.com/microsoft/PowerToys">Microsoft PowerToys</a></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Raycast is a productivity tool for macOS. It allows you to quickly access files, folders, and applications. It’s great, but only availabl</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Install Windows 11 with VMware Fusion on Apple M2 MacBook</title>
@@ -405,26 +425,6 @@
       
     <summary type="html">&lt;p&gt;Sharding is basically to break up your data across servers to improve the performance and&amp;#x2F;or infrastructure.&lt;/p&gt;
 &lt;p&gt;A replica set of</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Fermi paradox</title>
-    <link href="http://yiweishen.github.io/2021/03/14/Fermi-paradox/"/>
-    <id>http://yiweishen.github.io/2021/03/14/Fermi-paradox/</id>
-    <published>2021-03-14T02:40:32.000Z</published>
-    <updated>2022-02-24T22:06:44.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>You can google it for more details, maybe you can find the wikipedia page if you are curious enough. Anyway, put it in a simple way, the paradox is talking about the contradiction between the reality that we have not met any aliens and the high probability there should be so many aliens in the cosmos because the universe is so big.</p><p>It occurs to me that when a society becomes more civilized, it kind of loses the impulse to invade as one way of exploration. You need to treat all those living things equally because you can see the tendency that we treat with each other more fairly no matter who you are, where you come from, or what are you. In the end, everyone lives happily in their chambers and forgets the big universe exists.</p><p>Or maybe, there could be a pandemic out there in the universe, everyone during this period of time needs to stay low and keep quiet. It is equivalent to the dark forest theory I know. But the twist here is that the pandemic can end, and it will.</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;You can google it for more details, maybe you can find the wikipedia page if you are curious enough. Anyway, put it in a simple way, the </summary>
       
     
     

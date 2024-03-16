@@ -123,7 +123,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">73</span>
+          <span class="site-state-item-count">74</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -156,6 +156,85 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2021/06/13/MySQL-Workbench-Hangs-attempting-to-Open-MySQL-Editor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yiwei Shen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SecondHand C0D1NG">
+      <meta itemprop="description" content="Notes & Thoughts">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | SecondHand C0D1NG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/06/13/MySQL-Workbench-Hangs-attempting-to-Open-MySQL-Editor/" class="post-title-link" itemprop="url">MySQL Workbench Hangs attempting to Open MySQL Editor</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-12 22:20:54" itemprop="dateCreated datePublished" datetime="2021-06-12T22:20:54-04:00">2021-06-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-24 17:06:44" itemprop="dateModified" datetime="2022-02-24T17:06:44-05:00">2022-02-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>When this bug happens, it shows that it takes time to open the MySQL Editor, but the fact is that it will never open. So you will wait forever.</p>
+<p>I am on MacOS Catalina and the MySQL Workbench version is 8.0.22, just in case you want to know.</p>
+<h2 id="Why-this-error-happens-My-guess"><a href="#Why-this-error-happens-My-guess" class="headerlink" title="Why this error happens (My guess):"></a>Why this error happens (My guess):</h2><p>You changed the password to the MySQL database user, but it somehow failed to sync the password in the keychain.</p>
+<h2 id="The-solution"><a href="#The-solution" class="headerlink" title="The solution:"></a>The solution:</h2><p>Go to the &#x2F;Applicaiton&#x2F;Utilities&#x2F; to find the Keychain Access App and run it. Search and delete the password to the database user. Try search ‘MySQL’. Reopen the MySQL Workbench and you should be fine now.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -863,84 +942,6 @@
     <div class="post-body" itemprop="articleBody">
           <p>Sharding is basically to break up your data across servers to improve the performance and&#x2F;or infrastructure.</p>
 <p>A replica set of MongoDB for example is replicating your data on any of your servers while sharding is breaking up the data across your servers. The process is called MongoS using Shard Key. When you connect and send queries to MongoDB, MongoS will look up the data and get it from the right place and also merge data if necessary because they can be on different servers.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2021/03/14/Fermi-paradox/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yiwei Shen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SecondHand C0D1NG">
-      <meta itemprop="description" content="Notes & Thoughts">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | SecondHand C0D1NG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/03/14/Fermi-paradox/" class="post-title-link" itemprop="url">Fermi paradox</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-03-13 21:40:32" itemprop="dateCreated datePublished" datetime="2021-03-13T21:40:32-05:00">2021-03-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-02-24 17:06:44" itemprop="dateModified" datetime="2022-02-24T17:06:44-05:00">2022-02-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>You can google it for more details, maybe you can find the wikipedia page if you are curious enough. Anyway, put it in a simple way, the paradox is talking about the contradiction between the reality that we have not met any aliens and the high probability there should be so many aliens in the cosmos because the universe is so big.</p>
-<p>It occurs to me that when a society becomes more civilized, it kind of loses the impulse to invade as one way of exploration. You need to treat all those living things equally because you can see the tendency that we treat with each other more fairly no matter who you are, where you come from, or what are you. In the end, everyone lives happily in their chambers and forgets the big universe exists.</p>
-<p>Or maybe, there could be a pandemic out there in the universe, everyone during this period of time needs to stay low and keep quiet. It is equivalent to the dark forest theory I know. But the twist here is that the pandemic can end, and it will.</p>
 
       
     </div>
