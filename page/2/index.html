@@ -123,7 +123,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">74</span>
+          <span class="site-state-item-count">75</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -156,6 +156,89 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2021/06/24/Emulator-30-7-4-Crashes-in-Android-Studio-4-2-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yiwei Shen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SecondHand C0D1NG">
+      <meta itemprop="description" content="Notes & Thoughts">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | SecondHand C0D1NG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/06/24/Emulator-30-7-4-Crashes-in-Android-Studio-4-2-1/" class="post-title-link" itemprop="url">Emulator 30.7.4 Crashes in Android Studio 4.2.1</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-24 14:03:05" itemprop="dateCreated datePublished" datetime="2021-06-24T14:03:05-04:00">2021-06-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-24 17:06:44" itemprop="dateModified" datetime="2022-02-24T17:06:44-05:00">2022-02-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>All emulators in AVD failed to run after I <em>accidentally</em> update Android Studio to 4.2.1 on macOS Catalina (10.15.7).</p>
+<p>You can find more debug details if you run the emulator in terminal.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">emulator -list-avds</span><br><span class="line">emulator -avd your_avd_name</span><br></pre></td></tr></table></figure>
+
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Downgrade (sort of) amulator to 30.4.5 (build_id 7140946)<br><a target="_blank" rel="noopener" href="https://dl.google.com/android/repository/emulator-darwin_x64-7140946.zip">https://dl.google.com/android/repository/emulator-darwin_x64-7140946.zip</a></p>
+<p>First, downlaod the zip file and unzip it.<br>Then, find the emulator folder under sdk folder. Replace the items inside with what you have downloaded.<br>Restart Android Studio (for example, go to menu File, select Invalidate Caches &#x2F; Restart) and try to run the emulators again.</p>
+<p>You will see the warnings saying something, like, these files can not be verified due to unknown developer. Remember to go to Mac System Preference, Security &amp; Privacy, under the General tab, allow these apps to run. Eventually, everything will be fine. Good luck.</p>
+<p>Ref:<br><a target="_blank" rel="noopener" href="https://issuetracker.google.com/issues/191799887">https://issuetracker.google.com/issues/191799887</a><br><a target="_blank" rel="noopener" href="https://issuetracker.google.com/issues/191805460">https://issuetracker.google.com/issues/191805460</a><br><a target="_blank" rel="noopener" href="https://medium.com/nerd-for-tech/how-to-downgrade-android-emulator-on-macos-6e611d2d2bcb">https://medium.com/nerd-for-tech/how-to-downgrade-android-emulator-on-macos-6e611d2d2bcb</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -865,83 +948,6 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>Make the database in a simpler way and make it fast instead of designing complicated architecture of tables. MongoDB can do this with its document model to store things more naturally which can be later fit into your applications. Remember, it’s fast. I think it can make your life easier.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2021/03/15/Database-Sharding/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yiwei Shen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SecondHand C0D1NG">
-      <meta itemprop="description" content="Notes & Thoughts">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | SecondHand C0D1NG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/03/15/Database-Sharding/" class="post-title-link" itemprop="url">Database Sharding</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-03-14 23:28:42" itemprop="dateCreated datePublished" datetime="2021-03-14T23:28:42-04:00">2021-03-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-02-24 17:06:44" itemprop="dateModified" datetime="2022-02-24T17:06:44-05:00">2022-02-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Sharding is basically to break up your data across servers to improve the performance and&#x2F;or infrastructure.</p>
-<p>A replica set of MongoDB for example is replicating your data on any of your servers while sharding is breaking up the data across your servers. The process is called MongoS using Shard Key. When you connect and send queries to MongoDB, MongoS will look up the data and get it from the right place and also merge data if necessary because they can be on different servers.</p>
 
       
     </div>

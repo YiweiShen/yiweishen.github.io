@@ -123,7 +123,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">74</span>
+          <span class="site-state-item-count">75</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -156,6 +156,87 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2017/04/10/glob-Module/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yiwei Shen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SecondHand C0D1NG">
+      <meta itemprop="description" content="Notes & Thoughts">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | SecondHand C0D1NG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/04/10/glob-Module/" class="post-title-link" itemprop="url">glob Module</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-04-10 00:27:20" itemprop="dateCreated datePublished" datetime="2017-04-10T00:27:20-04:00">2017-04-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-24 17:06:44" itemprop="dateModified" datetime="2022-02-24T17:06:44-05:00">2022-02-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Docs first:<br><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/glob.html">https://docs.python.org/3/library/glob.html</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> glob</span><br><span class="line">glob.glob(<span class="string">&#x27;./[0-9].*&#x27;</span>) <span class="comment"># [&#x27;./1.gif&#x27;, &#x27;./2.txt&#x27;]</span></span><br></pre></td></tr></table></figure>
+<p>The glob module finds all the pathnames matching a specified pattern according to the rules used by the Unix shell, although results are returned in arbitrary order. </p>
+<p>glob.glob(pathname, *, recursive&#x3D;False)</p>
+<p>Return a possibly-empty list of path names that match pathname, which must be a string containing a path specification. pathname can be either absolute (like &#x2F;usr&#x2F;src&#x2F;Python-1.5&#x2F;Makefile) or relative (like ..&#x2F;..&#x2F;Tools&#x2F;<em>&#x2F;</em>.gif), and can contain shell-style wildcards. Broken symlinks are included in the results (as in the shell).</p>
+<p>If recursive is true, the pattern “**” will match any files and zero or more directories and subdirectories. If the pattern is followed by an os.sep, only directories and subdirectories match.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -493,7 +574,7 @@
 <p>(?!…)<br>Matches if … doesn’t match next. This is a negative lookahead assertion. For example, Isaac (?!Asimov) will match ‘Isaac ‘ only if it’s not followed by ‘Asimov’.</p>
 <p>(?&lt;&#x3D;…)<br>Matches if the current position in the string is preceded by a match for … that ends at the current position. This is called a positive lookbehind assertion. (?&lt;&#x3D;abc)def will find a match in abcdef, since the lookbehind will back up 3 characters and check if the contained pattern matches. The contained pattern must only match strings of some fixed length, meaning that abc or a|b are allowed, but a* and a{3,4} are not. </p>
 <p>(?&lt;!…)<br>Matches if the current position in the string is not preceded by a match for …</p>
-<p>(?(id&#x2F;name)yes-pattern|no-pattern)<br>Will try to match with yes-pattern if the group with given id or name exists, and with no-pattern if it doesn’t. no-pattern is optional and can be omitted. For example, (&lt;)?(\w+@\w+(?:.\w+)+)(?(1)&gt;|$) is a poor email matching pattern, which will match with ‘<a href="mailto:&#x75;&#115;&#x65;&#114;&#64;&#104;&#111;&#115;&#116;&#46;&#x63;&#x6f;&#x6d;">&#x75;&#115;&#x65;&#114;&#64;&#104;&#111;&#115;&#116;&#46;&#x63;&#x6f;&#x6d;</a>‘ as well as ‘<a href="mailto:&#x75;&#115;&#101;&#114;&#64;&#x68;&#111;&#x73;&#116;&#x2e;&#x63;&#x6f;&#x6d;">&#x75;&#115;&#101;&#114;&#64;&#x68;&#111;&#x73;&#116;&#x2e;&#x63;&#x6f;&#x6d;</a>‘, but not with ‘&lt;<a href="mailto:&#117;&#115;&#101;&#x72;&#64;&#x68;&#x6f;&#115;&#116;&#46;&#99;&#111;&#109;">&#117;&#115;&#101;&#x72;&#64;&#x68;&#x6f;&#115;&#116;&#46;&#99;&#111;&#109;</a>‘ nor ‘<a href="mailto:&#x75;&#x73;&#x65;&#x72;&#x40;&#x68;&#x6f;&#x73;&#116;&#46;&#99;&#x6f;&#x6d;">&#x75;&#x73;&#x65;&#x72;&#x40;&#x68;&#x6f;&#x73;&#116;&#46;&#99;&#x6f;&#x6d;</a>&gt;’.</p>
+<p>(?(id&#x2F;name)yes-pattern|no-pattern)<br>Will try to match with yes-pattern if the group with given id or name exists, and with no-pattern if it doesn’t. no-pattern is optional and can be omitted. For example, (&lt;)?(\w+@\w+(?:.\w+)+)(?(1)&gt;|$) is a poor email matching pattern, which will match with ‘<a href="mailto:&#x75;&#x73;&#x65;&#114;&#64;&#x68;&#111;&#115;&#116;&#46;&#x63;&#111;&#109;">&#x75;&#x73;&#x65;&#114;&#64;&#x68;&#111;&#115;&#116;&#46;&#x63;&#111;&#109;</a>‘ as well as ‘<a href="mailto:&#x75;&#x73;&#101;&#x72;&#x40;&#104;&#x6f;&#x73;&#116;&#46;&#99;&#111;&#109;">&#x75;&#x73;&#101;&#x72;&#x40;&#104;&#x6f;&#x73;&#116;&#46;&#99;&#111;&#109;</a>‘, but not with ‘&lt;<a href="mailto:&#117;&#x73;&#x65;&#114;&#x40;&#104;&#111;&#115;&#116;&#x2e;&#x63;&#111;&#x6d;">&#117;&#x73;&#x65;&#114;&#x40;&#104;&#111;&#115;&#116;&#x2e;&#x63;&#111;&#x6d;</a>‘ nor ‘<a href="mailto:&#117;&#115;&#x65;&#114;&#64;&#x68;&#x6f;&#x73;&#x74;&#x2e;&#99;&#111;&#x6d;">&#117;&#115;&#x65;&#114;&#64;&#x68;&#x6f;&#x73;&#x74;&#x2e;&#99;&#111;&#x6d;</a>&gt;’.</p>
 <p>\number<br>Matches the contents of the group of the same number. Groups are numbered starting from 1. For example, (.+) \1 matches ‘the the’ or ‘55 55’, but not ‘thethe’ (note the space after the group).</p>
 <p>\A<br>Matches only at the start of the string.</p>
 <p>\b<br>Matches the empty string, but only at the beginning or end of a word.</p>
@@ -996,88 +1077,6 @@ Namespaces are one honking great idea -- let&#39;s do more of those!```
           <p>To use the TouchID in your app, first include LocalAuthentication.framework and then add some code. The reason for implementing dispatch_async is that it somehow speeds up the UI updating process.</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"><span class="keyword">import</span> LocalAuthentication</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ViewController</span>: <span class="title class_">UIViewController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">@IBOutlet</span> <span class="keyword">weak</span> <span class="keyword">var</span> statusLabel: <span class="type">UILabel</span>!</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">@IBAction</span> <span class="keyword">func</span> <span class="title function_">authAction</span>(<span class="params">sender</span>: <span class="type">AnyObject</span>) &#123;</span><br><span class="line">        authAction()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="keyword">func</span> <span class="title function_">viewDidLoad</span>() &#123;</span><br><span class="line">        <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">authAction</span>() &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> laContext <span class="operator">=</span> <span class="type">LAContext</span>()</span><br><span class="line">        <span class="keyword">var</span> authError : <span class="type">NSError</span>?</span><br><span class="line">        <span class="keyword">let</span> authReason <span class="operator">=</span> <span class="string">&quot;Unlock the app&quot;</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> laContext.canEvaluatePolicy(<span class="type">LAPolicy</span>.<span class="type">DeviceOwnerAuthenticationWithBiometrics</span>, error: <span class="operator">&amp;</span>authError) &#123;</span><br><span class="line">            laContext.evaluatePolicy(<span class="type">LAPolicy</span>.<span class="type">DeviceOwnerAuthenticationWithBiometrics</span>, localizedReason: authReason, reply: &#123; (success, error) -&gt; <span class="type">Void</span> <span class="keyword">in</span></span><br><span class="line">                <span class="keyword">if</span> success &#123;</span><br><span class="line">                    dispatch_async(dispatch_get_main_queue(), &#123; () -&gt; <span class="type">Void</span> <span class="keyword">in</span></span><br><span class="line">                        <span class="keyword">self</span>.successForLogin()</span><br><span class="line">                    &#125;)</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    dispatch_async(dispatch_get_main_queue(), &#123; () -&gt; <span class="type">Void</span> <span class="keyword">in</span></span><br><span class="line">                        <span class="keyword">self</span>.failedForLogin()</span><br><span class="line">                    &#125;)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">successForLogin</span>() &#123;</span><br><span class="line">        statusLabel.text <span class="operator">=</span> <span class="string">&quot;Succeeded&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">failedForLogin</span>() &#123;</span><br><span class="line">        statusLabel.text <span class="operator">=</span> <span class="string">&quot;Failed&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2015/12/13/Swipe-Gesture-and-Motion-Shake/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yiwei Shen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SecondHand C0D1NG">
-      <meta itemprop="description" content="Notes & Thoughts">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | SecondHand C0D1NG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2015/12/13/Swipe-Gesture-and-Motion-Shake/" class="post-title-link" itemprop="url">Swipe Gesture and Motion Shake</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2015-12-12 21:08:11" itemprop="dateCreated datePublished" datetime="2015-12-12T21:08:11-05:00">2015-12-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-02-24 17:06:44" itemprop="dateModified" datetime="2022-02-24T17:06:44-05:00">2022-02-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Define an UISwipeGestureRecognizer:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">override func viewDidLoad() &#123;</span><br><span class="line">    super.viewDidLoad()</span><br><span class="line">    var swipeRight = UISwipeGestureRecognizer(target: self, action: &quot;swiped:&quot;)</span><br><span class="line">    swipeRight.direction = UISwipeGestureRecognizerDirection.Right</span><br><span class="line">    self.view.addGestureRecognizer(swipeRight)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Detailed actions are in the func:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">func swiped(gesture: UISwipeGestureRecognizer) &#123;  </span><br><span class="line">    if let swipeGesture = gesture as? UISwipeGestureRecognizer &#123;</span><br><span class="line">        switch swipeGesture.direction &#123;   </span><br><span class="line">             case UISwipeGestureRecognizerDirection.Right: </span><br><span class="line">                 print(&quot;right&quot;)</span><br><span class="line">             default:</span><br><span class="line">                 break</span><br><span class="line">        &#125;    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>To deal with the motion shake of iPhone:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) &#123;</span><br><span class="line">    if event?.subtype == UIEventSubtype.MotionShake &#123;</span><br><span class="line">        print(&quot;The phone has been shaken.”)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 

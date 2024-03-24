@@ -6,7 +6,7 @@
   <link href="http://yiweishen.github.io/atom.xml" rel="self"/>
   
   <link href="http://yiweishen.github.io/"/>
-  <updated>2024-03-16T16:04:28.000Z</updated>
+  <updated>2024-03-24T03:30:38.000Z</updated>
   <id>http://yiweishen.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Handle Login with Python Bindings for Selenium</title>
+    <link href="http://yiweishen.github.io/2024/03/24/Handle-Login-with-Python-Bindings-for-Selenium/"/>
+    <id>http://yiweishen.github.io/2024/03/24/Handle-Login-with-Python-Bindings-for-Selenium/</id>
+    <published>2024-03-24T02:52:12.000Z</published>
+    <updated>2024-03-24T03:30:38.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Before everything else, you need to install the Selenium package, of course.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install selenium</span><br></pre></td></tr></table></figure><p>Or, if you hate to deal with anti-bot measures, you can just use this.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install undetected-chromedriver</span><br></pre></td></tr></table></figure><p>Then, add the user data directory to the ChromeOptions object. It is the path to your Chrome profile. For macOS, it is located at ‘~&#x2F;Library&#x2F;Application Support&#x2F;Google&#x2F;Chrome’.</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> undetected_chromedriver <span class="keyword">as</span> uc</span><br><span class="line"></span><br><span class="line">options = uc.ChromeOptions()</span><br><span class="line">options.add_argument(<span class="string">f&quot;--user-data-dir=<span class="subst">&#123;<span class="string">&#x27;Path_to_your_Chrome_profile&#x27;</span>&#125;</span>&quot;</span>)</span><br><span class="line">driver = uc.Chrome(options=options)</span><br><span class="line"></span><br><span class="line">driver.get(<span class="string">&#x27;https://www.example.com&#x27;</span>)</span><br></pre></td></tr></table></figure><p>The <code>--user-data-dir</code> argument is kind of cheating because it allows you to bypass the login process without actually logging in.</p><p>Cookie is your friend.</p><p>But sometimes, you need to handle the login process, for instance, you have to switch between multiple accounts.</p><p>First of all, take care of your credentials. Use an .env file.</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> dotenv <span class="keyword">import</span> load_dotenv</span><br><span class="line"></span><br><span class="line">load_dotenv()</span><br><span class="line"></span><br><span class="line">USERNAME = os.getenv(<span class="string">&#x27;USERNAME_ENV_VAR&#x27;</span>)</span><br><span class="line">PASSWORD = os.getenv(<span class="string">&#x27;PASSWORD_ENV_VAR&#x27;</span>)</span><br></pre></td></tr></table></figure><p>Then, you can use the <code>send_keys</code> method to fill in the username and password fields. I add one while loop to wait for the element in case the script runs too fast.</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        driver.find_element(by=By.ID, value=<span class="string">&quot;username&quot;</span>).send_keys(USERNAME)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        time.sleep(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">driver.find_element(by=By.ID, value=<span class="string">&quot;password&quot;</span>).send_keys(PASSWORD)</span><br><span class="line">driver.find_element(by=By.ID, value=<span class="string">&quot;submit&quot;</span>).click()</span><br></pre></td></tr></table></figure><p>After logging in, the chrome usally pops up a dialog asking if you want to save the password. It is annoying.</p><p>You can try to disable it by adding the <code>--disable-save-password-bubble</code> or <code>--disable-popup-blocking</code> argument to the ChromeOptions object. I don’t think it works. But you can try.</p><p>In the end, I just used a hack, that is to open a new tab and immediately close it, the popup will appear.</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># open a new tab</span></span><br><span class="line">driver.execute_script(<span class="string">&quot;window.open(&#x27;&#x27;,&#x27;_blank&#x27;)&quot;</span>)</span><br><span class="line"></span><br><span class="line">time.sleep(<span class="number">1</span>) <span class="comment"># 1 second wait is enough I guess</span></span><br><span class="line">driver.switch_to.window(driver.window_handles[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># say goodbye to the new tab</span></span><br><span class="line">driver.close()</span><br><span class="line"></span><br><span class="line"><span class="comment"># now switch back to the original tab</span></span><br><span class="line">driver.switch_to.window(driver.window_handles[<span class="number">0</span>])</span><br></pre></td></tr></table></figure><p>That’s it.</p><p>Oh, one more thing.</p><p>Add user-agent to the ChromeOptions object is also a good idea. And please do not forget to specify <code>version_main</code> for the driver to match your current chrome version.</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Before everything else, you need to install the Selenium package, of course.&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gut</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Raycast Alternative on Windows 11: Microsoft PowerToys</title>
@@ -404,27 +425,6 @@
       
       
     <summary type="html">&lt;p&gt;Make the database in a simpler way and make it fast instead of designing complicated architecture of tables. MongoDB can do this with its</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Database Sharding</title>
-    <link href="http://yiweishen.github.io/2021/03/15/Database-Sharding/"/>
-    <id>http://yiweishen.github.io/2021/03/15/Database-Sharding/</id>
-    <published>2021-03-15T03:28:42.000Z</published>
-    <updated>2022-02-24T22:06:44.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>Sharding is basically to break up your data across servers to improve the performance and&#x2F;or infrastructure.</p><p>A replica set of MongoDB for example is replicating your data on any of your servers while sharding is breaking up the data across your servers. The process is called MongoS using Shard Key. When you connect and send queries to MongoDB, MongoS will look up the data and get it from the right place and also merge data if necessary because they can be on different servers.</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;Sharding is basically to break up your data across servers to improve the performance and&amp;#x2F;or infrastructure.&lt;/p&gt;
-&lt;p&gt;A replica set of</summary>
       
     
     
