@@ -123,7 +123,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">75</span>
+          <span class="site-state-item-count">76</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -156,6 +156,83 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2015/12/26/TouchID-in-Swift/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yiwei Shen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SecondHand C0D1NG">
+      <meta itemprop="description" content="Notes & Thoughts">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | SecondHand C0D1NG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2015/12/26/TouchID-in-Swift/" class="post-title-link" itemprop="url">TouchID in Swift</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-12-25 21:34:11" itemprop="dateCreated datePublished" datetime="2015-12-25T21:34:11-05:00">2015-12-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-24 17:06:44" itemprop="dateModified" datetime="2022-02-24T17:06:44-05:00">2022-02-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>To use the TouchID in your app, first include LocalAuthentication.framework and then add some code. The reason for implementing dispatch_async is that it somehow speeds up the UI updating process.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"><span class="keyword">import</span> LocalAuthentication</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ViewController</span>: <span class="title class_">UIViewController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">@IBOutlet</span> <span class="keyword">weak</span> <span class="keyword">var</span> statusLabel: <span class="type">UILabel</span>!</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">@IBAction</span> <span class="keyword">func</span> <span class="title function_">authAction</span>(<span class="params">sender</span>: <span class="type">AnyObject</span>) &#123;</span><br><span class="line">        authAction()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="keyword">func</span> <span class="title function_">viewDidLoad</span>() &#123;</span><br><span class="line">        <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">authAction</span>() &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> laContext <span class="operator">=</span> <span class="type">LAContext</span>()</span><br><span class="line">        <span class="keyword">var</span> authError : <span class="type">NSError</span>?</span><br><span class="line">        <span class="keyword">let</span> authReason <span class="operator">=</span> <span class="string">&quot;Unlock the app&quot;</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> laContext.canEvaluatePolicy(<span class="type">LAPolicy</span>.<span class="type">DeviceOwnerAuthenticationWithBiometrics</span>, error: <span class="operator">&amp;</span>authError) &#123;</span><br><span class="line">            laContext.evaluatePolicy(<span class="type">LAPolicy</span>.<span class="type">DeviceOwnerAuthenticationWithBiometrics</span>, localizedReason: authReason, reply: &#123; (success, error) -&gt; <span class="type">Void</span> <span class="keyword">in</span></span><br><span class="line">                <span class="keyword">if</span> success &#123;</span><br><span class="line">                    dispatch_async(dispatch_get_main_queue(), &#123; () -&gt; <span class="type">Void</span> <span class="keyword">in</span></span><br><span class="line">                        <span class="keyword">self</span>.successForLogin()</span><br><span class="line">                    &#125;)</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    dispatch_async(dispatch_get_main_queue(), &#123; () -&gt; <span class="type">Void</span> <span class="keyword">in</span></span><br><span class="line">                        <span class="keyword">self</span>.failedForLogin()</span><br><span class="line">                    &#125;)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">successForLogin</span>() &#123;</span><br><span class="line">        statusLabel.text <span class="operator">=</span> <span class="string">&quot;Succeeded&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">failedForLogin</span>() &#123;</span><br><span class="line">        statusLabel.text <span class="operator">=</span> <span class="string">&quot;Failed&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -692,7 +769,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-22 23:52:07" itemprop="dateModified" datetime="2024-04-22T23:52:07-04:00">2024-04-22</time>
+      <time title="Modified: 2024-04-22 23:52:43" itemprop="dateModified" datetime="2024-04-22T23:52:43-04:00">2024-04-22</time>
     </span>
 
   
@@ -849,7 +926,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-22 23:52:07" itemprop="dateModified" datetime="2024-04-22T23:52:07-04:00">2024-04-22</time>
+      <time title="Modified: 2024-04-22 23:52:43" itemprop="dateModified" datetime="2024-04-22T23:52:43-04:00">2024-04-22</time>
     </span>
 
   
@@ -865,104 +942,6 @@
           <p>简单测试一下图床</p>
 <p><img src="/img/imgurLogo.png"></p>
 <p>不要误解，并没有使用 Imgur 或者七牛，只是新建了个 img 文件夹</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2015/10/07/Swift-Study-Note-No-1-Basics/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yiwei Shen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SecondHand C0D1NG">
-      <meta itemprop="description" content="Notes & Thoughts">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | SecondHand C0D1NG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2015/10/07/Swift-Study-Note-No-1-Basics/" class="post-title-link" itemprop="url">Swift Study Note No.1 - Basics</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2015-10-07 12:08:03" itemprop="dateCreated datePublished" datetime="2015-10-07T12:08:03-04:00">2015-10-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-02-24 17:06:44" itemprop="dateModified" datetime="2022-02-24T17:06:44-05:00">2022-02-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Just like <a target="_blank" rel="noopener" href="http://cheng.guru/blog/2015/09/14/autoit.html">Cheng Zhao</a> said, quote:</p>
-<p>“其实网上的大部分的教程都非高手写成，而是新手在学习过程中的总结。有大量原创入门教程的知名博客，并不意味着博主是一个绝世高手，而是说明他是一个孜孜不倦的学习者。”</p>
-<p>I am writing this as a study note for myself and if it could help you in any way, I am glad.</p>
-<p>This note will be structured similar to the Lynda online course Swift Programming Language First Look with Simon Allardice.</p>
-<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>Swift is a new language. I am not going to say more about its history or differences between Swift and other languages. Please Google. Or hey Siri.</p>
-<h3 id="Using-Xcode"><a href="#Using-Xcode" class="headerlink" title="Using Xcode"></a>Using Xcode</h3><p>As a swiftly (ha…) updating language, Swift changes a lot (I guess) since its publication. You should always use the updated Xcode for programming. (Please ignore my naive advice if you are coding for production.)</p>
-<h3 id="Core-Syntax"><a href="#Core-Syntax" class="headerlink" title="Core Syntax"></a>Core Syntax</h3><h4 id="The-structure-of-Swift"><a href="#The-structure-of-Swift" class="headerlink" title="The structure of Swift"></a>The structure of Swift</h4><p>Go and find out yourself.</p>
-<h4 id="Writing-Swift-in-playgrounds"><a href="#Writing-Swift-in-playgrounds" class="headerlink" title="Writing Swift in playgrounds"></a>Writing Swift in playgrounds</h4><p>Try it, please.</p>
-<h4 id="Declaring-variables"><a href="#Declaring-variables" class="headerlink" title="Declaring variables"></a>Declaring variables</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var myVariable = 1</span><br></pre></td></tr></table></figure>
-<h4 id="Creating-constants"><a href="#Creating-constants" class="headerlink" title="Creating constants"></a>Creating constants</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let myVariable = &quot;this lable&quot;</span><br></pre></td></tr></table></figure>
-<h4 id="Printing-values"><a href="#Printing-values" class="headerlink" title="Printing values"></a>Printing values</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print myVarialbe</span><br></pre></td></tr></table></figure>
-<h4 id="Writing-if-statements"><a href="#Writing-if-statements" class="headerlink" title="Writing if statements"></a>Writing if statements</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if score &gt; 50 &#123;</span><br><span class="line">	some codes</span><br><span class="line">&#125; else &#123;</span><br><span class="line">	some other codes</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="Using-the-switch-statement"><a href="#Using-the-switch-statement" class="headerlink" title="Using the switch statement"></a>Using the switch statement</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">let vegetable = &quot;apple&quot;</span><br><span class="line"></span><br><span class="line">switch vegetable &#123;</span><br><span class="line">case &quot;apple&quot;:</span><br><span class="line">	let comment = &quot;Good.&quot;</span><br><span class="line">case &quot;pine&quot;:</span><br><span class="line">	let comment = &quot;OK.&quot;</span><br><span class="line">default:</span><br><span class="line">	let comment = &quot;whats that?&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="Creating-loops-in-Swift"><a href="#Creating-loops-in-Swift" class="headerlink" title="Creating loops in Swift"></a>Creating loops in Swift</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for score in scores &#123;</span><br><span class="line">	some codes</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="Defining-functions"><a href="#Defining-functions" class="headerlink" title="Defining functions"></a>Defining functions</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">func funcName (name : String) &#123;</span><br><span class="line">	some codes</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="Creating-and-using-arrays"><a href="#Creating-and-using-arrays" class="headerlink" title="Creating and using arrays"></a>Creating and using arrays</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var list = [&quot;a&quot;,&quot;b&quot;]</span><br></pre></td></tr></table></figure>
-<h4 id="Using-dictionaries"><a href="#Using-dictionaries" class="headerlink" title="Using dictionaries"></a>Using dictionaries</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var member : [String : String] = [&quot;Wang&quot;:&quot;Shanghai&quot;, &quot;Xia&quot;:&quot;Guangzhou&quot;]</span><br></pre></td></tr></table></figure>
-<h4 id="Understanding-tuples"><a href="#Understanding-tuples" class="headerlink" title="Understanding tuples"></a>Understanding tuples</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(Int, Int)</span><br></pre></td></tr></table></figure>
-<h4 id="Creating-optional-variables"><a href="#Creating-optional-variables" class="headerlink" title="Creating optional variables"></a>Creating optional variables</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(Int, Int)?</span><br><span class="line">(Int?,Int?)</span><br><span class="line"># Please note that they are different.</span><br></pre></td></tr></table></figure>
-<h4 id="Defining-and-using-enumerations"><a href="#Defining-and-using-enumerations" class="headerlink" title="Defining and using enumerations"></a>Defining and using enumerations</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">enum CompassPoint &#123;</span><br><span class="line">	case North</span><br><span class="line">	case South</span><br><span class="line">	case East</span><br><span class="line">	case West</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="Writing-closures"><a href="#Writing-closures" class="headerlink" title="Writing closures"></a>Writing closures</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">some lines of code</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="Creating-classes-and-instantiating-objects"><a href="#Creating-classes-and-instantiating-objects" class="headerlink" title="Creating classes and instantiating objects"></a>Creating classes and instantiating objects</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class videoMode &#123;</span><br><span class="line">	var resolution = Resolution()</span><br><span class="line">	var interlaced = false</span><br><span class="line">	var frameRate = 0.0</span><br><span class="line">	var name: String?</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct Resolution &#123;</span><br><span class="line">	var width = 0</span><br><span class="line">	var height = 0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h3><p>Thats it. Please correct me if any.</p>
 
       
     </div>

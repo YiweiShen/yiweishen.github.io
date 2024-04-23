@@ -123,7 +123,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">75</span>
+          <span class="site-state-item-count">76</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -156,6 +156,83 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2017/04/18/os-Module/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yiwei Shen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SecondHand C0D1NG">
+      <meta itemprop="description" content="Notes & Thoughts">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | SecondHand C0D1NG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/04/18/os-Module/" class="post-title-link" itemprop="url">os Module</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-04-17 21:07:31" itemprop="dateCreated datePublished" datetime="2017-04-17T21:07:31-04:00">2017-04-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-24 17:06:44" itemprop="dateModified" datetime="2022-02-24T17:06:44-05:00">2022-02-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Again, doc first.<br><a target="_blank" rel="noopener" href="https://docs.python.org/3.6/library/os.html">https://docs.python.org/3.6/library/os.html</a></p>
+<p>This module provides a portable way of using operating system dependent functionality. If you just want to read or write a file see open(), if you want to manipulate paths, see the os.path module, and if you want to read all the lines in all the files on the command line see the fileinput module. For creating temporary files and directories see the tempfile module, and for high-level file and directory handling see the shutil module.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os.path</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;File         :&#x27;</span>, __file__)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Access time  :&#x27;</span>, time.ctime(os.path.getatime(__file__)))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Modified time:&#x27;</span>, time.ctime(os.path.getmtime(__file__)))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Change time  :&#x27;</span>, time.ctime(os.path.getctime(__file__)))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Size         :&#x27;</span>, os.path.getsize(__file__))</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -811,81 +888,6 @@
       <span class="post-meta-item-text">Posted on</span>
 
       <time title="Created: 2017-04-10 00:28:07" itemprop="dateCreated datePublished" datetime="2017-04-10T00:28:07-04:00">2017-04-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-02-24 17:06:44" itemprop="dateModified" datetime="2022-02-24T17:06:44-05:00">2022-02-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2017/04/10/requests-Module/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yiwei Shen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SecondHand C0D1NG">
-      <meta itemprop="description" content="Notes & Thoughts">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | SecondHand C0D1NG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/04/10/requests-Module/" class="post-title-link" itemprop="url">requests Module</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-04-10 00:27:49" itemprop="dateCreated datePublished" datetime="2017-04-10T00:27:49-04:00">2017-04-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

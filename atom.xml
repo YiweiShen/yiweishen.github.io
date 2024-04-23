@@ -6,7 +6,7 @@
   <link href="http://yiweishen.github.io/atom.xml" rel="self"/>
   
   <link href="http://yiweishen.github.io/"/>
-  <updated>2024-03-24T03:30:38.000Z</updated>
+  <updated>2024-04-23T03:52:28.000Z</updated>
   <id>http://yiweishen.github.io/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HTTP Headers for Resumable Downloads</title>
+    <link href="http://yiweishen.github.io/2024/04/23/HTTP-Headers-for-Resumable-Downloads/"/>
+    <id>http://yiweishen.github.io/2024/04/23/HTTP-Headers-for-Resumable-Downloads/</id>
+    <published>2024-04-23T03:14:18.000Z</published>
+    <updated>2024-04-23T03:52:28.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>We’ve all experienced the frustration of a poor internet connection. You may recall the disappointment of a large file download failing after 24 hours of waiting. Even worse, discovering that the download is not resumable.</p><p>Responsibility for resumable downloads doesn’t solely rest on the client side with the correct setting of HTTP headers. It’s equally, if not more, important for the backend to correctly enable several headers and implement the associated logic.</p><p>While I won’t delve into the detailed implementation in a specific language, understanding the headers discussed below will equip you with the knowledge to easily implement this feature if you wish.</p><h1 id="Client"><a href="#Client" class="headerlink" title="Client"></a>Client</h1><p>The only aspect you need to focus on is the Range HTTP request header. This header specifies the portions of a resource that the server should return. That’s all there is to it.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Range: &lt;unit&gt;=&lt;range-start&gt;-</span><br></pre></td></tr></table></figure><p>On the client side, the only requirement is to properly implement the Range HTTP request header. This involves using the correct unit and determining the starting point of the range. The server then knows which portion of the file to send. There’s no need to worry about specifying the range end, as the typical use case involves resuming and downloading the entire file.</p><h1 id="Server"><a href="#Server" class="headerlink" title="Server"></a>Server</h1><p>Now, things start to get more complicated.</p><p>The ETag (also known as entity tag) HTTP response header serves as an identifier for a specific version of a resource.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ETag: <span class="string">&quot;&lt;etag_value&gt;&quot;</span></span><br></pre></td></tr></table></figure><p>If your target client includes a browser, then you need to set the ETag. Modern browsers expect to see this value; otherwise, the browser will simply retry downloading the entire file again.</p><p>The Content-Range response HTTP header signifies the position of a partial message within the full body message.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Range: &lt;unit&gt; &lt;range-start&gt;-&lt;range-end&gt;/&lt;size&gt;</span><br></pre></td></tr></table></figure><p>Imagine you are downloading a file of 500 bytes, but due to an unstable internet connection, the download is interrupted after only 100 bytes. In this scenario, you would expect the server to send the remaining 400 bytes of the file. Consequently, you would anticipate seeing the appropriate header in the server’s response.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Range: bytes 100-499/500</span><br></pre></td></tr></table></figure><p>Check out MDN for understanding those numbers, I won’t explain them here.</p><p>The Accept-Ranges HTTP response header acts as a signal from the server, indicating its capability to handle partial requests from the client for file downloads.</p><p>Essentially, this header communicates to the client, “Hey, I am capable of handling this, let’s proceed.”</p><p>Don’t ask me why, you just need it.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Accept-Ranges: &lt;range-unit&gt;</span><br></pre></td></tr></table></figure><p>I suggest simply using bytes.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Accept-Ranges: bytes</span><br></pre></td></tr></table></figure><p>The Content-Length header signifies the size of the message body, measured in bytes, that is transmitted to the recipient.</p><p>In layman’s terms, it represents the bytes of the remaining file.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Length: &lt;length&gt;</span><br></pre></td></tr></table></figure><p>Let’s continue the same example mentioned above, the server is going to send the remaining 400 bytes of the file.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Length: 400</span><br></pre></td></tr></table></figure><p>This is merely an introduction.</p><p>There are many complex considerations to take into account. For instance, when dealing with ETags, you must strategize on how to assign a unique ID to each resource. Additionally, you need to determine how to update the ETag when a resource is upgraded to a newer version.</p><p>Understanding those HTTPS headers is a good start.</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;We’ve all experienced the frustration of a poor internet connection. You may recall the disappointment of a large file download failing a</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Handle Login with Python Bindings for Selenium</title>
@@ -405,26 +425,6 @@
 &lt;p&gt;The code is for Pymongo.&lt;/p&gt;
 &lt;p&gt;Preparation&lt;/p&gt;
 &lt;figure class=&quot;high</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Why MongoDB</title>
-    <link href="http://yiweishen.github.io/2021/03/15/Why-MongoDB/"/>
-    <id>http://yiweishen.github.io/2021/03/15/Why-MongoDB/</id>
-    <published>2021-03-15T03:42:20.000Z</published>
-    <updated>2022-02-24T22:06:44.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>Make the database in a simpler way and make it fast instead of designing complicated architecture of tables. MongoDB can do this with its document model to store things more naturally which can be later fit into your applications. Remember, it’s fast. I think it can make your life easier.</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;Make the database in a simpler way and make it fast instead of designing complicated architecture of tables. MongoDB can do this with its</summary>
       
     
     

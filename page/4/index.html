@@ -123,7 +123,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">75</span>
+          <span class="site-state-item-count">76</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -156,6 +156,83 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2021/03/02/IF-statement-with-1-0-matrix/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yiwei Shen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SecondHand C0D1NG">
+      <meta itemprop="description" content="Notes & Thoughts">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | SecondHand C0D1NG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/03/02/IF-statement-with-1-0-matrix/" class="post-title-link" itemprop="url">IF statement with {1,0} matrix</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-03-02 14:45:12" itemprop="dateCreated datePublished" datetime="2021-03-02T14:45:12-05:00">2021-03-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-24 17:06:44" itemprop="dateModified" datetime="2022-02-24T17:06:44-05:00">2022-02-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Today, I was trying to use VLookup function in excel to find a particular item in one column with multiple criteria in other columns. It can be done with adding extra columns first to create one real column to look up for and attach the data column you are looking for after that artificial column. For example, you can combine column A&amp;B&amp;C to merge them into one column, so that you can use VLOOKUP(item_A&amp;item_B&amp;item_C, A&amp;B&amp;C&amp;data_column, 2, 0) to find the result.</p>
+<p>To avoid making extra columns, in this case, A&amp;B&amp;C&amp;data_column, I found we can also use IF({1, 0}, A&amp;B&amp;C, data_column) to make such matrix instead of actually copying &amp; pasting to create one. Because IF function can work with array {1, 0} as logical tests, so basically it runs the first test with 1 (i.e. True) and then again with 0 (i.e False), in the end, it generates the result matrix A&amp;B&amp;C &amp; data_column. Really impressive because it looks simple and elegant.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -904,83 +981,6 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pip3 install faker <span class="comment"># as always</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> faker <span class="keyword">import</span> Faker</span><br><span class="line">f = Faker()</span><br><span class="line">f.text()</span><br><span class="line"><span class="built_in">dir</span>(f) <span class="comment"># check it out</span></span><br></pre></td></tr></table></figure>
 <p>For me, I think it would be a wonderful tool for generating random words or names or addresses or anything for testing or other purposes. The random module is limited in some way.</p>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2017/04/18/os-Module/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yiwei Shen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SecondHand C0D1NG">
-      <meta itemprop="description" content="Notes & Thoughts">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | SecondHand C0D1NG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/04/18/os-Module/" class="post-title-link" itemprop="url">os Module</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-04-17 21:07:31" itemprop="dateCreated datePublished" datetime="2017-04-17T21:07:31-04:00">2017-04-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-02-24 17:06:44" itemprop="dateModified" datetime="2022-02-24T17:06:44-05:00">2022-02-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Again, doc first.<br><a target="_blank" rel="noopener" href="https://docs.python.org/3.6/library/os.html">https://docs.python.org/3.6/library/os.html</a></p>
-<p>This module provides a portable way of using operating system dependent functionality. If you just want to read or write a file see open(), if you want to manipulate paths, see the os.path module, and if you want to read all the lines in all the files on the command line see the fileinput module. For creating temporary files and directories see the tempfile module, and for high-level file and directory handling see the shutil module.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os.path</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;File         :&#x27;</span>, __file__)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Access time  :&#x27;</span>, time.ctime(os.path.getatime(__file__)))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Modified time:&#x27;</span>, time.ctime(os.path.getmtime(__file__)))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Change time  :&#x27;</span>, time.ctime(os.path.getctime(__file__)))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Size         :&#x27;</span>, os.path.getsize(__file__))</span><br></pre></td></tr></table></figure>
       
     </div>
 

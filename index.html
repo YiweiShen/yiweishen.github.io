@@ -123,7 +123,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">75</span>
+          <span class="site-state-item-count">76</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -156,6 +156,112 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2024/04/23/HTTP-Headers-for-Resumable-Downloads/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yiwei Shen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SecondHand C0D1NG">
+      <meta itemprop="description" content="Notes & Thoughts">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | SecondHand C0D1NG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/04/23/HTTP-Headers-for-Resumable-Downloads/" class="post-title-link" itemprop="url">HTTP Headers for Resumable Downloads</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-04-22 23:14:18 / Modified: 23:52:28" itemprop="dateCreated datePublished" datetime="2024-04-22T23:14:18-04:00">2024-04-22</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>We’ve all experienced the frustration of a poor internet connection. You may recall the disappointment of a large file download failing after 24 hours of waiting. Even worse, discovering that the download is not resumable.</p>
+<p>Responsibility for resumable downloads doesn’t solely rest on the client side with the correct setting of HTTP headers. It’s equally, if not more, important for the backend to correctly enable several headers and implement the associated logic.</p>
+<p>While I won’t delve into the detailed implementation in a specific language, understanding the headers discussed below will equip you with the knowledge to easily implement this feature if you wish.</p>
+<h1 id="Client"><a href="#Client" class="headerlink" title="Client"></a>Client</h1><p>The only aspect you need to focus on is the Range HTTP request header. This header specifies the portions of a resource that the server should return. That’s all there is to it.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Range: &lt;unit&gt;=&lt;range-start&gt;-</span><br></pre></td></tr></table></figure>
+
+<p>On the client side, the only requirement is to properly implement the Range HTTP request header. This involves using the correct unit and determining the starting point of the range. The server then knows which portion of the file to send. There’s no need to worry about specifying the range end, as the typical use case involves resuming and downloading the entire file.</p>
+<h1 id="Server"><a href="#Server" class="headerlink" title="Server"></a>Server</h1><p>Now, things start to get more complicated.</p>
+<p>The ETag (also known as entity tag) HTTP response header serves as an identifier for a specific version of a resource.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ETag: <span class="string">&quot;&lt;etag_value&gt;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>If your target client includes a browser, then you need to set the ETag. Modern browsers expect to see this value; otherwise, the browser will simply retry downloading the entire file again.</p>
+<p>The Content-Range response HTTP header signifies the position of a partial message within the full body message.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Range: &lt;unit&gt; &lt;range-start&gt;-&lt;range-end&gt;/&lt;size&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Imagine you are downloading a file of 500 bytes, but due to an unstable internet connection, the download is interrupted after only 100 bytes. In this scenario, you would expect the server to send the remaining 400 bytes of the file. Consequently, you would anticipate seeing the appropriate header in the server’s response.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Range: bytes 100-499/500</span><br></pre></td></tr></table></figure>
+
+<p>Check out MDN for understanding those numbers, I won’t explain them here.</p>
+<p>The Accept-Ranges HTTP response header acts as a signal from the server, indicating its capability to handle partial requests from the client for file downloads.</p>
+<p>Essentially, this header communicates to the client, “Hey, I am capable of handling this, let’s proceed.”</p>
+<p>Don’t ask me why, you just need it.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Accept-Ranges: &lt;range-unit&gt;</span><br></pre></td></tr></table></figure>
+
+<p>I suggest simply using bytes.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Accept-Ranges: bytes</span><br></pre></td></tr></table></figure>
+
+<p>The Content-Length header signifies the size of the message body, measured in bytes, that is transmitted to the recipient.</p>
+<p>In layman’s terms, it represents the bytes of the remaining file.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Length: &lt;length&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Let’s continue the same example mentioned above, the server is going to send the remaining 400 bytes of the file.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Length: 400</span><br></pre></td></tr></table></figure>
+
+<p>This is merely an introduction.</p>
+<p>There are many complex considerations to take into account. For instance, when dealing with ETags, you must strategize on how to assign a unique ID to each resource. Additionally, you need to determine how to update the ETag when a resource is upgraded to a newer version.</p>
+<p>Understanding those HTTPS headers is a good start.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1026,92 +1132,6 @@
 <p>Password Cracking<br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=7U-RbOKanYs">https://www.youtube.com/watch?v=7U-RbOKanYs</a></p>
 <p>How NOT to Store Passwords!<br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=8ZtInClXe1Q">https://www.youtube.com/watch?v=8ZtInClXe1Q</a></p>
 <p>Rainbow table<br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Rainbow_table">https://en.wikipedia.org/wiki/Rainbow_table</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2021/07/11/Rescue-a-Bricked-iPad-after-Jailbreaking/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yiwei Shen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SecondHand C0D1NG">
-      <meta itemprop="description" content="Notes & Thoughts">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | SecondHand C0D1NG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/07/11/Rescue-a-Bricked-iPad-after-Jailbreaking/" class="post-title-link" itemprop="url">Rescue a Bricked iPad after Jailbreaking</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-07-11 13:01:16" itemprop="dateCreated datePublished" datetime="2021-07-11T13:01:16-04:00">2021-07-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-02-24 17:06:44" itemprop="dateModified" datetime="2022-02-24T17:06:44-05:00">2022-02-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Somehow I decided to reset an useless old iPad (A1395, iOS 9.3.5) which had been jailbroken. After erasing all the content and settings, I found the iPad became bricked. The situation is that if you press the Power button, a few seconds of Apple logo shows, followed by a battery status in the center of the screen. And that’s it, it just did not turn on.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>You need to make sure you have charged the iPad for several hours. It helps to rule out the cases when iPad refuses to turn on with low battery. If the battery is all good, there are two ways to rescue your iPad. Try the force-restart first.</p>
-<h3 id="Force-Restart"><a href="#Force-Restart" class="headerlink" title="Force Restart"></a>Force Restart</h3><p>Hold down the Power button and the Home button at the same time for 10 seconds. You will see the Apple logo twice I guess. The second time when you see the logo, you can let go the two buttons and wait&#x2F;pray for the iPad to turn on.</p>
-<h3 id="Factory-Reset-in-DFU-mode"><a href="#Factory-Reset-in-DFU-mode" class="headerlink" title="Factory Reset in DFU mode"></a>Factory Reset in DFU mode</h3><ul>
-<li>Connect your iPad to a Mac (Sorry, I did not test if you can connect iPad to a Windows, chances are you can)</li>
-<li>On the iPad, hold down the Power button and the Home button at the same time, yes, for 10 seconds.</li>
-<li>Then, release the Power button but continue to hold the Home button for another 5 seconds.</li>
-<li>It should be entering DFU mode now. Choose Restore the factory settings.</li>
-<li>Wait for the iPad to reinstall everything once again.</li>
-</ul>
-<p>I know a bricked iPad is useless. But, you know what, after rescuing the old iPad, I find the iPad is <em>still</em> useless anyway.</p>
 
       
     </div>
