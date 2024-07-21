@@ -123,7 +123,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-count">77</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -156,6 +156,127 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2021/07/15/Store-Password-in-Database/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yiwei Shen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SecondHand C0D1NG">
+      <meta itemprop="description" content="Notes & Thoughts">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | SecondHand C0D1NG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/07/15/Store-Password-in-Database/" class="post-title-link" itemprop="url">Store Password in Database</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-07-14 22:59:48" itemprop="dateCreated datePublished" datetime="2021-07-14T22:59:48-04:00">2021-07-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-24 17:06:44" itemprop="dateModified" datetime="2022-02-24T17:06:44-05:00">2022-02-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>I have been thinking about how to store customer’s login details into the database.</p>
+<p>I mean, how to arrange the tables to store the passwords securely enough so that even if one day the database is leaked (and it will), no actual passwords are exposed.</p>
+<p>On seond thoughts, managing the passwords by myself could be a bad idea.</p>
+<p>Hand it over to Google or Facebook.</p>
+<p>OK.</p>
+<p>Let’s say, for some unknown reasons, I have to do it.</p>
+<p>The million-dollar question is, HOW.</p>
+<ul>
+<li>If I store the plain text password anywhere in the database, the company probably would just fire the guy who designed the database, that’s me, for good.</li>
+<li>If I store the hashed password with username, just like that, it is vulnerable to dictionary or rainbow table attacks. But maybe I can keep my job, for now.</li>
+<li>If I use SHA512, instead of MD5, as the hash function, the computational power required to crack the passwords is signaficantly different.</li>
+</ul>
+<h2 id="Solution-perhaps"><a href="#Solution-perhaps" class="headerlink" title="Solution (perhaps)"></a>Solution (perhaps)</h2><p>Add random salt to each individual password, and then calculate the SHA512 hash values. Remember to generate salt again, once the customer changes the password. Also, I need a cryptographically secure random function to generate salt.</p>
+<table>
+<thead>
+<tr>
+<th align="center">LoginID</th>
+<th align="center">LoginName</th>
+<th align="center">Salt</th>
+<th align="center">HashedPasswordWithSalt</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0000001</td>
+<td align="center">Alice</td>
+<td align="center">T7#jd</td>
+<td align="center">RncFuVDvUtVxXUFrvOHPfiF</td>
+</tr>
+<tr>
+<td align="center">0000002</td>
+<td align="center">Bob</td>
+<td align="center">$1Yo2</td>
+<td align="center">UZ0CkHkEccFErZujyAl3wys</td>
+</tr>
+<tr>
+<td align="center">0000003</td>
+<td align="center">Charlie</td>
+<td align="center">UWp*1</td>
+<td align="center">Pt4a1176FY2zcewmbcvEuAN</td>
+</tr>
+</tbody></table>
+<p>In practice, use longer salt, I guess.</p>
+<p>Ref:</p>
+<p>Password Cracking<br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=7U-RbOKanYs">https://www.youtube.com/watch?v=7U-RbOKanYs</a></p>
+<p>How NOT to Store Passwords!<br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=8ZtInClXe1Q">https://www.youtube.com/watch?v=8ZtInClXe1Q</a></p>
+<p>Rainbow table<br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Rainbow_table">https://en.wikipedia.org/wiki/Rainbow_table</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -864,100 +985,6 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;/dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
 <p>I did some research to find out what it means. Basically, the number 1 is standard output, the number 2 is the standard error, the char &gt; is to redirect the flow of information, and 2&gt;&amp;1 means to treat the 2 the same way as the 1, and &#x2F;dev&#x2F;null, you know, is in the middle of nowhere.</p>
 <p>So, to put them all together, this piece of code means that throw the standard output and standard error away as garbage. You will never see anything stdout or stderr on the screen or anywhere on disk. No, just say goodbye to them. They are gone for good.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2021/03/16/CRUD-in-MongoDB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yiwei Shen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SecondHand C0D1NG">
-      <meta itemprop="description" content="Notes & Thoughts">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | SecondHand C0D1NG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/03/16/CRUD-in-MongoDB/" class="post-title-link" itemprop="url">CRUD in MongoDB</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-03-16 17:46:38" itemprop="dateCreated datePublished" datetime="2021-03-16T17:46:38-04:00">2021-03-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-02-24 17:06:44" itemprop="dateModified" datetime="2022-02-24T17:06:44-05:00">2022-02-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>CRUD operations in MongoDB, i.e. Create, Read, Update, Delete.</p>
-<p>The code is for Pymongo.</p>
-<p>Preparation</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">from</span> pymongo <span class="keyword">import</span> MongoClient</span><br><span class="line"></span><br><span class="line">client = MongoClient()</span><br><span class="line">db = client.test_database</span><br><span class="line">collection = db.test_collection</span><br><span class="line"></span><br><span class="line">post = &#123;<span class="string">&#x27;author&#x27;</span>: <span class="string">&#x27;Mike&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;text&#x27;</span>: <span class="string">&#x27;My first blog post!&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tags&#x27;</span>: [<span class="string">&#x27;mongodb&#x27;</span>, <span class="string">&#x27;python&#x27;</span>, <span class="string">&#x27;pymongo&#x27;</span>],</span><br><span class="line">        <span class="string">&#x27;date&#x27;</span>: datetime.datetime.utcnow()&#125;</span><br></pre></td></tr></table></figure>
-
-<p>CREATE:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">create_lines</span>():</span><br><span class="line">    collection.insert_one(post)</span><br><span class="line">    <span class="comment"># if we have multiple posts (an array of dictionaries)</span></span><br><span class="line">    collection.insert_many(posts)</span><br></pre></td></tr></table></figure>
-
-<p>READ:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">read_lines</span>():</span><br><span class="line">    collection.find_one(&#123;<span class="string">&#x27;author&#x27;</span>: <span class="string">&#x27;Mike&#x27;</span>&#125;)</span><br><span class="line">    <span class="comment"># if we want to find multiple records at the same time</span></span><br><span class="line">    collection.find_many(&#123;<span class="string">&#x27;author&#x27;</span>: <span class="string">&#x27;Mike&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>UPDATE:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">update_lines</span>():</span><br><span class="line">    collection.update_one(&#123;<span class="string">&#x27;author&#x27;</span>: <span class="string">&#x27;Mike&#x27;</span>&#125;,</span><br><span class="line">                          &#123;<span class="string">&#x27;$set&#x27;</span>: &#123;<span class="string">&#x27;text&#x27;</span>: <span class="string">&#x27;My second blog post!&#x27;</span>&#125;&#125;)</span><br><span class="line">    <span class="comment"># if we want to update all the relevant records at the same time</span></span><br><span class="line">    collection.update_many(&#123;<span class="string">&#x27;author&#x27;</span>: <span class="string">&#x27;Mike&#x27;</span>&#125;,</span><br><span class="line">                          &#123;<span class="string">&#x27;$set&#x27;</span>: &#123;<span class="string">&#x27;text&#x27;</span>: <span class="string">&#x27;My second blog post!&#x27;</span>&#125;&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>DELETE:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">delete_lines</span>():</span><br><span class="line">    collection.delete_one(&#123;<span class="string">&#x27;author&#x27;</span>: <span class="string">&#x27;Mike&#x27;</span>&#125;)</span><br><span class="line">    <span class="comment"># if we want to delete the matched records all at once</span></span><br><span class="line">    collection.delete_many(&#123;<span class="string">&#x27;author&#x27;</span>: <span class="string">&#x27;Mike&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>I would say MongoDB is designed in a way that is very user-friendly.</p>
-<p>Check out the pymongo website for more detailed instructions.<br><a target="_blank" rel="noopener" href="https://pymongo.readthedocs.io/en/stable/tutorial.html">https://pymongo.readthedocs.io/en/stable/tutorial.html</a></p>
 
       
     </div>

@@ -123,7 +123,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-count">77</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -156,6 +156,100 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2021/03/16/CRUD-in-MongoDB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yiwei Shen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SecondHand C0D1NG">
+      <meta itemprop="description" content="Notes & Thoughts">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | SecondHand C0D1NG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/03/16/CRUD-in-MongoDB/" class="post-title-link" itemprop="url">CRUD in MongoDB</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-03-16 17:46:38" itemprop="dateCreated datePublished" datetime="2021-03-16T17:46:38-04:00">2021-03-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-24 17:06:44" itemprop="dateModified" datetime="2022-02-24T17:06:44-05:00">2022-02-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>CRUD operations in MongoDB, i.e. Create, Read, Update, Delete.</p>
+<p>The code is for Pymongo.</p>
+<p>Preparation</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">from</span> pymongo <span class="keyword">import</span> MongoClient</span><br><span class="line"></span><br><span class="line">client = MongoClient()</span><br><span class="line">db = client.test_database</span><br><span class="line">collection = db.test_collection</span><br><span class="line"></span><br><span class="line">post = &#123;<span class="string">&#x27;author&#x27;</span>: <span class="string">&#x27;Mike&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;text&#x27;</span>: <span class="string">&#x27;My first blog post!&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tags&#x27;</span>: [<span class="string">&#x27;mongodb&#x27;</span>, <span class="string">&#x27;python&#x27;</span>, <span class="string">&#x27;pymongo&#x27;</span>],</span><br><span class="line">        <span class="string">&#x27;date&#x27;</span>: datetime.datetime.utcnow()&#125;</span><br></pre></td></tr></table></figure>
+
+<p>CREATE:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">create_lines</span>():</span><br><span class="line">    collection.insert_one(post)</span><br><span class="line">    <span class="comment"># if we have multiple posts (an array of dictionaries)</span></span><br><span class="line">    collection.insert_many(posts)</span><br></pre></td></tr></table></figure>
+
+<p>READ:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">read_lines</span>():</span><br><span class="line">    collection.find_one(&#123;<span class="string">&#x27;author&#x27;</span>: <span class="string">&#x27;Mike&#x27;</span>&#125;)</span><br><span class="line">    <span class="comment"># if we want to find multiple records at the same time</span></span><br><span class="line">    collection.find_many(&#123;<span class="string">&#x27;author&#x27;</span>: <span class="string">&#x27;Mike&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>UPDATE:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">update_lines</span>():</span><br><span class="line">    collection.update_one(&#123;<span class="string">&#x27;author&#x27;</span>: <span class="string">&#x27;Mike&#x27;</span>&#125;,</span><br><span class="line">                          &#123;<span class="string">&#x27;$set&#x27;</span>: &#123;<span class="string">&#x27;text&#x27;</span>: <span class="string">&#x27;My second blog post!&#x27;</span>&#125;&#125;)</span><br><span class="line">    <span class="comment"># if we want to update all the relevant records at the same time</span></span><br><span class="line">    collection.update_many(&#123;<span class="string">&#x27;author&#x27;</span>: <span class="string">&#x27;Mike&#x27;</span>&#125;,</span><br><span class="line">                          &#123;<span class="string">&#x27;$set&#x27;</span>: &#123;<span class="string">&#x27;text&#x27;</span>: <span class="string">&#x27;My second blog post!&#x27;</span>&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>DELETE:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">delete_lines</span>():</span><br><span class="line">    collection.delete_one(&#123;<span class="string">&#x27;author&#x27;</span>: <span class="string">&#x27;Mike&#x27;</span>&#125;)</span><br><span class="line">    <span class="comment"># if we want to delete the matched records all at once</span></span><br><span class="line">    collection.delete_many(&#123;<span class="string">&#x27;author&#x27;</span>: <span class="string">&#x27;Mike&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>I would say MongoDB is designed in a way that is very user-friendly.</p>
+<p>Check out the pymongo website for more detailed instructions.<br><a target="_blank" rel="noopener" href="https://pymongo.readthedocs.io/en/stable/tutorial.html">https://pymongo.readthedocs.io/en/stable/tutorial.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -844,86 +938,6 @@
     <div class="post-body" itemprop="articleBody">
           <p>Previously, I listened to the topic of remote working in one of the podcasts. It is something new to me if the work is entirely remote, but I would say to some extent, we need to get used to this concept of remote working with colleagues in a team. In the beginning, you might feel the pain that when you need to talk to someone to get things done, but other people are living in different time zones, which means they are still in their sleep. So you have to wait.</p>
 <p>After the pandemic, I think people will realize that most of the office work can be done anyway at home. So finding a better way of collaboration among people in different places is one of the most important things to do. You can write more emails. Maybe.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2021/03/03/Full-Disk-Access-for-Terminal/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yiwei Shen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SecondHand C0D1NG">
-      <meta itemprop="description" content="Notes & Thoughts">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | SecondHand C0D1NG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/03/03/Full-Disk-Access-for-Terminal/" class="post-title-link" itemprop="url">Full Disk Access for Terminal</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-03-03 18:11:50" itemprop="dateCreated datePublished" datetime="2021-03-03T18:11:50-05:00">2021-03-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-02-24 17:06:44" itemprop="dateModified" datetime="2022-02-24T17:06:44-05:00">2022-02-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>When I am trying to use the AT command in terminal, it prompt with such a message.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">“Terminal” would like to administer your computer. </span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Administration can include modifying passwords, networking and system settings.</span><br></pre></td></tr></table></figure>
-
-<p>It seems you have to grant futher access to the terminal so it can work properly.</p>
 
       
     </div>
