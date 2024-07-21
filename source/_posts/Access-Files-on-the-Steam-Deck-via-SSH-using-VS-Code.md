@@ -17,7 +17,7 @@ Before getting started, make sure you have the following:
 
 ## Step 1: Enable SSH on the Steam Deck
 
-Switch to Desktop Mode: Press the Steam button, navigate to Power, and switch to Desktop. Once in desktop mode, open the KDE application launcher and search for Konsole (terminal).
+Press the Steam button, navigate to Power, and switch to Desktop mode. Once in desktop mode, open the KDE application launcher and search for Konsole (terminal).
 
 - Start the SSH server with:
   ```bash
@@ -42,12 +42,11 @@ Creating SSH key pairs can enhance the security of your SSH connection by using 
   ssh-keygen -t rsa -b 4096 -f ~/.ssh/sd_rsa
   ```
   This command will save the key pair in the specified folder (~/.ssh/sd_rsa).
-  You can also set a passphrase for an additional layer of security. Press "Enter" if you do not want to set a passphrase.
 
 This process will create two files:
 
 - "sd_rsa": This is your private key. Keep this file secure and find a way to copy it to the Mac. Be creative; for example, you can use GoodReader to set up a quick WiFi Server.
-- "sd_rsa.pub": This is your public key. This file can be shared and will be copied to the Steam Deck.
+- "sd_rsa.pub": This is your public key. This file can be shared and will stay on the Steam Deck.
 
 For added security, you can:
 
@@ -60,7 +59,7 @@ For added security, you can:
   PasswordAuthentication no
   PubkeyAuthentication yes
   ```
-- Save the file and restart the SSH service:
+- Save the file (:wq) and restart the SSH service:
   ```bash
   sudo systemctl restart sshd
   ```
@@ -90,7 +89,7 @@ Ensure you have the Remote - SSH extension installed. If not, you can find it in
 
 - Again, open the command palette ("Cmd+Shift+P").
 - Type "Remote-SSH: Connect to Host..." and select the entry you just added.
-- The first time only, you may be prompted to accept the host's fingerprint and enter the password for the "deck" user.
+- The first time only, you may be prompted to accept the host's fingerprint.
 
 By following the above steps, you can conveniently access and manage your Steam Deck’s file system using the powerful toolset provided by VS Code over an SSH connection.
 
@@ -100,6 +99,6 @@ If you haven't already, download and install Raycast from [Raycast's official we
 
 - Open Raycast "Option+Space"
 - Type "VS Code" and you will see the shortcut in VS Code Recent Projects.
-- Select "deck" or another name for your SSH connection from the list to quickly open it in VS Code.
+- Select "deck" or another name for your SSH connection from the list to quickly open it in the VS Code.
 
 A big thanks to the developers who created these amazing tools!
