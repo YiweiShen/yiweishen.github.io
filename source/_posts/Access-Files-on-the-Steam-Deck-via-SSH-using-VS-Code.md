@@ -72,6 +72,8 @@ For added security, you can:
 
 Ensure you have the Remote - SSH extension installed. If not, you can find it in the VS Code Marketplace. Copy the "sd_rsa" private key to your Mac and set the correct permissions (chmod 600 if necessary).
 
+![](/img/remote-ssh-vscode.png)
+
 - Press "Cmd+Shift+P" on Mac to open the command palette.
 - Type "Remote-SSH: Open SSH Configuration File..." and select it.
 - Choose the SSH configuration file you want to edit (usually "~/.ssh/config").
@@ -97,8 +99,21 @@ By following the above steps, you can conveniently access and manage your Steam 
 
 If you haven't already, download and install Raycast from [Raycast's official website](https://www.raycast.com/). Open Raycast and go to the "Extensions Store" and search for "Visual Studio Code" and install the extension.
 
+![](/img/raycast-recent-vscode-projects.png)
+
 - Open Raycast "Option+Space"
 - Type "VS Code" and you will see the shortcut in VS Code Recent Projects.
 - Select "deck" or another name for your SSH connection from the list to quickly open it in the VS Code.
 
 A big thanks to the developers who created these amazing tools!
+
+## References
+
+SSH-KEYGEN General Commands Manual
+https://man.openbsd.org/ssh-keygen
+
+Remote SSH with Visual Studio Code
+https://code.visualstudio.com/blogs/2019/07/25/remote-ssh
+
+Remote SSH: Tips and Tricks
+https://code.visualstudio.com/blogs/2019/10/03/remote-ssh-tips-and-tricks
