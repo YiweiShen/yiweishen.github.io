@@ -4,7 +4,37 @@ date: 2024-07-21 00:20:55
 tags:
 ---
 
-Accessing the Steam Deck's file system remotely can be incredibly useful. Imagine using Raycast to quickly open a recent VS Code project, and one of them is a folder on the Steam Deck via an SSH connection. With just one click, you're connected and ready to go.
+Accessing the Steam Deck's file system remotely can be incredibly useful.
+
+<div>
+<!-- https://github.com/rough-stuff/rough-notation -->
+  <script src="https://unpkg.com/rough-notation/lib/rough-notation.iife.js"></script>
+  <div>
+    Imagine using <span id="raycastCircle"> Raycast</span> to quickly open a recent <span id="vsCodeBox">VS Code</span> project, and one of them is a folder on the <span id="steamHighlight">Steam Deck</span> via an <span id="sshUnderline">SSH connection</span>. With just one click, you're connected and ready to go.
+  </div>
+<script>
+    const { annotate, annotationGroup } = RoughNotation;
+    // Span elements
+    const elements = [
+        { id: '#raycastCircle', type: 'circle', color: 'red', delay: 9000 },
+        { id: '#vsCodeBox', type: 'box', color: 'blue', delay: 10000 },
+        { id: '#steamHighlight', type: 'highlight', color: 'yellow', delay: 11000 },
+        { id: '#sshUnderline', type: 'underline', color: 'green', delay: 12000 }
+    ];
+    // Create and store annotations dynamically
+    const annotationsList = elements.map(({ id, type, color }) =>
+        annotate(document.querySelector(id), { type, color, animationDuration: 2000 })
+    );
+    // Show annotations
+    const annotations = annotationGroup(annotationsList);
+    annotations.show();
+    // Hide annotations with dynamic delays
+    elements.forEach(({ delay }, index) => {
+        setTimeout(() => annotationsList[index].hide(), delay);
+    });
+</script>
+
+</div>
 
 ## Prerequisites
 
