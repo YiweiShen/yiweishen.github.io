@@ -19,17 +19,17 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"yiweishen.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Accessing the Steam Deck’s file system remotely can be incredibly useful. Imagine using Raycast to quickly open a recent VS Code project, and one of them is a folder on the Steam Deck via an SSH conne">
+    <meta name="description" content="Accessing the Steam Deck’s file system remotely can be incredibly useful.             Imagine using  Raycast to quickly open a recent VS Code project, and one of them is a folder on the Steam Deck via">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Access Files on the Steam Deck via SSH using VS Code">
 <meta property="og:url" content="http://yiweishen.github.io/2024/07/21/Access-Files-on-the-Steam-Deck-via-SSH-using-VS-Code/index.html">
 <meta property="og:site_name" content="SecondHand C0D1NG">
-<meta property="og:description" content="Accessing the Steam Deck’s file system remotely can be incredibly useful. Imagine using Raycast to quickly open a recent VS Code project, and one of them is a folder on the Steam Deck via an SSH conne">
+<meta property="og:description" content="Accessing the Steam Deck’s file system remotely can be incredibly useful.             Imagine using  Raycast to quickly open a recent VS Code project, and one of them is a folder on the Steam Deck via">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://yiweishen.github.io/img/remote-ssh-vscode.png">
 <meta property="og:image" content="http://yiweishen.github.io/img/raycast-recent-vscode-projects.png">
 <meta property="article:published_time" content="2024-07-21T04:20:55.000Z">
-<meta property="article:modified_time" content="2024-07-21T14:07:05.000Z">
+<meta property="article:modified_time" content="2025-03-26T03:24:14.000Z">
 <meta property="article:author" content="Yiwei Shen">
 <meta property="article:tag" content="Blog">
 <meta name="twitter:card" content="summary">
@@ -199,9 +199,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2024-07-21 00:20:55 / Modified: 10:07:05" itemprop="dateCreated datePublished" datetime="2024-07-21T00:20:55-04:00">2024-07-21</time>
+      <time title="Created: 2024-07-21 00:20:55" itemprop="dateCreated datePublished" datetime="2024-07-21T00:20:55-04:00">2024-07-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-03-25 23:24:14" itemprop="dateModified" datetime="2025-03-25T23:24:14-04:00">2025-03-25</time>
     </span>
 
   
@@ -213,7 +219,37 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>Accessing the Steam Deck’s file system remotely can be incredibly useful. Imagine using Raycast to quickly open a recent VS Code project, and one of them is a folder on the Steam Deck via an SSH connection. With just one click, you’re connected and ready to go.</p>
+    <div class="post-body" itemprop="articleBody"><p>Accessing the Steam Deck’s file system remotely can be incredibly useful.</p>
+<div>
+<!-- https://github.com/rough-stuff/rough-notation -->
+  <script src="https://unpkg.com/rough-notation/lib/rough-notation.iife.js"></script>
+  <div>
+    Imagine using <span id="raycastCircle"> Raycast</span> to quickly open a recent <span id="vsCodeBox">VS Code</span> project, and one of them is a folder on the <span id="steamHighlight">Steam Deck</span> via an <span id="sshUnderline">SSH connection</span>. With just one click, you're connected and ready to go.
+  </div>
+<script>
+    const { annotate, annotationGroup } = RoughNotation;
+    // Span elements
+    const elements = [
+        { id: '#raycastCircle', type: 'circle', color: 'red', delay: 9000 },
+        { id: '#vsCodeBox', type: 'box', color: 'blue', delay: 10000 },
+        { id: '#steamHighlight', type: 'highlight', color: 'yellow', delay: 11000 },
+        { id: '#sshUnderline', type: 'underline', color: 'green', delay: 12000 }
+    ];
+    // Create and store annotations dynamically
+    const annotationsList = elements.map(({ id, type, color }) =>
+        annotate(document.querySelector(id), { type, color, animationDuration: 2000 })
+    );
+    // Show annotations
+    const annotations = annotationGroup(annotationsList);
+    annotations.show();
+    // Hide annotations with dynamic delays
+    elements.forEach(({ delay }, index) => {
+        setTimeout(() => annotationsList[index].hide(), delay);
+    });
+</script>
+
+</div>
+
 <h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><p>Before getting started, make sure you have the following:</p>
 <ul>
 <li>Steam Deck: Ensure your Steam Deck is powered on and connected to the same Wi-Fi network as your laptop.</li>
