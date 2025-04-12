@@ -122,6 +122,7 @@ Ensure you have the Remote - SSH extension installed. If not, you can find it in
 - Again, open the command palette ("Cmd+Shift+P").
 - Type "Remote-SSH: Connect to Host..." and select the entry you just added.
 - The first time only, you may be prompted to accept the host's fingerprint.
+- You'll need to grant VS Code permission to access the local network. Go to System Settings > Privacy & Security > Local Network and ensure VS Code is listed and has access enabled.
 
 By following the above steps, you can conveniently access and manage your Steam Deck’s file system using the powerful toolset provided by VS Code over an SSH connection.
 
