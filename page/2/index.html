@@ -139,7 +139,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">77</span>
+          <span class="site-state-item-count">78</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -172,6 +172,113 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2022/02/24/HTTP-Proxy-via-Squid-in-Ubuntu-on-Microsoft-Azure/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yiwei Shen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SecondHand C0D1NG">
+      <meta itemprop="description" content="Notes & Thoughts">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | SecondHand C0D1NG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/02/24/HTTP-Proxy-via-Squid-in-Ubuntu-on-Microsoft-Azure/" class="post-title-link" itemprop="url">HTTP Proxy via Squid in Ubuntu on Microsoft Azure</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-02-24 12:34:21" itemprop="dateCreated datePublished" datetime="2022-02-24T12:34:21-05:00">2022-02-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-25 23:39:24" itemprop="dateModified" datetime="2022-02-25T23:39:24-05:00">2022-02-25</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>For some reason, you need to use a HTTP Proxy.</p>
+<p>Let me assume you have an account of Microsoft Azure. </p>
+<h1 id="Create-VM-on-Azure"><a href="#Create-VM-on-Azure" class="headerlink" title="Create VM on Azure"></a>Create VM on Azure</h1><p>First, go to Azure Portal and create a linux virtual machine, say, Ubuntu 20.04 LTS. Default config will be fine during your VM setup.</p>
+<h1 id="Connect-to-VM"><a href="#Connect-to-VM" class="headerlink" title="Connect to VM"></a>Connect to VM</h1><p>Connect to the virtual machine via SSH with client, in my case, I use Terminal on MacOS. Let’s rename the private key file to azureuser.pem which you download from the previous VM creation step. Use chmod 400 to ensure you have read-only access to the private key. </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> 400 azureuser.pem</span><br><span class="line">ssh -i /Path/To/Some/Folder/azureuser.pem azureuser@vps_IP</span><br></pre></td></tr></table></figure>
+
+<h1 id="Install-Squid"><a href="#Install-Squid" class="headerlink" title="Install Squid"></a>Install Squid</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get update -y</span><br><span class="line"><span class="built_in">sudo</span> apt-get upgrade -y</span><br><span class="line"><span class="built_in">sudo</span> apt-get install squid -y</span><br></pre></td></tr></table></figure>
+
+<h1 id="Update-Squid-Config-file"><a href="#Update-Squid-Config-file" class="headerlink" title="Update Squid Config file"></a>Update Squid Config file</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> nano /etc/squid/squid.conf</span><br></pre></td></tr></table></figure>
+
+<p>Find and insert the below two lines BEFORE the line of http_access deny all, to allow your IP to use the proxy.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">acl client src your_IP</span><br><span class="line">http_access allow client</span><br></pre></td></tr></table></figure>
+<p>By default, Squid uses port 3128. If you are going to change it, just remember to double check if any other application is using the port by default.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http_port PORT_NUMBER</span><br></pre></td></tr></table></figure>
+<p>By default, Squid will append your original IP address in the HTTP requests it forwards, something like X-Forwarded-For: 192.1.2.3. So, if you don’t want the destination server to know you are using a proxy, and you want to remove some of the request_headers that Squid passes on to the destination server, you can Ctrl + W to find and uncomment these:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># forwarded_for off</span></span><br><span class="line"><span class="comment"># request_header_access Authorization allow all</span></span><br><span class="line"><span class="comment"># request_header_access Proxy-Authorization allow all</span></span><br><span class="line"><span class="comment"># request_header_access Cache-Control allow all           </span></span><br><span class="line"><span class="comment"># request_header_access Content-Length allow all</span></span><br><span class="line"><span class="comment"># request_header_access Content-Type allow all</span></span><br><span class="line"><span class="comment"># request_header_access Date allow all</span></span><br><span class="line"><span class="comment"># request_header_access Host allow all</span></span><br><span class="line"><span class="comment"># request_header_access If-Modified-Since allow all</span></span><br><span class="line"><span class="comment"># request_header_access Pragma allow all</span></span><br><span class="line"><span class="comment"># request_header_access Accept allow all</span></span><br><span class="line"><span class="comment"># request_header_access Accept-Charset allow all</span></span><br><span class="line"><span class="comment"># request_header_access Accept-Encoding allow all</span></span><br><span class="line"><span class="comment"># request_header_access Accept-Language allow all</span></span><br><span class="line"><span class="comment"># request_header_access Connection allow all</span></span><br><span class="line"><span class="comment"># request_header_access All deny all</span></span><br></pre></td></tr></table></figure>
+
+<p>All, done. Ctrl + O to save the file, and Ctrl + X to exit the file. Restart Squid or maybe you can just restart VM.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> service squid restart</span><br></pre></td></tr></table></figure>
+
+<h1 id="Open-Port-for-Squid"><a href="#Open-Port-for-Squid" class="headerlink" title="Open Port for Squid"></a>Open Port for Squid</h1><p>Lastly, go to your VM on the azure portal, open the Networking Tab in the settings. You need to add one inbound port rules to make the Squid http_port number (by default, 3128) accessible from your IP.</p>
+<h1 id="Use-HTTP-Proxy-in-Python"><a href="#Use-HTTP-Proxy-in-Python" class="headerlink" title="Use HTTP Proxy in Python"></a>Use HTTP Proxy in Python</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">http_proxy = &#123;</span><br><span class="line">	<span class="string">&#x27;http&#x27;</span>: <span class="string">&#x27;http://vps_IP:PORT_NUMBER&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">r = requests.get(url, proxies=http_proxy)</span><br></pre></td></tr></table></figure>
+<h1 id="Use-HTTP-Proxy-in-Terminal-on-MacOS-Bash"><a href="#Use-HTTP-Proxy-in-Terminal-on-MacOS-Bash" class="headerlink" title="Use HTTP Proxy in Terminal on MacOS (Bash)"></a>Use HTTP Proxy in Terminal on MacOS (Bash)</h1><p>Enter the below command into the terminal for a session use.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> http_proxy=http://vps_IP:PORT_NUMBER</span><br></pre></td></tr></table></figure>
+<p>If you want to make the proxy permanent in the Terminal, you can add it into bash_profile.</p>
+<h1 id="Use-HTTP-Proxy-on-iOS"><a href="#Use-HTTP-Proxy-on-iOS" class="headerlink" title="Use HTTP Proxy on iOS"></a>Use HTTP Proxy on iOS</h1><p>Go to the settings page of the WiFi you are currently using. Configure HTTP Proxy to Manual and enter the details. </p>
+<p>By the way, save your time and do not use Squid to bypass GFW. It will fail, technically speaking. I’m sorry. </p>
+<p>Squid is not designed to encrypt internet traffic by any means. On the contrary, Squid server can and will intercept SSL interception because Squid is literally the man-in-the-middle (MiTM). Keep that in mind if you consider making use of the other’s HTTP Proxy.</p>
+<p>Ref:</p>
+<p>Ubuntu documentation for Squid:<br><a target="_blank" rel="noopener" href="https://help.ubuntu.com/community/Squid">https://help.ubuntu.com/community/Squid</a></p>
+<p>Squid man page:<br><a target="_blank" rel="noopener" href="http://manpages.ubuntu.com/manpages/focal/en/man8/squid.8.html">http://manpages.ubuntu.com/manpages/focal/en/man8/squid.8.html</a></p>
+<p>Official Squid site:<br><a target="_blank" rel="noopener" href="http://www.squid-cache.org/">http://www.squid-cache.org</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -918,89 +1025,6 @@
           <p>The book of Code Complete has been sitting on my book shelf for a long time. I always feel that it was a big book and the content is too much for my level. But these feelings were purely generated from the imagination because I never ever actually tried to read the book.</p>
 <p>Until now. I began the reading. And it turns out the content makes sense to me in a lot of ways. I think it is considered as a classic book for a good reason.</p>
 <p>It might take some time before I can finish the book, but I can say it now to anyone hesitate to read it, today is the day, just read it.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2021/03/19/dev-null-2-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yiwei Shen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SecondHand C0D1NG">
-      <meta itemprop="description" content="Notes & Thoughts">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | SecondHand C0D1NG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/03/19/dev-null-2-1/" class="post-title-link" itemprop="url">> /dev/null 2>&1</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-03-19 18:25:34" itemprop="dateCreated datePublished" datetime="2021-03-19T18:25:34-04:00">2021-03-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-02-24 17:06:44" itemprop="dateModified" datetime="2022-02-24T17:06:44-05:00">2022-02-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>I saw something in the shell code as follows.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /dev/random &gt; /dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
-<p>Or something similar.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> lang=<span class="string">&quot;en_us.utf-8&quot;</span> &gt;/dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
-<p>They all have this part.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;/dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
-<p>I did some research to find out what it means. Basically, the number 1 is standard output, the number 2 is the standard error, the char &gt; is to redirect the flow of information, and 2&gt;&amp;1 means to treat the 2 the same way as the 1, and &#x2F;dev&#x2F;null, you know, is in the middle of nowhere.</p>
-<p>So, to put them all together, this piece of code means that throw the standard output and standard error away as garbage. You will never see anything stdout or stderr on the screen or anywhere on disk. No, just say goodbye to them. They are gone for good.</p>
 
       
     </div>

@@ -6,7 +6,7 @@
   <link href="http://yiweishen.github.io/atom.xml" rel="self"/>
   
   <link href="http://yiweishen.github.io/"/>
-  <updated>2025-04-12T01:58:13.000Z</updated>
+  <updated>2025-06-22T20:48:58.377Z</updated>
   <id>http://yiweishen.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>编程范式的重构</title>
+    <link href="http://yiweishen.github.io/2025/06/22/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%9A%84%E9%87%8D%E6%9E%84/"/>
+    <id>http://yiweishen.github.io/2025/06/22/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%9A%84%E9%87%8D%E6%9E%84/</id>
+    <published>2025-06-22T17:16:19.000Z</published>
+    <updated>2025-06-22T20:48:58.377Z</updated>
+    
+    <content type="html"><![CDATA[<p>所谓“范式”，是一种形式，更是一种思维模式。</p><p>程序员，作为文字工作者的一个分支，要与成千上万行代码打交道，自然离不开各种范式的指引。就像预设好了一个“系统提示”，你无需一遍遍向同事解释“什么是面向对象”，也无需在设计模式上争论太多细节。大家心照不宣，默认你在某个语境下是“按套路出牌”。</p><p>毕竟，人类的“思维窗口”大小有限，没有范式的合作无异于鸡同鸭讲。你要是硬把所有函数堆在一个文件里，不做任何抽象、分类，那后果就是写文档要写到崩溃。</p><p>可当人工智能加入程序员的工作流之后，范式正在发生变化。</p><p>首先，代码的处理方式从“手工雕刻”变成了“语义理解”。那些听话的“编程小助手”，听你一句指令，便能自动修改代码。那么，这种转变下，传统代码里的范式还重要吗？</p><p>这得看你怎么看。</p><p>重要，当然重要。因为大模型处理的是“语言”，语言的组织结构越清晰，越有利于信息的提取和再创造。这就像未经分类的文件堆和精心整理过的档案柜之间的差别，信息熵不一样，效率自然也不一样。</p><p>但换个角度，也可以说它已经不那么重要了。毕竟，以往的范式，是为了“人”阅读。而现在，大模型完全可以发展出自己的范式，甚至回收那些早被人类嫌弃的“古典做法”。比如说，直接操作二进制编码，何须讲究抽象层级？对于模型来说，那点“人类的可读性”，恐怕只是多余。</p><p>其次，是程序员身份的转变。不论内心是否接受，这股变化的洪流，已经悄然将人推到了新的位置。手搓代码的岁月，有点像老手艺人打磨木工制品，那种纯手工的尊严和骄傲，仿佛藏在每一个字符之间。</p><p>但若从商业角度看，当网页和 App 成为最终商品时，程序员不过是产业链条上的一环。你是用手搓，还是让 AI 帮你画，用户并不关心。思维也要随之转变。我不只是代码的搬运工、软件的敲字员，而是一个解决问题的工程师。写代码，是解决问题的手段，绝不是唯一答案。</p><p>在我看来，范式的意义，是帮助我们整理思绪，好让将来的“自己”或“他人”在回头阅读这些代码时，能更快地进入状态。这本来是程序员的一项自救之术，如今，却被大模型轻松超越。它记忆力更强，分析力更快，哪怕你写得一团糟，它也能看出门道。</p><p>那么，未来还需要范式吗？</p><p>也许真正的问题是：我们愿意把思维交给它，还是愿意保留一点属于人类自己的逻辑痕迹？</p><p>范式，是程序世界中的路标。</p><p>而当道路不再由我们铺设，是否意味着，我们也将不再是旅人，而是被路指引的方向？</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;所谓“范式”，是一种形式，更是一种思维模式。&lt;/p&gt;
+&lt;p&gt;程序员，作为文字工作者的一个分支，要与成千上万行代码打交道，自然离不开各种范式的指引。就像预设好了一个“系统提示”，你无需一遍遍向同事解释“什么是面向对象”，也无需在设计模式上争论太多细节。大家心照不宣，默认你在某</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Access Files on the Steam Deck via SSH using VS Code</title>
@@ -403,27 +424,6 @@
       
       
     <summary type="html">&lt;p&gt;The book of Code Complete has been sitting on my book shelf for a long time. I always feel that it was a big book and the content is too </summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>&gt; /dev/null 2&gt;&amp;1</title>
-    <link href="http://yiweishen.github.io/2021/03/19/dev-null-2-1/"/>
-    <id>http://yiweishen.github.io/2021/03/19/dev-null-2-1/</id>
-    <published>2021-03-19T22:25:34.000Z</published>
-    <updated>2022-02-24T22:06:44.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>I saw something in the shell code as follows.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /dev/random &gt; /dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure><p>Or something similar.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> lang=<span class="string">&quot;en_us.utf-8&quot;</span> &gt;/dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure><p>They all have this part.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;/dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure><p>I did some research to find out what it means. Basically, the number 1 is standard output, the number 2 is the standard error, the char &gt; is to redirect the flow of information, and 2&gt;&amp;1 means to treat the 2 the same way as the 1, and &#x2F;dev&#x2F;null, you know, is in the middle of nowhere.</p><p>So, to put them all together, this piece of code means that throw the standard output and standard error away as garbage. You will never see anything stdout or stderr on the screen or anywhere on disk. No, just say goodbye to them. They are gone for good.</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;I saw something in the shell code as follows.&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;</summary>
       
     
     

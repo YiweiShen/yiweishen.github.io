@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yiweishen.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.23.1","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tomorrow-night-bright","dark":"tomorrow-night-bright"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="所谓“范式”，是一种形式，更是一种思维模式。 程序员，作为文字工作者的一个分支，要与成千上万行代码打交道，自然离不开各种范式的指引。就像预设好了一个“系统提示”，你无需一遍遍向同事解释“什么是面向对象”，也无需在设计模式上争论太多细节。大家心照不宣，默认你在某个语境下是“按套路出牌”。 毕竟，人类的“思维窗口”大小有限，没有范式的合作无异于鸡同鸭讲。你要是硬把所有函数堆在一个文件里，不做任何抽象、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编程范式的重构">
+<meta property="og:url" content="http://yiweishen.github.io/2025/06/22/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%9A%84%E9%87%8D%E6%9E%84/index.html">
+<meta property="og:site_name" content="SecondHand C0D1NG">
+<meta property="og:description" content="所谓“范式”，是一种形式，更是一种思维模式。 程序员，作为文字工作者的一个分支，要与成千上万行代码打交道，自然离不开各种范式的指引。就像预设好了一个“系统提示”，你无需一遍遍向同事解释“什么是面向对象”，也无需在设计模式上争论太多细节。大家心照不宣，默认你在某个语境下是“按套路出牌”。 毕竟，人类的“思维窗口”大小有限，没有范式的合作无异于鸡同鸭讲。你要是硬把所有函数堆在一个文件里，不做任何抽象、">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-06-22T17:16:19.000Z">
+<meta property="article:modified_time" content="2025-06-22T20:48:58.377Z">
+<meta property="article:author" content="Yiwei Shen">
+<meta property="article:tag" content="Blog">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://yiweishen.github.io/2025/06/22/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%9A%84%E9%87%8D%E6%9E%84/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://yiweishen.github.io/2025/06/22/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%9A%84%E9%87%8D%E6%9E%84/","path":"2025/06/22/编程范式的重构/","title":"编程范式的重构"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>编程范式的重构 | SecondHand C0D1NG</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="SecondHand C0D1NG" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">SecondHand C0D1NG</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yiwei Shen</p>
+  <div class="site-description" itemprop="description">Notes & Thoughts</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/YiweiShen" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;YiweiShen" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml" rel="noopener me"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2025/06/22/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%9A%84%E9%87%8D%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yiwei Shen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SecondHand C0D1NG">
+      <meta itemprop="description" content="Notes & Thoughts">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="编程范式的重构 | SecondHand C0D1NG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          编程范式的重构
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2025-06-22 13:16:19 / Modified: 16:48:58" itemprop="dateCreated datePublished" datetime="2025-06-22T13:16:19-04:00">2025-06-22</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>所谓“范式”，是一种形式，更是一种思维模式。</p>
+<p>程序员，作为文字工作者的一个分支，要与成千上万行代码打交道，自然离不开各种范式的指引。就像预设好了一个“系统提示”，你无需一遍遍向同事解释“什么是面向对象”，也无需在设计模式上争论太多细节。大家心照不宣，默认你在某个语境下是“按套路出牌”。</p>
+<p>毕竟，人类的“思维窗口”大小有限，没有范式的合作无异于鸡同鸭讲。你要是硬把所有函数堆在一个文件里，不做任何抽象、分类，那后果就是写文档要写到崩溃。</p>
+<p>可当人工智能加入程序员的工作流之后，范式正在发生变化。</p>
+<p>首先，代码的处理方式从“手工雕刻”变成了“语义理解”。那些听话的“编程小助手”，听你一句指令，便能自动修改代码。那么，这种转变下，传统代码里的范式还重要吗？</p>
+<p>这得看你怎么看。</p>
+<p>重要，当然重要。因为大模型处理的是“语言”，语言的组织结构越清晰，越有利于信息的提取和再创造。这就像未经分类的文件堆和精心整理过的档案柜之间的差别，信息熵不一样，效率自然也不一样。</p>
+<p>但换个角度，也可以说它已经不那么重要了。毕竟，以往的范式，是为了“人”阅读。而现在，大模型完全可以发展出自己的范式，甚至回收那些早被人类嫌弃的“古典做法”。比如说，直接操作二进制编码，何须讲究抽象层级？对于模型来说，那点“人类的可读性”，恐怕只是多余。</p>
+<p>其次，是程序员身份的转变。不论内心是否接受，这股变化的洪流，已经悄然将人推到了新的位置。手搓代码的岁月，有点像老手艺人打磨木工制品，那种纯手工的尊严和骄傲，仿佛藏在每一个字符之间。</p>
+<p>但若从商业角度看，当网页和 App 成为最终商品时，程序员不过是产业链条上的一环。你是用手搓，还是让 AI 帮你画，用户并不关心。思维也要随之转变。我不只是代码的搬运工、软件的敲字员，而是一个解决问题的工程师。写代码，是解决问题的手段，绝不是唯一答案。</p>
+<p>在我看来，范式的意义，是帮助我们整理思绪，好让将来的“自己”或“他人”在回头阅读这些代码时，能更快地进入状态。这本来是程序员的一项自救之术，如今，却被大模型轻松超越。它记忆力更强，分析力更快，哪怕你写得一团糟，它也能看出门道。</p>
+<p>那么，未来还需要范式吗？</p>
+<p>也许真正的问题是：我们愿意把思维交给它，还是愿意保留一点属于人类自己的逻辑痕迹？</p>
+<p>范式，是程序世界中的路标。</p>
+<p>而当道路不再由我们铺设，是否意味着，我们也将不再是旅人，而是被路指引的方向？</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Yiwei Shen
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="http://yiweishen.github.io/2025/06/22/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%9A%84%E9%87%8D%E6%9E%84/" title="编程范式的重构">http://yiweishen.github.io/2025/06/22/编程范式的重构/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/07/21/Access-Files-on-the-Steam-Deck-via-SSH-using-VS-Code/" rel="prev" title="Access Files on the Steam Deck via SSH using VS Code">
+                  <i class="fa fa-angle-left"></i> Access Files on the Steam Deck via SSH using VS Code
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Yiwei Shen</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
