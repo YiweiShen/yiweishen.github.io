@@ -139,7 +139,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-count">79</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -172,6 +172,117 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2022/02/24/Rebuild-this-blog-using-Hexo-and-Theme-NexT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yiwei Shen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SecondHand C0D1NG">
+      <meta itemprop="description" content="Notes & Thoughts">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | SecondHand C0D1NG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/02/24/Rebuild-this-blog-using-Hexo-and-Theme-NexT/" class="post-title-link" itemprop="url">Rebuild this blog using Hexo and Theme NexT</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-02-24 18:08:10" itemprop="dateCreated datePublished" datetime="2022-02-24T18:08:10-05:00">2022-02-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-25 23:39:24" itemprop="dateModified" datetime="2022-02-25T23:39:24-05:00">2022-02-25</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Seven years ago, I wrote the first post in this blog to explain how to build this blog. Basically, I still use the Hexo framework for blogging. Here is the summary of how you can rebuild the blog today.</p>
+<h1 id="Versions"><a href="#Versions" class="headerlink" title="Versions"></a>Versions</h1><ul>
+<li>Node.js v17.6.0</li>
+<li>npm 8.5.1</li>
+<li>hexo 6.0.0</li>
+<li>hexo-theme-next 8.10.0</li>
+</ul>
+<p>If you use the different versions, things may break.</p>
+<h1 id="Create-GitHub-Repo-for-the-blog-folder"><a href="#Create-GitHub-Repo-for-the-blog-folder" class="headerlink" title="Create GitHub Repo for the blog folder"></a>Create GitHub Repo for the blog folder</h1><p>It will be convenient to use git to version control your post writings. You can just create an empty private repo. Let’s call the folder as your_blog_folder&#x2F;</p>
+<h1 id="Create-Github-Repo-for-hosting-blog-Github-Page"><a href="#Create-Github-Repo-for-hosting-blog-Github-Page" class="headerlink" title="Create Github Repo for hosting blog Github Page"></a>Create Github Repo for hosting blog Github Page</h1><p>A public repo with the repo name as YOUR_NAME.github.io, YOUR_NAME here is your GitHub account name.</p>
+<h1 id="Install-Node-Hexo-and-NexT"><a href="#Install-Node-Hexo-and-NexT" class="headerlink" title="Install Node, Hexo and NexT"></a>Install Node, Hexo and NexT</h1><p>Install Node.js with Homebrew</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install node</span><br></pre></td></tr></table></figure>
+<p>Install Hexo and NexT with npm</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br><span class="line">npm install hexo-theme-next</span><br></pre></td></tr></table></figure>
+<h1 id="Initialize-Hexo"><a href="#Initialize-Hexo" class="headerlink" title="Initialize Hexo"></a>Initialize Hexo</h1><p>Make sure you are in the target folder</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> your_blog_folder</span><br><span class="line">hexo init</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<h1 id="Configure-Hexo-and-NexT"><a href="#Configure-Hexo-and-NexT" class="headerlink" title="Configure Hexo and NexT"></a>Configure Hexo and NexT</h1><p>your_blog_folder&#x2F;_config.yml is the config file for Hexo, and you need to copy the config file of NexT at &#x2F;node_modules&#x2F;hexo-theme-next&#x2F;_config.yml to the root folder of your_blog_folder&#x2F;, rename it to _config.next.yml. So they are now in the same folder. Here are some of the key configuration changes. </p>
+<p>For _config.yml</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line">timezone: <span class="string">&#x27;America/Toronto&#x27;</span></span><br><span class="line"><span class="comment"># URL</span></span><br><span class="line">url: http://YOUR_NAME.github.io</span><br><span class="line"><span class="comment"># Extensions</span></span><br><span class="line">theme: next</span><br><span class="line"><span class="comment"># Deployment</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://github.com/YOUR_NAME/YOUR_NAME.github.io</span><br><span class="line">  branch: main</span><br></pre></td></tr></table></figure>
+<p>For _config.next.yml</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Creative Commons 4.0 International License.</span></span><br><span class="line">creative_commons:</span><br><span class="line">  sidebar: <span class="literal">true</span></span><br><span class="line">  post: <span class="literal">true</span></span><br><span class="line"><span class="comment"># Menu Settings</span></span><br><span class="line">menu:</span><br><span class="line">  home: / || fa fa-home</span><br><span class="line">  archives: /archives/ || fa fa-archive</span><br><span class="line"><span class="comment"># Sidebar Settings</span></span><br><span class="line">sidebar:</span><br><span class="line">  position: right</span><br><span class="line"><span class="comment"># Social Links</span></span><br><span class="line">social:</span><br><span class="line">  GitHub: https://github.com/YOUR_NAME || fab fa-github</span><br><span class="line"><span class="comment"># Subscribe through Telegram Channel, Twitter, etc.</span></span><br><span class="line">follow_me:</span><br><span class="line">  RSS: /atom.xml || fa fa-rss</span><br><span class="line"><span class="comment"># Misc Theme Settings</span></span><br><span class="line">codeblock:</span><br><span class="line">  theme:</span><br><span class="line">    light: tomorrow-night-bright</span><br><span class="line">    dark: tomorrow-night-bright</span><br><span class="line">  copy_button:</span><br><span class="line">    <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">    style: mac</span><br><span class="line"><span class="comment"># Reading progress bar</span></span><br><span class="line">reading_progress:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h1 id="Write-a-post"><a href="#Write-a-post" class="headerlink" title="Write a post"></a>Write a post</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo n <span class="string">&#x27;Your_post_name&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>And if you are using vscode, you will find the Your_post_name.md in the your_blog_folder&#x2F;source&#x2F;_posts&#x2F; you can write in markdown.</p>
+<h1 id="Generate-the-post-html"><a href="#Generate-the-post-html" class="headerlink" title="Generate the post html"></a>Generate the post html</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+<p>You can view the post locally and make changes if you need.</p>
+<h1 id="Deploy-the-post-to-GitHub"><a href="#Deploy-the-post-to-GitHub" class="headerlink" title="Deploy the post to GitHub"></a>Deploy the post to GitHub</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<p>It will automatically generate GitHub Page for you which you can see by visiting YOUR_NAME.github.io</p>
+<p>When you try to deploy the blog, if you see this message ERROR Deployer not found: git, or other error messages, for example, you need rss feed ready for your blog, please double check if you have all node_modules installed.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br><span class="line">npm install hexo-generator-feed --save</span><br></pre></td></tr></table></figure>
+<h1 id="Reminder"><a href="#Reminder" class="headerlink" title="Reminder"></a>Reminder</h1><p>If you git clone the private blog repo to write a new post, remember to npm install before you try to deploy it to github. Because the moment you git clone to your local machine, the folder node_modules is empty. It is not sync with git by default as set in the .gitignore generated by Hexo.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -rf node_modules &amp;&amp; npm install --force</span><br><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
+
+<p>Ref:</p>
+<p>Hexo<br><a target="_blank" rel="noopener" href="https://hexo.io/">https://hexo.io</a></p>
+<p>Theme NexT<br><a target="_blank" rel="noopener" href="https://theme-next.js.org/">https://theme-next.js.org</a></p>
+<p>hexo-generator-feed<br><a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-generator-feed">https://github.com/hexojs/hexo-generator-feed</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -947,84 +1058,6 @@
     <div class="post-body" itemprop="articleBody">
           <p>The coding experience on Leetcode is fantastic because you can always get instant feedback that your code is not working. Then you try again and get the feedback again that your codes fail. Back and forth serveral times until you get it.</p>
 <p>To be honest, I like Project Euler more, because of its simplicity and the sense of art comes from the simplicity. Still, I think you need the Leetcode to practice to get a job. In this sense, it’s a wonderful website that gives you hope of the employment.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2021/03/23/Code-Complete/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yiwei Shen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SecondHand C0D1NG">
-      <meta itemprop="description" content="Notes & Thoughts">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | SecondHand C0D1NG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/03/23/Code-Complete/" class="post-title-link" itemprop="url">Code Complete</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-03-23 18:10:19" itemprop="dateCreated datePublished" datetime="2021-03-23T18:10:19-04:00">2021-03-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-02-24 17:06:44" itemprop="dateModified" datetime="2022-02-24T17:06:44-05:00">2022-02-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>The book of Code Complete has been sitting on my book shelf for a long time. I always feel that it was a big book and the content is too much for my level. But these feelings were purely generated from the imagination because I never ever actually tried to read the book.</p>
-<p>Until now. I began the reading. And it turns out the content makes sense to me in a lot of ways. I think it is considered as a classic book for a good reason.</p>
-<p>It might take some time before I can finish the book, but I can say it now to anyone hesitate to read it, today is the day, just read it.</p>
 
       
     </div>

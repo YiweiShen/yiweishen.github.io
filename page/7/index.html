@@ -139,7 +139,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-count">79</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -172,6 +172,98 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2017/04/03/time%20Module%20in%20Python%203%20Standard%20Library/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yiwei Shen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SecondHand C0D1NG">
+      <meta itemprop="description" content="Notes & Thoughts">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | SecondHand C0D1NG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/04/03/time%20Module%20in%20Python%203%20Standard%20Library/" class="post-title-link" itemprop="url">time Module in Python 3 Standard Library</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-04-03 19:39:21" itemprop="dateCreated datePublished" datetime="2017-04-03T19:39:21-04:00">2017-04-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-24 17:06:44" itemprop="dateModified" datetime="2022-02-24T17:06:44-05:00">2022-02-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>According to 16.3. time — Time access and conversions<br><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/time.html">https://docs.python.org/3/library/time.html</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">This module provides various time-related functions. </span><br></pre></td></tr></table></figure>
+<p>Or you can say in this module there are</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Functions <span class="keyword">for</span> manipulating clock time.</span><br></pre></td></tr></table></figure>
+<p>as in the PYMOTW-3<br><a target="_blank" rel="noopener" href="https://pymotw.com/3/time/index.html">https://pymotw.com/3/time/index.html</a></p>
+<p>I am not going to list every function available in the ‘time’ module, only the core functions such as time(), etc.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">time.time()</span><br></pre></td></tr></table></figure>
+<p>You would see number of seconds since the start of the “epoch” as a floating point value, e.g. 1491220050.174642.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">time.ctime() <span class="comment"># &#x27;Mon Apr  3 19:49:02 2017&#x27;</span></span><br><span class="line">time.ctime(<span class="number">15</span>) <span class="comment"># &#x27;Thu Jan  1 08:00:15 1970&#x27;</span></span><br><span class="line">time.ctime(<span class="number">1</span>) <span class="comment"># &#x27;Thu Jan  1 08:00:01 1970&#x27;</span></span><br><span class="line">time.ctime(time.time()+<span class="number">15</span>) <span class="comment"># &#x27;Mon Apr  3 19:52:10 2017&#x27;</span></span><br><span class="line"></span><br><span class="line">start = time.monotonic()</span><br><span class="line">time.sleep(<span class="number">15.5</span>) <span class="comment"># sleep for at least 15.5 seconds, see PEP 475</span></span><br><span class="line">end = time.monotonic()</span><br></pre></td></tr></table></figure>
+<p>Only the difference between the results of consecutive calls is valid. The same applies to time.perf_counter() and time.process_time()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time.gmtime()</span><br></pre></td></tr></table></figure>
+<p>time.struct_time(tm_year&#x3D;2017, tm_mon&#x3D;4, tm_mday&#x3D;3, tm_hour&#x3D;12, tm_min&#x3D;3, tm_sec&#x3D;33, tm_wday&#x3D;0, tm_yday&#x3D;93, tm_isdst&#x3D;0)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">time.gmtime().tm_year <span class="comment"># 2017</span></span><br><span class="line">time.gmtime()[<span class="number">0</span>] <span class="comment"># 2017</span></span><br><span class="line"></span><br><span class="line">time.perf_counter()</span><br></pre></td></tr></table></figure>
+<p>Return the value (in fractional seconds) of a performance counter, i.e. a clock with the highest available resolution to measure a short duration. It does include time elapsed during sleep and is system-wide.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time.process_time()</span><br></pre></td></tr></table></figure>
+<p>Return the value (in fractional seconds) of the sum of the system and user CPU time of the current process. It does not include time elapsed during sleep. It is process-wide by definition.</p>
+<p>The above should be enough for now.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -917,87 +1009,6 @@ Namespaces are one honking great idea -- let&#39;s do more of those!```
 <p>This time I think a systematic way of learning Swift is what I should try. A good book could do the help.</p>
 <p>Will keep you posted. I am trying only post study notes instead of nonsense as above.</p>
 <p>But I still wrote this post. Hope you understand why.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2015/10/16/%E7%A7%8B%E6%97%A5%E5%8D%88%E5%90%8E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yiwei Shen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SecondHand C0D1NG">
-      <meta itemprop="description" content="Notes & Thoughts">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | SecondHand C0D1NG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2015/10/16/%E7%A7%8B%E6%97%A5%E5%8D%88%E5%90%8E/" class="post-title-link" itemprop="url">秋日午后</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2015-10-16 15:16:47" itemprop="dateCreated datePublished" datetime="2015-10-16T15:16:47-04:00">2015-10-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-06-22 16:48:58" itemprop="dateModified" datetime="2025-06-22T16:48:58-04:00">2025-06-22</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="https://music.163.com/outchain/player?type=2&id=26251386&auto=1&height=66"></iframe>
-
-<p> 本来想写写转行的心路，删了写，写了删。</p>
-<p> 懂的人自然会懂，也就不必多说了。</p>
-<p> 不要放弃。虽然没有说三遍。</p>
-<p>题外话，在 Github Page 上放 163 音乐的时候记得要把 src 的 http 改成 https，否则不给加载，不确定是不是 Safari 的强制要求。</p>
 
       
     </div>

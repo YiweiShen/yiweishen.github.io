@@ -6,7 +6,7 @@
   <link href="http://yiweishen.github.io/atom.xml" rel="self"/>
   
   <link href="http://yiweishen.github.io/"/>
-  <updated>2025-06-22T20:48:58.377Z</updated>
+  <updated>2025-06-22T21:02:52.000Z</updated>
   <id>http://yiweishen.github.io/</id>
   
   <author>
@@ -17,11 +17,32 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>The Restructuring of Programming Paradigms</title>
+    <link href="http://yiweishen.github.io/2025/06/22/The-Restructuring-of-Programming-Paradigms/"/>
+    <id>http://yiweishen.github.io/2025/06/22/The-Restructuring-of-Programming-Paradigms/</id>
+    <published>2025-06-22T20:54:24.000Z</published>
+    <updated>2025-06-22T21:02:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>A “paradigm” is not just a form—it’s a mode of thinking.</p><p>As a branch of the writing profession, programmers interact with tens of thousands of lines of code, and naturally, they rely on paradigms for guidance. It’s like having a built-in “system prompt”—you don’t need to explain “what object-oriented programming is” to your colleagues every time, nor do you have to argue endlessly about the details of design patterns. There’s an unspoken understanding that you’re “playing by the rules” in a certain context.</p><p>After all, the human “mental window” is limited in size. Collaborating without a paradigm is like chickens talking to ducks—utter miscommunication. If you insist on piling all your functions into a single file with no abstraction or categorization, the consequence is writing documentation until you break down.</p><p>But now that artificial intelligence is part of the programmer’s workflow, paradigms are shifting.</p><p>First, the way we handle code has transformed from “manual carving” to “semantic understanding.” Those obedient little “coding assistants” can automatically modify your code based on a single instruction. So under this transformation, do traditional coding paradigms still matter?</p><p>It depends on your perspective.</p><p>They do matter—because large language models deal in language. The clearer the linguistic structure, the easier it is to extract and recreate information. It’s the difference between a pile of unclassified documents and a meticulously organized file cabinet. The information entropy is not the same, and naturally, neither is the efficiency.</p><p>But from another angle, maybe they’re no longer that important. After all, paradigms were originally for humans to read. Now, LLMs can develop their own paradigms—or even revive those long-abandoned “classical practices.” For instance, directly manipulating binary code: who needs layers of abstraction? From a model’s perspective, that quaint notion of “human readability” might be completely unnecessary.</p><p>Second, there’s the transformation of the programmer’s role. Whether we accept it or not, this wave of change has quietly pushed us into a new position. The days of hand-crafting code were like seasoned artisans refining woodwork—there was a kind of pride and dignity woven into every character.</p><p>But from a business standpoint, when websites and apps are the final product, the programmer is just one link in the industrial chain. Whether you code by hand or use AI to generate it, the user doesn’t care. Our mindset must shift accordingly. I am not just a code porter or a keystroke operator—I am an engineer solving problems. Writing code is a means to that end, not the end itself.</p><p>To me, the value of paradigms lies in helping us organize our thoughts, so that our future selves—or others—can quickly get into the zone when reading our code. This was once a form of self-rescue for programmers. But now, LLMs effortlessly surpass us. They have stronger memory, faster analysis, and even if your code is a mess, they can still make sense of it.</p><p>So, do we still need paradigms in the future?</p><p>Perhaps the real question is: are we willing to hand over our thinking to the model, or do we want to preserve a trace of human logic?</p><p>Paradigms are road signs in the world of programming.</p><p>But when the roads are no longer built by humans—does that mean we are no longer travelers, or just moving where the machine tells us to go?</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;A “paradigm” is not just a form—it’s a mode of thinking.&lt;/p&gt;
+&lt;p&gt;As a branch of the writing profession, programmers interact with tens of </summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>编程范式的重构</title>
     <link href="http://yiweishen.github.io/2025/06/22/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%9A%84%E9%87%8D%E6%9E%84/"/>
     <id>http://yiweishen.github.io/2025/06/22/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%9A%84%E9%87%8D%E6%9E%84/</id>
     <published>2025-06-22T17:16:19.000Z</published>
-    <updated>2025-06-22T20:48:58.377Z</updated>
+    <updated>2025-06-22T21:03:03.536Z</updated>
     
     <content type="html"><![CDATA[<p>所谓“范式”，是一种形式，更是一种思维模式。</p><p>程序员，作为文字工作者的一个分支，要与成千上万行代码打交道，自然离不开各种范式的指引。就像预设好了一个“系统提示”，你无需一遍遍向同事解释“什么是面向对象”，也无需在设计模式上争论太多细节。大家心照不宣，默认你在某个语境下是“按套路出牌”。</p><p>毕竟，人类的“思维窗口”大小有限，没有范式的合作无异于鸡同鸭讲。你要是硬把所有函数堆在一个文件里，不做任何抽象、分类，那后果就是写文档要写到崩溃。</p><p>可当人工智能加入程序员的工作流之后，范式正在发生变化。</p><p>首先，代码的处理方式从“手工雕刻”变成了“语义理解”。那些听话的“编程小助手”，听你一句指令，便能自动修改代码。那么，这种转变下，传统代码里的范式还重要吗？</p><p>这得看你怎么看。</p><p>重要，当然重要。因为大模型处理的是“语言”，语言的组织结构越清晰，越有利于信息的提取和再创造。这就像未经分类的文件堆和精心整理过的档案柜之间的差别，信息熵不一样，效率自然也不一样。</p><p>但换个角度，也可以说它已经不那么重要了。毕竟，以往的范式，是为了“人”阅读。而现在，大模型完全可以发展出自己的范式，甚至回收那些早被人类嫌弃的“古典做法”。比如说，直接操作二进制编码，何须讲究抽象层级？对于模型来说，那点“人类的可读性”，恐怕只是多余。</p><p>其次，是程序员身份的转变。不论内心是否接受，这股变化的洪流，已经悄然将人推到了新的位置。手搓代码的岁月，有点像老手艺人打磨木工制品，那种纯手工的尊严和骄傲，仿佛藏在每一个字符之间。</p><p>但若从商业角度看，当网页和 App 成为最终商品时，程序员不过是产业链条上的一环。你是用手搓，还是让 AI 帮你画，用户并不关心。思维也要随之转变。我不只是代码的搬运工、软件的敲字员，而是一个解决问题的工程师。写代码，是解决问题的手段，绝不是唯一答案。</p><p>在我看来，范式的意义，是帮助我们整理思绪，好让将来的“自己”或“他人”在回头阅读这些代码时，能更快地进入状态。这本来是程序员的一项自救之术，如今，却被大模型轻松超越。它记忆力更强，分析力更快，哪怕你写得一团糟，它也能看出门道。</p><p>那么，未来还需要范式吗？</p><p>也许真正的问题是：我们愿意把思维交给它，还是愿意保留一点属于人类自己的逻辑痕迹？</p><p>范式，是程序世界中的路标。</p><p>而当道路不再由我们铺设，是否意味着，我们也将不再是旅人，而是被路指引的方向？</p>]]></content>
     
@@ -404,26 +425,6 @@
       
       
     <summary type="html">&lt;p&gt;The coding experience on Leetcode is fantastic because you can always get instant feedback that your code is not working. Then you try ag</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Code Complete</title>
-    <link href="http://yiweishen.github.io/2021/03/23/Code-Complete/"/>
-    <id>http://yiweishen.github.io/2021/03/23/Code-Complete/</id>
-    <published>2021-03-23T22:10:19.000Z</published>
-    <updated>2022-02-24T22:06:44.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>The book of Code Complete has been sitting on my book shelf for a long time. I always feel that it was a big book and the content is too much for my level. But these feelings were purely generated from the imagination because I never ever actually tried to read the book.</p><p>Until now. I began the reading. And it turns out the content makes sense to me in a lot of ways. I think it is considered as a classic book for a good reason.</p><p>It might take some time before I can finish the book, but I can say it now to anyone hesitate to read it, today is the day, just read it.</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;The book of Code Complete has been sitting on my book shelf for a long time. I always feel that it was a big book and the content is too </summary>
       
     
     
