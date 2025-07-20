@@ -211,7 +211,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2025-07-20 16:36:20 / Modified: 17:08:56" itemprop="dateCreated datePublished" datetime="2025-07-20T16:36:20-04:00">2025-07-20</time>
+      <time title="Created: 2025-07-20 16:36:20 / Modified: 17:27:58" itemprop="dateCreated datePublished" datetime="2025-07-20T16:36:20-04:00">2025-07-20</time>
     </span>
 
   
@@ -235,13 +235,15 @@
 
 <p><img src="/img/codez002.jpg"></p>
 <p>Agent 就开始工作啦。即便它在运行时是断网的，但通过 context（比如我们的代码、给的链接、issue 内容），它还是给出了几条挺靠谱的初步思路。</p>
+<hr>
 <h2 id="第二步：自动拆解成-actionable-的-tickets"><a href="#第二步：自动拆解成-actionable-的-tickets" class="headerlink" title="第二步：自动拆解成 actionable 的 tickets"></a>第二步：自动拆解成 actionable 的 tickets</h2><p>接着我又触发了一次 agent，这次是让它生成一系列 issue：</p>
 <p><img src="/img/codez003.jpg"></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/codex</span><br><span class="line">--create-issues    <span class="comment"># 生成 JSON，再用 GitHub API 创建 issues</span></span><br><span class="line">--full-history     <span class="comment"># 把整个 issue 的所有评论都作为上下文</span></span><br></pre></td></tr></table></figure>
 
-<p>注意一下：这些 flag 是对“当前这条评论”生效的，之前的那些不会继承。所以得按需组合。Agent 就把之前的讨论内容整合，拆成了几个明确的小 ticket。每一个都可以独立地推进。比如这样一个：</p>
+<p>注意一下：这些 flag 是对“当前这条评论”生效的，之前的那些不会继承。所以得按需组合。Agent 就把之前的讨论内容整合，拆成了几个明确的小 ticket。每一个都可以独立地推进。比如这样：</p>
 <p><img src="/img/codez004.jpg"></p>
 <p>这些新建好的 ticket 就可以一个一个单独的处理啦。比如下面这样。</p>
+<hr>
 <h2 id="最后一步：Agent-干活"><a href="#最后一步：Agent-干活" class="headerlink" title="最后一步：Agent 干活"></a>最后一步：Agent 干活</h2><p><img src="/img/codez005.jpg"></p>
 <p>整个过程跟团队协作时的节奏几乎一模一样：先讨论，再拆解，最后分头干活。不同的是，人换成了 Agent，效率还挺高，重点是它不会摆烂（除非 prompt 写的太糟糕）。</p>
 <p>有点上头。</p>
@@ -390,7 +392,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-07-20 17:08:56" itemprop="dateModified" datetime="2025-07-20T17:08:56-04:00">2025-07-20</time>
+      <time title="Modified: 2025-07-20 17:27:58" itemprop="dateModified" datetime="2025-07-20T17:27:58-04:00">2025-07-20</time>
     </span>
 
   
@@ -562,7 +564,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-07-20 17:08:56" itemprop="dateModified" datetime="2025-07-20T17:08:56-04:00">2025-07-20</time>
+      <time title="Modified: 2025-07-20 17:27:58" itemprop="dateModified" datetime="2025-07-20T17:27:58-04:00">2025-07-20</time>
     </span>
 
   
