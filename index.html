@@ -139,7 +139,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-count">83</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -172,6 +172,105 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2025/07/21/Codez-Use-Case-Workflow/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yiwei Shen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SecondHand C0D1NG">
+      <meta itemprop="description" content="Notes & Thoughts">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | SecondHand C0D1NG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/07/21/Codez-Use-Case-Workflow/" class="post-title-link" itemprop="url">Codez Use Case Workflow</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2025-07-21 01:37:50 / Modified: 01:46:58" itemprop="dateCreated datePublished" datetime="2025-07-21T01:37:50-04:00">2025-07-21</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Lately, I’ve been obsessed with Agentic Coding and built a small project called <a target="_blank" rel="noopener" href="https://github.com/YiweiShen/codez">Codez</a>, which runs the Codex CLI directly inside GitHub Actions. It’s been working quite well. Here’s an example of a workflow it supports:</p>
+<p><strong>Discuss with AI first → break down the problem → tackle each part one by one</strong></p>
+<p>Take this code refactoring request as an example: <a target="_blank" rel="noopener" href="https://github.com/YiweiShen/codez/issues/304">Issue #304</a></p>
+<hr>
+<p><img src="/img/codez001.jpg"></p>
+<hr>
+<h2 id="Step-1-Raise-the-Requirement"><a href="#Step-1-Raise-the-Requirement" class="headerlink" title="Step 1: Raise the Requirement"></a>Step 1: Raise the Requirement</h2><p>In the issue, I clearly described what I wanted to do, including points to discuss and related background info. The title and content of the issue become part of the initial prompt for the agent.</p>
+<p>Then, I triggered the agent directly in the comments:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/codex             <span class="comment"># Keyword to wake up the agent</span></span><br><span class="line">--no-pr            <span class="comment"># Add this flag to prevent it from directly creating a PR. I want to clarify the problem first</span></span><br><span class="line">--fetch            <span class="comment"># This flag lets the agent fetch the content from the link for offline use</span></span><br><span class="line">https://google.github.io/styleguide/tsguide.html  <span class="comment"># Relevant documentation to help the agent make informed decisions</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><img src="/img/codez002.jpg"></p>
+<hr>
+<p>With that, the agent gets to work. Even though it doesn’t have network access during runtime, it can still give some solid initial ideas using the context (codebase, content cached from the provided links, and the issue itself).</p>
+<h2 id="Step-2-Automatically-Break-Down-into-Actionable-Tickets"><a href="#Step-2-Automatically-Break-Down-into-Actionable-Tickets" class="headerlink" title="Step 2: Automatically Break Down into Actionable Tickets"></a>Step 2: Automatically Break Down into Actionable Tickets</h2><p>Next, I triggered the agent again. This time to generate a series of issues:</p>
+<hr>
+<p><img src="/img/codez003.jpg"></p>
+<hr>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/codex</span><br><span class="line">--create-issues    <span class="comment"># The model generates a JSON of titles and descriptions, then uses GitHub API to create issues</span></span><br><span class="line">--full-history     <span class="comment"># Includes all previous comments in this thread into the context window</span></span><br></pre></td></tr></table></figure>
+
+<p>Note: Only flags in the current comment are recognized. The agent then organizes the discussion into multiple issues. Each issue can be worked on independently.</p>
+<hr>
+<p><img src="/img/codez004.jpg"></p>
+<hr>
+<p>These newly created tickets can now be handled one by one. Like this:</p>
+<h2 id="Final-Step-Let-the-Agent-Do-the-Work"><a href="#Final-Step-Let-the-Agent-Do-the-Work" class="headerlink" title="Final Step: Let the Agent Do the Work"></a>Final Step: Let the Agent Do the Work</h2><hr>
+<p><img src="/img/codez005.jpg"></p>
+<hr>
+<p>The entire workflow feels like genuine team collaboration: discuss first, break down the problem, then work in parallel. The difference is that humans are replaced by agents.</p>
+<p>Some say Agentic Coding is like catnip for programmers, totally addictive. It’s true.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -217,7 +316,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-07-21 01:36:08" itemprop="dateModified" datetime="2025-07-21T01:36:08-04:00">2025-07-21</time>
+      <time title="Modified: 2025-07-21 01:47:10" itemprop="dateModified" datetime="2025-07-21T01:47:10-04:00">2025-07-21</time>
     </span>
 
   
@@ -405,7 +504,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-07-21 01:36:08" itemprop="dateModified" datetime="2025-07-21T01:36:08-04:00">2025-07-21</time>
+      <time title="Modified: 2025-07-21 01:47:10" itemprop="dateModified" datetime="2025-07-21T01:47:10-04:00">2025-07-21</time>
     </span>
 
   
@@ -577,7 +676,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-07-21 01:36:08" itemprop="dateModified" datetime="2025-07-21T01:36:08-04:00">2025-07-21</time>
+      <time title="Modified: 2025-07-21 01:47:10" itemprop="dateModified" datetime="2025-07-21T01:47:10-04:00">2025-07-21</time>
     </span>
 
   
@@ -1054,120 +1153,6 @@ This command will save the key pair in the specified folder (~&#x2F;.ssh&#x2F;sd
 <li><a target="_blank" rel="noopener" href="https://raycast.com/">Raycast</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/microsoft/PowerToys">Microsoft PowerToys</a></li>
 </ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2023/09/02/Install-Windows-11-with-VMware-Fusion-on-Apple-M2-MacBook/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yiwei Shen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SecondHand C0D1NG">
-      <meta itemprop="description" content="Notes & Thoughts">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | SecondHand C0D1NG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/09/02/Install-Windows-11-with-VMware-Fusion-on-Apple-M2-MacBook/" class="post-title-link" itemprop="url">Install Windows 11 with VMware Fusion on Apple M2 MacBook</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2023-09-02 14:54:02 / Modified: 15:27:10" itemprop="dateCreated datePublished" datetime="2023-09-02T14:54:02-04:00">2023-09-02</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="The-Problem"><a href="#The-Problem" class="headerlink" title="The Problem"></a>The Problem</h2><ul>
-<li>Microsoft is only providing intel version ISO file for Windows 11.</li>
-<li>For Windows 11 Insider Preview, the arm version is provided only in VHDX format.</li>
-</ul>
-<h2 id="Workaround"><a href="#Workaround" class="headerlink" title="Workaround"></a>Workaround</h2><p>Luckily, we can get the ESD file and then convert it into ISO file which can be used in VMware.</p>
-<h2 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h2><p>Go to the website of <a target="_blank" rel="noopener" href="https://www.parallels.com/ca/products/desktop/">Parallels</a> to download their Mac app. Alternatively, you can get the DMG link from <a target="_blank" rel="noopener" href="https://formulae.brew.sh/api/cask/parallels.json">Homebrew API</a></p>
-<p>The link looks like <a target="_blank" rel="noopener" href="https://download.parallels.com/desktop/v19/19.0.0-54570/ParallelsDesktop-19.0.0-54570.dmg">this</a>. After downloading, double click the DMG file but don’t install the Parallels. You just need to mount the DMG file.</p>
-<p>Then open the terminal and run the following commands:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> ditto /Volumes/Parallels\ Desktop\ 19/Parallels\ Desktop.app/Contents/MacOS/prl_esd2iso /usr/local/bin/prl_esd2iso</span><br><span class="line"><span class="built_in">sudo</span> ditto /Volumes/Parallels\ Desktop\ 19/Parallels\ Desktop.app/Contents/Frameworks/libwimlib.1.dylib /usr/local/lib/libwimlib.1.dylib</span><br></pre></td></tr></table></figure>
-
-<p>We can thank Parallels for providing these amazing tools later. Unmount and delete the DMG file.</p>
-<p>To figure out the download link for Windows 11 ESD file:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/Downloads/ &amp;&amp; curl -L <span class="string">&quot;https://go.microsoft.com/fwlink?linkid=2156292&quot;</span> -o products_Win11.cab &amp;&amp; tar -xf products_Win11.cab products.xml &amp;&amp; <span class="built_in">cat</span> products.xml | <span class="built_in">cat</span> products.xml | grep <span class="string">&quot;.*_CLIENTCONSUMER_RET_A64FRE_en-us.esd&quot;</span> | sed -e s/<span class="string">&quot;&lt;FileName&gt;&quot;</span>//g -e s/<span class="string">&quot;&lt;\/FileName&gt;&quot;</span>//g -e s/\ //g -e s/<span class="string">&quot;&lt;FilePath&gt;&quot;</span>//g -e s/<span class="string">&quot;&lt;\/FilePath&gt;&quot;</span>//g -e s/\ //g | <span class="built_in">head</span> -n 2</span><br></pre></td></tr></table></figure>
-
-<p>By the way, I assume your current working directory is ~&#x2F;Downloads&#x2F;. If not, please change it accordingly.</p>
-<p>Use curl to download the ESD file:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl http://dl.delivery.mp.microsoft.com/filestreamingservice/files/f16733c5-e9f8-4613-9fe6-d331c8dd6e28/22621.1702.230505-1222.ni_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_en-us.esd --output win11.esd</span><br></pre></td></tr></table></figure>
-
-<p>Convert the ESD file into ISO file.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prl_esd2iso ~/Downloads/win11.esd ~/Downloads/win11.iso</span><br></pre></td></tr></table></figure>
-
-<p>Now you can insert the ISO file into VMware Fusion which is free to use with a <a target="_blank" rel="noopener" href="https://www.vmware.com/go/get-fusionplayer-key">personal license</a> You can find the license key after you register&#x2F;login on the their website.</p>
-<p>Install the vmware fusion with Homebrew. Yes, you need have Homebrew installed, but I guess you already done it.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install --cask vmware-fusion</span><br></pre></td></tr></table></figure>
-
-<p>If you run into the chown issue like:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Chown /Applications/VMware Fusion.app: Operation not permitted</span><br></pre></td></tr></table></figure>
-
-<p>Please double check if the Full Disk Access is granted for the Terminal.app in system settings Privacy &amp; Security.</p>
-<p>Drag and drop the Windows 11 ISO file into vmware. You can go with UEFI and also the default values with the rest of the settings.</p>
-<p>Pay attention to the message on the screen, if it is saying press any key to continue, don’t wait. You only have five seconds to hit the key, so be fast. I will not talk about the basic steps of installing Windows 11, I trust you can install the operating system with the GUI.</p>
-<p>When you reach the setup step of internet connection, press shift + fn + F10 to invoke the CMD. Input:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OOBE\BYPASSNRO</span><br></pre></td></tr></table></figure>
-
-<p>It will auto restart the setup steps and this time you choose the option I don’t have internet (Yup, actually you don’t.) Continue with limited setup. If everything goes well. In the end, you get into Windows 11 Desktop</p>
-<p>Run PowerShell as Administrator and type:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set-ExecutionPolicy RemoteSigned</span><br></pre></td></tr></table></figure>
-
-<p>Insert the VMware Tools CD image into the virtual machine. Run the setup script with PowerShell.</p>
-<p>In case you want to set the Execution Policy back:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set-ExecutionPolicy Restricted</span><br></pre></td></tr></table></figure>
-
-<p>If the VMware Tools are successfully installed, the internet connection is working inside the virtual machine. Adjust settings as you wish. For example, set the display resolution to 2880 x 1800 and Scale to 200%.</p>
-<p>A fully operational Windows 11 on Mac is all yours.</p>
-<p>Enjoy.</p>
 
       
     </div>

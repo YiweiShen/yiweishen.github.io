@@ -139,7 +139,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-count">83</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -172,6 +172,120 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2023/09/02/Install-Windows-11-with-VMware-Fusion-on-Apple-M2-MacBook/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yiwei Shen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SecondHand C0D1NG">
+      <meta itemprop="description" content="Notes & Thoughts">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | SecondHand C0D1NG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/09/02/Install-Windows-11-with-VMware-Fusion-on-Apple-M2-MacBook/" class="post-title-link" itemprop="url">Install Windows 11 with VMware Fusion on Apple M2 MacBook</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2023-09-02 14:54:02 / Modified: 15:27:10" itemprop="dateCreated datePublished" datetime="2023-09-02T14:54:02-04:00">2023-09-02</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="The-Problem"><a href="#The-Problem" class="headerlink" title="The Problem"></a>The Problem</h2><ul>
+<li>Microsoft is only providing intel version ISO file for Windows 11.</li>
+<li>For Windows 11 Insider Preview, the arm version is provided only in VHDX format.</li>
+</ul>
+<h2 id="Workaround"><a href="#Workaround" class="headerlink" title="Workaround"></a>Workaround</h2><p>Luckily, we can get the ESD file and then convert it into ISO file which can be used in VMware.</p>
+<h2 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h2><p>Go to the website of <a target="_blank" rel="noopener" href="https://www.parallels.com/ca/products/desktop/">Parallels</a> to download their Mac app. Alternatively, you can get the DMG link from <a target="_blank" rel="noopener" href="https://formulae.brew.sh/api/cask/parallels.json">Homebrew API</a></p>
+<p>The link looks like <a target="_blank" rel="noopener" href="https://download.parallels.com/desktop/v19/19.0.0-54570/ParallelsDesktop-19.0.0-54570.dmg">this</a>. After downloading, double click the DMG file but don’t install the Parallels. You just need to mount the DMG file.</p>
+<p>Then open the terminal and run the following commands:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> ditto /Volumes/Parallels\ Desktop\ 19/Parallels\ Desktop.app/Contents/MacOS/prl_esd2iso /usr/local/bin/prl_esd2iso</span><br><span class="line"><span class="built_in">sudo</span> ditto /Volumes/Parallels\ Desktop\ 19/Parallels\ Desktop.app/Contents/Frameworks/libwimlib.1.dylib /usr/local/lib/libwimlib.1.dylib</span><br></pre></td></tr></table></figure>
+
+<p>We can thank Parallels for providing these amazing tools later. Unmount and delete the DMG file.</p>
+<p>To figure out the download link for Windows 11 ESD file:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/Downloads/ &amp;&amp; curl -L <span class="string">&quot;https://go.microsoft.com/fwlink?linkid=2156292&quot;</span> -o products_Win11.cab &amp;&amp; tar -xf products_Win11.cab products.xml &amp;&amp; <span class="built_in">cat</span> products.xml | <span class="built_in">cat</span> products.xml | grep <span class="string">&quot;.*_CLIENTCONSUMER_RET_A64FRE_en-us.esd&quot;</span> | sed -e s/<span class="string">&quot;&lt;FileName&gt;&quot;</span>//g -e s/<span class="string">&quot;&lt;\/FileName&gt;&quot;</span>//g -e s/\ //g -e s/<span class="string">&quot;&lt;FilePath&gt;&quot;</span>//g -e s/<span class="string">&quot;&lt;\/FilePath&gt;&quot;</span>//g -e s/\ //g | <span class="built_in">head</span> -n 2</span><br></pre></td></tr></table></figure>
+
+<p>By the way, I assume your current working directory is ~&#x2F;Downloads&#x2F;. If not, please change it accordingly.</p>
+<p>Use curl to download the ESD file:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl http://dl.delivery.mp.microsoft.com/filestreamingservice/files/f16733c5-e9f8-4613-9fe6-d331c8dd6e28/22621.1702.230505-1222.ni_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_en-us.esd --output win11.esd</span><br></pre></td></tr></table></figure>
+
+<p>Convert the ESD file into ISO file.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prl_esd2iso ~/Downloads/win11.esd ~/Downloads/win11.iso</span><br></pre></td></tr></table></figure>
+
+<p>Now you can insert the ISO file into VMware Fusion which is free to use with a <a target="_blank" rel="noopener" href="https://www.vmware.com/go/get-fusionplayer-key">personal license</a> You can find the license key after you register&#x2F;login on the their website.</p>
+<p>Install the vmware fusion with Homebrew. Yes, you need have Homebrew installed, but I guess you already done it.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install --cask vmware-fusion</span><br></pre></td></tr></table></figure>
+
+<p>If you run into the chown issue like:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Chown /Applications/VMware Fusion.app: Operation not permitted</span><br></pre></td></tr></table></figure>
+
+<p>Please double check if the Full Disk Access is granted for the Terminal.app in system settings Privacy &amp; Security.</p>
+<p>Drag and drop the Windows 11 ISO file into vmware. You can go with UEFI and also the default values with the rest of the settings.</p>
+<p>Pay attention to the message on the screen, if it is saying press any key to continue, don’t wait. You only have five seconds to hit the key, so be fast. I will not talk about the basic steps of installing Windows 11, I trust you can install the operating system with the GUI.</p>
+<p>When you reach the setup step of internet connection, press shift + fn + F10 to invoke the CMD. Input:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OOBE\BYPASSNRO</span><br></pre></td></tr></table></figure>
+
+<p>It will auto restart the setup steps and this time you choose the option I don’t have internet (Yup, actually you don’t.) Continue with limited setup. If everything goes well. In the end, you get into Windows 11 Desktop</p>
+<p>Run PowerShell as Administrator and type:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set-ExecutionPolicy RemoteSigned</span><br></pre></td></tr></table></figure>
+
+<p>Insert the VMware Tools CD image into the virtual machine. Run the setup script with PowerShell.</p>
+<p>In case you want to set the Execution Policy back:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set-ExecutionPolicy Restricted</span><br></pre></td></tr></table></figure>
+
+<p>If the VMware Tools are successfully installed, the internet connection is working inside the virtual machine. Adjust settings as you wish. For example, set the display resolution to 2880 x 1800 and Scale to 200%.</p>
+<p>A fully operational Windows 11 on Mac is all yours.</p>
+<p>Enjoy.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -998,91 +1112,6 @@
 <p>I am on MacOS Catalina and the MySQL Workbench version is 8.0.22, just in case you want to know.</p>
 <h2 id="Why-this-error-happens-My-guess"><a href="#Why-this-error-happens-My-guess" class="headerlink" title="Why this error happens (My guess):"></a>Why this error happens (My guess):</h2><p>You changed the password to the MySQL database user, but it somehow failed to sync the password in the keychain.</p>
 <h2 id="The-solution"><a href="#The-solution" class="headerlink" title="The solution:"></a>The solution:</h2><p>Go to the &#x2F;Applicaiton&#x2F;Utilities&#x2F; to find the Keychain Access App and run it. Search and delete the password to the database user. Try search ‘MySQL’. Reopen the MySQL Workbench and you should be fine now.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2021/05/24/Superclass-Typo-in-Servlet-Template-of-Eclipse/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yiwei Shen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SecondHand C0D1NG">
-      <meta itemprop="description" content="Notes & Thoughts">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | SecondHand C0D1NG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/05/24/Superclass-Typo-in-Servlet-Template-of-Eclipse/" class="post-title-link" itemprop="url">Superclass Typo in Servlet Template of Eclipse</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-05-23 20:52:39" itemprop="dateCreated datePublished" datetime="2021-05-23T20:52:39-04:00">2021-05-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-02-24 17:06:44" itemprop="dateModified" datetime="2022-02-24T17:06:44-05:00">2022-02-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Update: The typo has been fixed if you are using Dynamic web module version 5.0</p>
-<p>When you are using the Servlet Template in Eclipse, you may encounter the error saying “The import javax.servlet cannot be resolved.”</p>
-<p>For example, I am using Eclipse for Mac (Version 4.19.0). First, create a Dynamic Web Project, target runtime: Apache Tomcat v10.0, Dynamic web module version 4.0. And inside this project, create a new servlet file using the Create Servlet Wizard. Soon you will see the errors pop up in the servlet file you just created.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// BEFORE</span></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.annotation.WebServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br></pre></td></tr></table></figure>
-
-<p>How to fix it? All you have to do is changing the superclass name from javax into jakarta. Why does this happen? I think it is because, as mentioned on Wikipedia page, that from 12 Jun 2020 and on, API moved from package javax.servlet to jakarta.servlet. Let’s hope Eclipse will update the template someday in future. For the exising codes out there, I guess they are doing well.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// AFTER</span></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> jakarta.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> jakarta.servlet.annotation.WebServlet;</span><br><span class="line"><span class="keyword">import</span> jakarta.servlet.http.HttpServlet;</span><br><span class="line"><span class="keyword">import</span> jakarta.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> jakarta.servlet.http.HttpServletResponse;</span><br></pre></td></tr></table></figure>
-
-<p>Of course, you can create an empty class file to build servlet from scratch, to avoid such issues. Just in case you do face the similar errors in Eclipse when coding Java, I hope the simple fix would help you.</p>
-<p>Wikipedia page of Jakarta Servlet:<br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Jakarta_Servlet">https://en.wikipedia.org/wiki/Jakarta_Servlet</a></p>
 
       
     </div>
