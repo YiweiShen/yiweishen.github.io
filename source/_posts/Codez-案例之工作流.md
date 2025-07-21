@@ -4,13 +4,15 @@ date: 2025-07-20 16:36:20
 tags:
 ---
 
-最近被 Agentic Coding 这套思路迷住了，于是搞了个小项目 [Codez](https://github.com/YiweiShen/codez)，直接嵌在 GitHub Actions 里运行 Codex，效果还不错的。比如这样的工作流：
+最近沉迷于 Agentic Coding，搞了个小项目 [Codez](https://github.com/YiweiShen/codez)，直接嵌在 GitHub Actions 里运行 Codex CLI，效果还不错。可以做这样的工作流：
 
-**先讨论，然后拆解成 tickets，最后各个击破**
+**先和 AI 讨论，然后问题拆解，最后各个击破**
 
-像是这个代码重构的需求：[Parent Ticket](https://github.com/YiweiShen/codez/issues/304)
+比如这个代码重构的需求：[Issue #304](https://github.com/YiweiShen/codez/issues/304)
 
-![Parent Ticket](/img/codez001.jpg)
+---
+
+![](/img/codez001.jpg)
 
 ---
 
@@ -22,41 +24,53 @@ tags:
 
 ```bash
 /codex             # 用关键词唤醒 agent
---no-pr            # 加个 flag，不要直接生成 PR
---fetch            # 把链接里的内容先抓下来，方便 agent 离线使用
+--no-pr            # 加个 flag，不要直接生成 PR，因为我想要把问题先探讨清楚
+--fetch            # 这 flag 会让 agent 把链接里的内容先抓下来，方便离线使用
 https://google.github.io/styleguide/tsguide.html  # 提供相关文档，有助于 agent 做判断
 ```
 
-![](/img/codez002.jpg)
+---
 
-Agent 就开始工作啦。即便它在运行时是断网的，但通过 context（比如我们的代码、给的链接、issue 内容），它还是给出了几条挺靠谱的初步思路。
+![](/img/codez002.jpg)
 
 ---
 
-## 第二步：自动拆解成 actionable 的 tickets
+这样 agent 就开始工作啦。即便它在运行时没有网络权限，但通过 context（包括 codebase、给的链接、issue 内容），它还是给出了几条挺靠谱的初步思路。
 
-接着我又触发了一次 agent，这次是让它生成一系列 issue：
+## 第二步：自动拆解成可执行的 tickets
+
+接着我又触发了一次 agent，这次是让它生成一系列 issues：
+
+---
 
 ![](/img/codez003.jpg)
 
+---
+
 ```bash
 /codex
---create-issues    # 生成 JSON，再用 GitHub API 创建 issues
---full-history     # 把整个 issue 的所有评论都作为上下文
+--create-issues    # 原理是让模型生成标题加内容的 JSON，然后用 GitHub API 创建 issue
+--full-history     # 把当前对话前面的所有评论都加入 prompt 进入 context window
 ```
 
-注意一下：这些 flag 是对“当前这条评论”生效的，之前的那些不会继承。所以得按需组合。Agent 就把之前的讨论内容整合，拆成了几个明确的小 ticket。每一个都可以独立地推进。比如这样：
-
-![](/img/codez004.jpg)
-
-这些新建好的 ticket 就可以一个一个单独的处理啦。比如下面这样。
+注意一下：所谓的 flag 只有当前评论内的 flag 才会生效。现在 agent 把讨论内容整合，分别创建了 issues。每一个 issue 都可以独立地推进。
 
 ---
 
+![](/img/codez004.jpg)
+
+---
+
+这些新建好的 ticket 就可以一个一个单独的处理啦。比如下面这样。
+
 ## 最后一步：Agent 干活
+
+---
 
 ![](/img/codez005.jpg)
 
-整个过程跟团队协作时的节奏几乎一模一样：先讨论，再拆解，最后分头干活。不同的是，人换成了 Agent，效率还挺高，重点是它不会摆烂（除非 prompt 写的太糟糕）。
+---
 
-有点上头。
+整个工作流就像真正的团队协作一样：先讨论，再问题拆解，最后分头干活。不同的是，把人换成了 agent。
+
+有人说，Agentic Coding 就像是程序员的猫薄荷。特别上头。
