@@ -1216,7 +1216,7 @@ pre code {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #8cfff6;
+  background: #ffff4e;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -2111,7 +2111,7 @@ pre code {
 }
 .post-copyright ul::after {
   content: '\f25e';
-  font-family: 'Font Awesome 6 Brands';
+  font-family: 'Font Awesome 7 Brands';
   font-size: 200px;
   opacity: 0.1;
   position: absolute;
