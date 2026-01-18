@@ -4,6 +4,8 @@ date: 2026-01-17 21:24:59
 tags:
 ---
 
+![](/img/512px-Punishment_sisyph.jpg)
+
 I often find myself thinking: at this point in time, when AI can do so many things so well, what capabilities truly remain essential?
 
 The answer, I believe, is the ability to communicate effectively with AI.
