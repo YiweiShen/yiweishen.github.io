@@ -139,7 +139,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -172,6 +172,153 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2017/04/13/itchat-for-WeChat/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yiwei Shen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SecondHand C0D1NG">
+      <meta itemprop="description" content="Notes & Thoughts">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | SecondHand C0D1NG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/04/13/itchat-for-WeChat/" class="post-title-link" itemprop="url">itchat for WeChat</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-04-12 23:06:27" itemprop="dateCreated datePublished" datetime="2017-04-12T23:06:27-04:00">2017-04-12</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install itchat</span><br></pre></td></tr></table></figure>
+<p>You could find its Github page:<br><a target="_blank" rel="noopener" href="https://github.com/littlecodersh/itchat">https://github.com/littlecodersh/itchat</a><br>This module has a complete and graceful API for WeChat.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> itchat</span><br><span class="line"></span><br><span class="line"><span class="comment">#login on Mac terminal with white background</span></span><br><span class="line">itchat.auto_login(enableCmdQR=-<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p>itchat API could be found on its core.py<br><a target="_blank" rel="noopener" href="https://github.com/littlecodersh/ItChat/blob/master/itchat/core.py">https://github.com/littlecodersh/ItChat/blob/master/itchat/core.py</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">search_friends</span>(<span class="params">self, name=<span class="literal">None</span>, userName=<span class="literal">None</span>,</span></span><br><span class="line"><span class="params">                   remarkName=<span class="literal">None</span>, nickName=<span class="literal">None</span>, wechatAccount=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">self</span>.storageClass.search_friends(name, userName,</span><br><span class="line">                                            remarkName, nickName, wechatAccount)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">search_chatrooms</span>(<span class="params">self, name=<span class="literal">None</span>, userName=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">self</span>.storageClass.search_chatrooms(name, userName)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">send_msg</span>(<span class="params">self, msg=<span class="string">&#x27;Test Message&#x27;</span>, toUserName=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27; send plain text message</span></span><br><span class="line"><span class="string">        for options</span></span><br><span class="line"><span class="string">            - msg: should be unicode if there&#x27;s non-ascii words in msg</span></span><br><span class="line"><span class="string">            - toUserName: &#x27;UserName&#x27; key of friend dict</span></span><br><span class="line"><span class="string">        it is defined in components/messages.py</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">raise</span> NotImplementedError()</span><br><span class="line"></span><br><span class="line"><span class="comment"># or you could use</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">send</span>(<span class="params">self, msg, toUserName=<span class="literal">None</span>, mediaId=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27; wrapped function for all the sending functions</span></span><br><span class="line"><span class="string">        for options</span></span><br><span class="line"><span class="string">            - msg: message starts with different string indicates different type</span></span><br><span class="line"><span class="string">                - list of type string: [&#x27;@fil@&#x27;, &#x27;@img@&#x27;, &#x27;@msg@&#x27;, &#x27;@vid@&#x27;]</span></span><br><span class="line"><span class="string">                - they are for file, image, plain text, video</span></span><br><span class="line"><span class="string">                - if none of them matches, it will be sent like plain text</span></span><br><span class="line"><span class="string">            - toUserName: &#x27;UserName&#x27; key of friend dict</span></span><br><span class="line"><span class="string">            - mediaId: if set, uploading will not be repeated</span></span><br><span class="line"><span class="string">        it is defined in components/messages.py</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">raise</span> NotImplementedError()</span><br></pre></td></tr></table></figure>
+<p>For example, if you know the name of one particular chatroom is ‘abc’, then you could:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">some_chatroom_username = itchat.search_chatrooms(name=<span class="string">&#x27;abc&#x27;</span>)[<span class="number">0</span>][<span class="string">&#x27;UserName&#x27;</span>]</span><br><span class="line"><span class="comment"># then you enter the chatroom to say hi</span></span><br><span class="line">itchat.send(<span class="string">&#x27;Hello everyone&#x27;</span>, some_chatroom_username)</span><br></pre></td></tr></table></figure>
+<p>I know there are blank pages for previous blogs.  I know.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2017/04/10/argparse-Module/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yiwei Shen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SecondHand C0D1NG">
+      <meta itemprop="description" content="Notes & Thoughts">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | SecondHand C0D1NG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/04/10/argparse-Module/" class="post-title-link" itemprop="url">argparse Module</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-04-10 10:07:06" itemprop="dateCreated datePublished" datetime="2017-04-10T10:07:06-04:00">2017-04-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br></pre></td></tr></table></figure>
+<p>Docs here:<br><a target="_blank" rel="noopener" href="https://docs.python.org/3/howto/argparse.html">https://docs.python.org/3/howto/argparse.html</a></p>
+<p>The argparse module makes it easy to write user-friendly command-line interfaces.  The program defines what arguments it requires, and argparse will figure out how to parse those out of sys.argv.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">parser = argparse.ArgumentParser(description=<span class="string">&#x27;Process some integers.&#x27;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;integers&#x27;</span>, metavar=<span class="string">&#x27;N&#x27;</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, nargs=<span class="string">&#x27;+&#x27;</span>,</span><br><span class="line">                    <span class="built_in">help</span>=<span class="string">&#x27;an integer for the accumulator&#x27;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;--sum&#x27;</span>, dest=<span class="string">&#x27;accumulate&#x27;</span>, action=<span class="string">&#x27;store_const&#x27;</span>,</span><br><span class="line">                    const=<span class="built_in">sum</span>, default=<span class="built_in">max</span>,</span><br><span class="line">                    <span class="built_in">help</span>=<span class="string">&#x27;sum the integers (default: find the max)&#x27;</span>)</span><br><span class="line"></span><br><span class="line">args = parser.parse_args()</span><br><span class="line"><span class="built_in">print</span>(args.accumulate(args.integers))</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -705,155 +852,6 @@
     
     <div class="post-body" itemprop="articleBody">
           
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2017/04/10/glob-Module/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yiwei Shen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SecondHand C0D1NG">
-      <meta itemprop="description" content="Notes & Thoughts">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | SecondHand C0D1NG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/04/10/glob-Module/" class="post-title-link" itemprop="url">glob Module</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-04-10 00:27:20" itemprop="dateCreated datePublished" datetime="2017-04-10T00:27:20-04:00">2017-04-10</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Docs first:<br><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/glob.html">https://docs.python.org/3/library/glob.html</a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> glob</span><br><span class="line">glob.glob(<span class="string">&#x27;./[0-9].*&#x27;</span>) <span class="comment"># [&#x27;./1.gif&#x27;, &#x27;./2.txt&#x27;]</span></span><br></pre></td></tr></table></figure>
-<p>The glob module finds all the pathnames matching a specified pattern according to the rules used by the Unix shell, although results are returned in arbitrary order. </p>
-<p>glob.glob(pathname, *, recursive&#x3D;False)</p>
-<p>Return a possibly-empty list of path names that match pathname, which must be a string containing a path specification. pathname can be either absolute (like &#x2F;usr&#x2F;src&#x2F;Python-1.5&#x2F;Makefile) or relative (like ..&#x2F;..&#x2F;Tools&#x2F;<em>&#x2F;</em>.gif), and can contain shell-style wildcards. Broken symlinks are included in the results (as in the shell).</p>
-<p>If recursive is true, the pattern “**” will match any files and zero or more directories and subdirectories. If the pattern is followed by an os.sep, only directories and subdirectories match.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2017/04/05/datetime-Module/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yiwei Shen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SecondHand C0D1NG">
-      <meta itemprop="description" content="Notes & Thoughts">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | SecondHand C0D1NG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/04/05/datetime-Module/" class="post-title-link" itemprop="url">datetime Module</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-04-04 23:35:16" itemprop="dateCreated datePublished" datetime="2017-04-04T23:35:16-04:00">2017-04-04</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="https://music.163.com/outchain/player?type=2&id=2007819&auto=1&height=66"></iframe>
-
-<p>The topic today is datetime which makes me think of life.  Maybe, music is a mataphor of life.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line">t = datetime.date(<span class="number">2017</span>, <span class="number">4</span>, <span class="number">4</span>)</span><br><span class="line">t.isoweekday() <span class="comment"># 2</span></span><br><span class="line">t.isoformat() <span class="comment"># &#x27;2017-04-04&#x27;</span></span><br><span class="line"></span><br><span class="line">one_day = datetime.timedelta(days=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<p>Other things useless (maybe not) you could find on<br><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/datetime.html">https://docs.python.org/3/library/datetime.html</a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> date</span><br><span class="line"></span><br><span class="line">today = date.today()</span><br><span class="line">today == date.fromtimestamp(time.time()) <span class="comment"># True</span></span><br><span class="line">my_birthday = date(today.year, <span class="number">6</span>, <span class="number">24</span>) <span class="comment"># Fake birthday</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> my_birthday &lt; today:</span><br><span class="line">    my_birthday = my_birthday.replace(year=today.year + <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">time_to_birthday = <span class="built_in">abs</span>(my_birthday - today) <span class="comment"># why we need abs that makes previous IF statement meaningless</span></span><br><span class="line">time_to_birthday.days</span><br></pre></td></tr></table></figure>
-<p>You could always find the manual. That’s enough for today.</p>
-
       
     </div>
 

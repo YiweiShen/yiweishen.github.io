@@ -139,7 +139,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -172,6 +172,182 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2024/03/24/Handle-Login-with-Python-Bindings-for-Selenium/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yiwei Shen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SecondHand C0D1NG">
+      <meta itemprop="description" content="Notes & Thoughts">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | SecondHand C0D1NG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/24/Handle-Login-with-Python-Bindings-for-Selenium/" class="post-title-link" itemprop="url">Handle Login with Python Bindings for Selenium</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-03-23 22:52:12" itemprop="dateCreated datePublished" datetime="2024-03-23T22:52:12-04:00">2024-03-23</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Before everything else, you need to install the Selenium package, of course.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install selenium</span><br></pre></td></tr></table></figure>
+
+<p>Or, if you hate to deal with anti-bot measures, you can just use this.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install undetected-chromedriver</span><br></pre></td></tr></table></figure>
+
+<p>Then, add the user data directory to the ChromeOptions object. It is the path to your Chrome profile. For macOS, it is located at ‘~&#x2F;Library&#x2F;Application Support&#x2F;Google&#x2F;Chrome’.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> undetected_chromedriver <span class="keyword">as</span> uc</span><br><span class="line"></span><br><span class="line">options = uc.ChromeOptions()</span><br><span class="line">options.add_argument(<span class="string">f&quot;--user-data-dir=<span class="subst">&#123;<span class="string">&#x27;Path_to_your_Chrome_profile&#x27;</span>&#125;</span>&quot;</span>)</span><br><span class="line">driver = uc.Chrome(options=options)</span><br><span class="line"></span><br><span class="line">driver.get(<span class="string">&#x27;https://www.example.com&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>The <code>--user-data-dir</code> argument is kind of cheating because it allows you to bypass the login process without actually logging in.</p>
+<p>Cookie is your friend.</p>
+<p>But sometimes, you need to handle the login process, for instance, you have to switch between multiple accounts.</p>
+<p>First of all, take care of your credentials. Use an .env file.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> dotenv <span class="keyword">import</span> load_dotenv</span><br><span class="line"></span><br><span class="line">load_dotenv()</span><br><span class="line"></span><br><span class="line">USERNAME = os.getenv(<span class="string">&#x27;USERNAME_ENV_VAR&#x27;</span>)</span><br><span class="line">PASSWORD = os.getenv(<span class="string">&#x27;PASSWORD_ENV_VAR&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>Then, you can use the <code>send_keys</code> method to fill in the username and password fields. I add one while loop to wait for the element in case the script runs too fast.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        driver.find_element(by=By.ID, value=<span class="string">&quot;username&quot;</span>).send_keys(USERNAME)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        time.sleep(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">driver.find_element(by=By.ID, value=<span class="string">&quot;password&quot;</span>).send_keys(PASSWORD)</span><br><span class="line">driver.find_element(by=By.ID, value=<span class="string">&quot;submit&quot;</span>).click()</span><br></pre></td></tr></table></figure>
+
+<p>After logging in, the chrome usally pops up a dialog asking if you want to save the password. It is annoying.</p>
+<p>You can try to disable it by adding the <code>--disable-save-password-bubble</code> or <code>--disable-popup-blocking</code> argument to the ChromeOptions object. I don’t think it works. But you can try.</p>
+<p>In the end, I just used a hack, that is to open a new tab and immediately close it, the popup will appear.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># open a new tab</span></span><br><span class="line">driver.execute_script(<span class="string">&quot;window.open(&#x27;&#x27;,&#x27;_blank&#x27;)&quot;</span>)</span><br><span class="line"></span><br><span class="line">time.sleep(<span class="number">1</span>) <span class="comment"># 1 second wait is enough I guess</span></span><br><span class="line">driver.switch_to.window(driver.window_handles[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># say goodbye to the new tab</span></span><br><span class="line">driver.close()</span><br><span class="line"></span><br><span class="line"><span class="comment"># now switch back to the original tab</span></span><br><span class="line">driver.switch_to.window(driver.window_handles[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+
+<p>That’s it.</p>
+<p>Oh, one more thing.</p>
+<p>Add user-agent to the ChromeOptions object is also a good idea. And please do not forget to specify <code>version_main</code> for the driver to match your current chrome version.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2024/03/16/Raycast-Alternative-on-Windows-11-Microsoft-PowerToys/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yiwei Shen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SecondHand C0D1NG">
+      <meta itemprop="description" content="Notes & Thoughts">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | SecondHand C0D1NG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/16/Raycast-Alternative-on-Windows-11-Microsoft-PowerToys/" class="post-title-link" itemprop="url">Raycast Alternative on Windows 11: Microsoft PowerToys</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-03-16 11:42:57" itemprop="dateCreated datePublished" datetime="2024-03-16T11:42:57-04:00">2024-03-16</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Raycast is a productivity tool for macOS. It allows you to quickly access files, folders, and applications. It’s great, but only available on macOS. If you already use Raycast, you know how useful it is. If you don’t, you should give it a try if you have a Mac.</p>
+<p>For daily work, I also use Windows, and I was trying to implement a similar workflow on Windows. The thing I missed the most was the ability to search and open previously used workspaces in VS Code or remote machines with a few keystrokes.</p>
+<p>You can guess my excitement when I found out about Microsoft PowerToys.</p>
+<p>OK.</p>
+<p>Enable VS Code search in the settings for PowerToys Run utility.</p>
+<p>Then, you can use the shortcut <code>Alt + Space</code> to search for your workspaces.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; THE_WORKSPACE_NAME_YOU_WANT_TO_OPEN</span><br></pre></td></tr></table></figure>
+
+<p>Now I have to find the equivalent of <code>zsh-autosuggestions</code> on Windows. Wish me luck.</p>
+<p>Links to the tools mentioned in this post:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://raycast.com/">Raycast</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/microsoft/PowerToys">Microsoft PowerToys</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -918,154 +1094,6 @@
 <li>Wait for the iPad to reinstall everything once again.</li>
 </ul>
 <p>I know a bricked iPad is useless. But, you know what, after rescuing the old iPad, I find the iPad is <em>still</em> useless anyway.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2021/06/24/Emulator-30-7-4-Crashes-in-Android-Studio-4-2-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yiwei Shen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SecondHand C0D1NG">
-      <meta itemprop="description" content="Notes & Thoughts">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | SecondHand C0D1NG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/06/24/Emulator-30-7-4-Crashes-in-Android-Studio-4-2-1/" class="post-title-link" itemprop="url">Emulator 30.7.4 Crashes in Android Studio 4.2.1</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-06-24 14:03:05" itemprop="dateCreated datePublished" datetime="2021-06-24T14:03:05-04:00">2021-06-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>All emulators in AVD failed to run after I <em>accidentally</em> update Android Studio to 4.2.1 on macOS Catalina (10.15.7).</p>
-<p>You can find more debug details if you run the emulator in terminal.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">emulator -list-avds</span><br><span class="line">emulator -avd your_avd_name</span><br></pre></td></tr></table></figure>
-
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Downgrade (sort of) amulator to 30.4.5 (build_id 7140946)<br><a target="_blank" rel="noopener" href="https://dl.google.com/android/repository/emulator-darwin_x64-7140946.zip">https://dl.google.com/android/repository/emulator-darwin_x64-7140946.zip</a></p>
-<p>First, downlaod the zip file and unzip it.<br>Then, find the emulator folder under sdk folder. Replace the items inside with what you have downloaded.<br>Restart Android Studio (for example, go to menu File, select Invalidate Caches &#x2F; Restart) and try to run the emulators again.</p>
-<p>You will see the warnings saying something, like, these files can not be verified due to unknown developer. Remember to go to Mac System Preference, Security &amp; Privacy, under the General tab, allow these apps to run. Eventually, everything will be fine. Good luck.</p>
-<p>Ref:<br><a target="_blank" rel="noopener" href="https://issuetracker.google.com/issues/191799887">https://issuetracker.google.com/issues/191799887</a><br><a target="_blank" rel="noopener" href="https://issuetracker.google.com/issues/191805460">https://issuetracker.google.com/issues/191805460</a><br><a target="_blank" rel="noopener" href="https://medium.com/nerd-for-tech/how-to-downgrade-android-emulator-on-macos-6e611d2d2bcb">https://medium.com/nerd-for-tech/how-to-downgrade-android-emulator-on-macos-6e611d2d2bcb</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yiweishen.github.io/2021/06/13/MySQL-Workbench-Hangs-attempting-to-Open-MySQL-Editor/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yiwei Shen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SecondHand C0D1NG">
-      <meta itemprop="description" content="Notes & Thoughts">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | SecondHand C0D1NG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/06/13/MySQL-Workbench-Hangs-attempting-to-Open-MySQL-Editor/" class="post-title-link" itemprop="url">MySQL Workbench Hangs attempting to Open MySQL Editor</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-06-12 22:20:54" itemprop="dateCreated datePublished" datetime="2021-06-12T22:20:54-04:00">2021-06-12</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>When this bug happens, it shows that it takes time to open the MySQL Editor, but the fact is that it will never open. So you will wait forever.</p>
-<p>I am on MacOS Catalina and the MySQL Workbench version is 8.0.22, just in case you want to know.</p>
-<h2 id="Why-this-error-happens-My-guess"><a href="#Why-this-error-happens-My-guess" class="headerlink" title="Why this error happens (My guess):"></a>Why this error happens (My guess):</h2><p>You changed the password to the MySQL database user, but it somehow failed to sync the password in the keychain.</p>
-<h2 id="The-solution"><a href="#The-solution" class="headerlink" title="The solution:"></a>The solution:</h2><p>Go to the &#x2F;Applicaiton&#x2F;Utilities&#x2F; to find the Keychain Access App and run it. Search and delete the password to the database user. Try search ‘MySQL’. Reopen the MySQL Workbench and you should be fine now.</p>
 
       
     </div>
