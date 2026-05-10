@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.2">
-
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"yiweishen.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tomorrow-night-bright","dark":"tomorrow-night-bright"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yiweishen.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tomorrow-night-bright","dark":"tomorrow-night-bright"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
 
     <meta name="description" content="Notes &amp; Thoughts">
 <meta property="og:type" content="website">
@@ -49,20 +49,26 @@
 
   
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
 <script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
 
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.5.0/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
   
 
 
 
 
-
-
-  
-
-
-
-
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@3.0.1/dist/quicklink.umd.js" integrity="sha256-44BednzIpUeQJcY8qtLyarFu0UCCTbgmWOvaoehiFQQ=" crossorigin="anonymous" defer></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":false,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"http://yiweishen.github.io/page/8/"}</script>
+  <script src="/js/third-party/quicklink.js" defer></script>
 
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
@@ -95,6 +101,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -103,11 +110,37 @@
 
 <nav class="site-nav">
   <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </header>
         
@@ -377,7 +410,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><img src="/img/martian.jpg"></p>
+          <p><img data-src="/img/martian.jpg"></p>
 <p>Tell them I love what I do and Im really good at it,</p>
 <p>and Im dying for something big and beautiful and greater than me,</p>
 <p>and I can live with that.</p>
@@ -450,7 +483,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>The tutorial recently published by Apple is called Start Developing iOS Apps (Swift).  <a target="_blank" rel="noopener" href="https://developer.apple.com/library/ios/referencelibrary/GettingStarted/DevelopiOSAppsSwift/RevisionHistory.html">Link</a></p>
-<p><img src="/img/startSwift.png"></p>
+<p><img data-src="/img/startSwift.png"></p>
 <p>Just a tip about this tutorial, I found the UI odd on iPhone 5s.  Maybe Apple presumes you should have iPhone 6 at least by now.</p>
 <p>To give you a glance of what this project looks like, I show you MealTableViewController.swift as follows.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br></pre></td><td class="code"><pre><span class="line">import UIKit</span><br><span class="line"></span><br><span class="line">class MealTableViewController: UITableViewController &#123;</span><br><span class="line">    // MARK: Properties</span><br><span class="line">    </span><br><span class="line">    var meals = [Meal]()</span><br><span class="line"></span><br><span class="line">    override func viewDidLoad() &#123;</span><br><span class="line">        super.viewDidLoad()</span><br><span class="line">        </span><br><span class="line">        // Use the edit button item provided by the table view controller.</span><br><span class="line">        navigationItem.leftBarButtonItem = editButtonItem()</span><br><span class="line">        </span><br><span class="line">        // Load any saved meals, otherwise load sample data.</span><br><span class="line">        if let savedMeals = loadMeals() &#123;</span><br><span class="line">            meals += savedMeals</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            // Load the sample data.</span><br><span class="line">            loadSampleMeals()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    func loadSampleMeals() &#123;</span><br><span class="line">        let photo1 = UIImage(named: &quot;meal1&quot;)!</span><br><span class="line">        let meal1 = Meal(name: &quot;Caprese Salad&quot;, photo: photo1, rating: 4)!</span><br><span class="line">        </span><br><span class="line">        let photo2 = UIImage(named: &quot;meal2&quot;)!</span><br><span class="line">        let meal2 = Meal(name: &quot;Chicken and Potatoes&quot;, photo: photo2, rating: 5)!</span><br><span class="line">        </span><br><span class="line">        let photo3 = UIImage(named: &quot;meal3&quot;)!</span><br><span class="line">        let meal3 = Meal(name: &quot;Pasta with Meatballs&quot;, photo: photo3, rating: 3)!</span><br><span class="line">        </span><br><span class="line">        meals += [meal1, meal2, meal3]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    override func didReceiveMemoryWarning() &#123;</span><br><span class="line">        super.didReceiveMemoryWarning()</span><br><span class="line">        // Dispose of any resources that can be recreated.</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // MARK: - Table view data source</span><br><span class="line"></span><br><span class="line">    override func numberOfSectionsInTableView(tableView: UITableView) -&gt; Int &#123;</span><br><span class="line">        return 1</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -&gt; Int &#123;</span><br><span class="line">        return meals.count</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -&gt; UITableViewCell &#123;</span><br><span class="line">        // Table view cells are reused and should be dequeued using a cell identifier.</span><br><span class="line">        let cellIdentifier = &quot;MealTableViewCell&quot;</span><br><span class="line">        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MealTableViewCell</span><br><span class="line">        </span><br><span class="line">        // Fetches the appropriate meal for the data source layout.</span><br><span class="line">        let meal = meals[indexPath.row]</span><br><span class="line">        </span><br><span class="line">        cell.nameLabel.text = meal.name</span><br><span class="line">        cell.photoImageView.image = meal.photo</span><br><span class="line">        cell.ratingControl.rating = meal.rating</span><br><span class="line">        </span><br><span class="line">        return cell</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Override to support conditional editing of the table view.</span><br><span class="line">    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -&gt; Bool &#123;</span><br><span class="line">        // Return false if you do not want the specified item to be editable.</span><br><span class="line">        return true</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    // Override to support editing the table view.</span><br><span class="line">    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) &#123;</span><br><span class="line">        if editingStyle == .Delete &#123;</span><br><span class="line">            // Delete the row from the data source</span><br><span class="line">            meals.removeAtIndex(indexPath.row)</span><br><span class="line">            saveMeals()</span><br><span class="line">            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)</span><br><span class="line">        &#125; else if editingStyle == .Insert &#123;</span><br><span class="line">            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view</span><br><span class="line">        &#125;    </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /*</span><br><span class="line">    // Override to support rearranging the table view.</span><br><span class="line">    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    */</span><br><span class="line"></span><br><span class="line">    /*</span><br><span class="line">    // Override to support conditional rearranging of the table view.</span><br><span class="line">    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -&gt; Bool &#123;</span><br><span class="line">        // Return false if you do not want the item to be re-orderable.</span><br><span class="line">        return true</span><br><span class="line">    &#125;</span><br><span class="line">    */</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    // MARK: - Navigation</span><br><span class="line"></span><br><span class="line">    // In a storyboard-based application, you will often want to do a little preparation before navigation</span><br><span class="line">    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) &#123;</span><br><span class="line">        if segue.identifier == &quot;ShowDetail&quot; &#123;</span><br><span class="line">            let mealDetailViewController = segue.destinationViewController as! MealViewController</span><br><span class="line">            </span><br><span class="line">            // Get the cell that generated this segue.</span><br><span class="line">            if let selectedMealCell = sender as? MealTableViewCell &#123;</span><br><span class="line">                let indexPath = tableView.indexPathForCell(selectedMealCell)!</span><br><span class="line">                let selectedMeal = meals[indexPath.row]</span><br><span class="line">                mealDetailViewController.meal = selectedMeal</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        else if segue.identifier == &quot;AddItem&quot; &#123;</span><br><span class="line">            print(&quot;Adding new meal.&quot;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    @IBAction func unwindToMealList(sender: UIStoryboardSegue) &#123;</span><br><span class="line">        if let sourceViewController = sender.sourceViewController as? MealViewController, meal = sourceViewController.meal &#123;</span><br><span class="line">            if let selectedIndexPath = tableView.indexPathForSelectedRow &#123;</span><br><span class="line">                // Update an existing meal.</span><br><span class="line">                meals[selectedIndexPath.row] = meal</span><br><span class="line">                tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .None)</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                // Add a new meal.</span><br><span class="line">                let newIndexPath = NSIndexPath(forRow: meals.count, inSection: 0)</span><br><span class="line">                meals.append(meal)</span><br><span class="line">                tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)</span><br><span class="line">            &#125;</span><br><span class="line">            // Save the meals.</span><br><span class="line">            saveMeals()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // MARK: NSCoding</span><br><span class="line">    </span><br><span class="line">    func saveMeals() &#123;</span><br><span class="line">        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(meals, toFile: Meal.ArchiveURL.path!)</span><br><span class="line">        if !isSuccessfulSave &#123;</span><br><span class="line">            print(&quot;Failed to save meals...&quot;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    func loadMeals() -&gt; [Meal]? &#123;</span><br><span class="line">        return NSKeyedUnarchiver.unarchiveObjectWithFile(Meal.ArchiveURL.path!) as? [Meal]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -816,7 +849,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>简单测试一下图床</p>
-<p><img src="/img/imgurLogo.png"></p>
+<p><img data-src="/img/imgurLogo.png"></p>
 <p>不要误解，并没有使用 Imgur 或者七牛，只是新建了个 img 文件夹</p>
 
       
