@@ -256,8 +256,6 @@
     
     <div class="post-body" itemprop="articleBody"><p>When a client performs a TLS handshake with a server, it sends a piece of information called SNI (Server Name Indication).</p>
 <p>Why does it do this? Because a single server can easily host several different TLS certificates on the same IP. If the client doesn’t say “who I’m looking for” during the handshake, the server is left clueless: with so many certificates on hand, which one should it present?</p>
-<span id="more"></span>
-
 <h2 id="Let’s-Walk-Through-the-Timeline"><a href="#Let’s-Walk-Through-the-Timeline" class="headerlink" title="Let’s Walk Through the Timeline"></a>Let’s Walk Through the Timeline</h2><ol>
 <li><strong>DNS lookup</strong>: Translate the domain name into an IP address.</li>
 <li><strong>TCP three-way handshake</strong>: Knock on port 443 of that IP.</li>

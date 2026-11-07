@@ -253,14 +253,30 @@
     <div class="post-body" itemprop="articleBody">
           <p>When a client performs a TLS handshake with a server, it sends a piece of information called SNI (Server Name Indication).</p>
 <p>Why does it do this? Because a single server can easily host several different TLS certificates on the same IP. If the client doesn’t say “who I’m looking for” during the handshake, the server is left clueless: with so many certificates on hand, which one should it present?</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2026/11/07/SNI-in-TLS-Handshake/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<h2 id="Let’s-Walk-Through-the-Timeline"><a href="#Let’s-Walk-Through-the-Timeline" class="headerlink" title="Let’s Walk Through the Timeline"></a>Let’s Walk Through the Timeline</h2><ol>
+<li><strong>DNS lookup</strong>: Translate the domain name into an IP address.</li>
+<li><strong>TCP three-way handshake</strong>: Knock on port 443 of that IP.</li>
+<li><strong>TLS handshake</strong>: Negotiate encryption parameters and verify the certificate. SNI is tucked into the ClientHello in this step, the key moment where the client “announces who it is looking for.”</li>
+<li><strong>HTTP request</strong>: Now data can finally be sent safely through the encrypted channel.</li>
+</ol>
+<h2 id="From-the-ISP’s-Point-of-View"><a href="#From-the-ISP’s-Point-of-View" class="headerlink" title="From the ISP’s Point of View"></a>From the ISP’s Point of View</h2><p>Start with the DNS lookup. It’s usually plaintext, so the ISP can see right through it. Even if you use encrypted DNS, the ISP can still see that you’re talking to some DNS server, though it may not know what exactly you asked. This kind of traffic is generally let through. The TCP handshake is the same: nothing special about it, and it’s usually let through as well.</p>
+<p>So here’s the question: if an ISP wants to block certain domains, or only allow domains on a whitelist, where does it start?</p>
+<p>The answer is the first step of the TLS handshake, using SNI to determine your destination. The moment the client initiates a TLS handshake, it is, in the ISP’s eyes, loudly announcing: “I’m going to visit such-and-such website!” Whether to let it through is entirely up to the ISP’s policy.</p>
+<blockquote>
+<p>As for ECH (Encrypted ClientHello), let’s set it aside for now.</p>
+</blockquote>
+<p>Interrupting your connection isn’t hard either, and can be done by tampering in the middle: send a TCP RST to each side of the communication, or simply drop packets and leave you waiting.</p>
+<h2 id="SNI-Spoofing-Putting-on-a-Disguise"><a href="#SNI-Spoofing-Putting-on-a-Disguise" class="headerlink" title="SNI Spoofing: Putting on a Disguise"></a>SNI Spoofing: Putting on a Disguise</h2><p>Now let’s look at it from the proxy side, and see why SNI spoofing works.</p>
+<p>The key is that you have a middleman VPS: traffic goes to the VPS first, and the VPS then forwards it to the real destination. So when establishing the TLS connection with the VPS, you’re free to set the SNI to any other domain. You’re clearly connecting to your own VPS, yet the SNI solemnly declares: “Oh, I’m Google.” As a result, what the ISP sees may be you dutifully visiting Google.</p>
+<p>So, observing SNI is indeed an effective means of traffic control. Overall, yes.</p>
+<h2 id="But-SNI-Wasn’t-Made-for-This"><a href="#But-SNI-Wasn’t-Made-for-This" class="headerlink" title="But SNI Wasn’t Made for This"></a>But SNI Wasn’t Made for This</h2><p>I want to stress that SNI was never designed for traffic identification or access control, so being pressed into this job comes with plenty of limitations.</p>
+<h3 id="Scenario-1-Better-Safe-Than-Sorry-Firewalls"><a href="#Scenario-1-Better-Safe-Than-Sorry-Firewalls" class="headerlink" title="Scenario 1: Better Safe Than Sorry Firewalls"></a>Scenario 1: Better Safe Than Sorry Firewalls</h3><p>For ISPs or firewalls that would rather wrongly block a thousand than let one slip through, if the SNI you claim is too famous, such as Microsoft or Google, they will likely get suspicious and go a step further, checking whether the destination IP belongs to a known data center or hosting provider, and then decide whether to allow it according to their own policy.</p>
+<p>In this case, the relatively safe approach is to use <code>VLESS/VMess + TLS</code> with your own domain and certificate, and play it straight.</p>
+<h3 id="Scenario-2-Simple-Domain-Management-Only"><a href="#Scenario-2-Simple-Domain-Management-Only" class="headerlink" title="Scenario 2: Simple Domain Management Only"></a>Scenario 2: Simple Domain Management Only</h3><p>Another kind of scenario uses SNI only for simple domain-based access control, such as Wi-Fi on planes and trains: some domains are free to access, while the rest require payment.</p>
+<p>In this case, <code>VLESS + Reality</code> combined with a modified SNI may be able to bypass this kind of simple SNI-based access control.</p>
+<hr>
+<p>That’s all, just some casual thoughts from a purely technical perspective.</p>
+
       
     </div>
 
@@ -330,14 +346,30 @@
     <div class="post-body" itemprop="articleBody">
           <p>客户端在向服务器进行 TLS 握手时，会发送一个叫作 SNI（Server Name Indication）的信息。</p>
 <p>为啥要这么做？因为一台服务器完全可能把好几张不同的 TLS 证书挂在同一个 IP 上。要是握手时不说清楚「我要找谁」，服务器就一脸懵：这么多证书，到底该拿哪张出来见客？</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2026/11/07/TLS-%E6%8F%A1%E6%89%8B%E4%B8%AD%E7%9A%84-SNI/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<h2 id="先捋一捋时间线"><a href="#先捋一捋时间线" class="headerlink" title="先捋一捋时间线"></a>先捋一捋时间线</h2><ol>
+<li><strong>DNS 查询</strong>：把域名翻译成 IP 地址。</li>
+<li><strong>TCP 三次握手</strong>：敲开该 IP 的 443 端口大门。</li>
+<li><strong>TLS 握手</strong>：协商加密参数、验证证书。SNI 就藏在这一步的 ClientHello 里，是整个流程里「自报家门」的关键时刻。</li>
+<li><strong>HTTP 请求</strong>：终于可以通过加密通道安心传数据啦。</li>
+</ol>
+<h2 id="站在-ISP-的视角"><a href="#站在-ISP-的视角" class="headerlink" title="站在 ISP 的视角"></a>站在 ISP 的视角</h2><p>先说 DNS 查询。它通常是明文的，ISP 一眼就能看穿。就算你用了加密 DNS，ISP 也能看到你在和某个 DNS 服务器聊天，只是不一定知道你具体问了啥。这类流量一般都会被放行。TCP 握手也一样，平平无奇，没什么特别之处，通常也是直接放行。</p>
+<p>那么问题来了：如果 ISP 想拦截某些域名，或者只放行白名单里的域名，该从哪下手呢？</p>
+<p>答案就是 TLS 握手的第一步，靠 SNI 判断你的目的地。客户端一发起 TLS 握手，在 ISP 眼里就等于大声宣布：「我要去访问某某网站啦！」放不放行，全看它自己的策略。</p>
+<blockquote>
+<p>关于 ECH（Encrypted ClientHello），这里先按下不表。</p>
+</blockquote>
+<p>想打断你的连接也不难，可以在中间动点手脚：给通信双方各发一个 TCP RST，或者干脆直接丢包，让你干等着。</p>
+<h2 id="SNI-欺骗：披一件马甲"><a href="#SNI-欺骗：披一件马甲" class="headerlink" title="SNI 欺骗：披一件马甲"></a>SNI 欺骗：披一件马甲</h2><p>再从网络代理的角度聊聊，SNI 欺骗为什么行得通。</p>
+<p>关键在于你有一台中间商 VPS：流量先到 VPS，再由它转发到真正的目的地。所以在和 VPS 建立 TLS 连接时，你完全可以把 SNI 填成别的域名。明明连的是自己的 VPS，却在 SNI 里一本正经地说：「啊，我是 Google。」这样一来，ISP 看到的可能就是你正在老老实实访问 Google。</p>
+<p>所以，观察 SNI 确实是一种行之有效的流量控制手段。总体来说，是的。</p>
+<h2 id="但是，SNI-并不是干这个的"><a href="#但是，SNI-并不是干这个的" class="headerlink" title="但是，SNI 并不是干这个的"></a>但是，SNI 并不是干这个的</h2><p>我想强调一下，SNI 的设计初衷从来不是用来做流量识别和访问控制的，被拿来干这个活，局限性自然不少。</p>
+<h3 id="场景一：宁可错杀一千的防火墙"><a href="#场景一：宁可错杀一千的防火墙" class="headerlink" title="场景一：宁可错杀一千的防火墙"></a>场景一：宁可错杀一千的防火墙</h3><p>对于那些宁可错杀一千、不可放过一个的 ISP 或防火墙来说，如果你声称的 SNI 太出名了，比如 Microsoft、Google，它们很可能会多留个心眼，进一步检查目标 IP 是不是已知的数据中心或机房，再按自己的策略决定放不放行。</p>
+<p>这时候，相对稳妥的做法是使用 <code>VLESS/VMess + TLS</code>，配上自己的域名和证书，老老实实做人。</p>
+<h3 id="场景二：只做简单域名管理的场景"><a href="#场景二：只做简单域名管理的场景" class="headerlink" title="场景二：只做简单域名管理的场景"></a>场景二：只做简单域名管理的场景</h3><p>另一类场景，只是用 SNI 做点简单的域名访问权限管理，比如飞机上、火车上的 Wi-Fi：部分域名免费访问，其余的要掏钱。</p>
+<p>这种情况下，<code>VLESS + Reality</code> 配合修改 SNI，就有可能绕过这种基于 SNI 的简单访问控制。</p>
+<hr>
+<p>以上，纯属技术角度的随想。</p>
+
       
     </div>
 
