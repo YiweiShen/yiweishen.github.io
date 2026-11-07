@@ -8,8 +8,6 @@ When a client performs a TLS handshake with a server, it sends a piece of inform
 
 Why does it do this? Because a single server can easily host several different TLS certificates on the same IP. If the client doesn't say "who I'm looking for" during the handshake, the server is left clueless: with so many certificates on hand, which one should it present?
 
-<!-- more -->
-
 ## Let's Walk Through the Timeline
 
 1. **DNS lookup**: Translate the domain name into an IP address.
